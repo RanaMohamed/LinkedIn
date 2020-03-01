@@ -1,0 +1,17 @@
+a {
+  color: inherit;
+}
+
+.logo {
+  width: 135px;
+  height: 34px;
+}
+
+.logo-sm {
+  width: 34px;
+}
+
+.logo svg {
+  width: 100%;
+  height: 100%;
+}
