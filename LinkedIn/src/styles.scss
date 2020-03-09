@@ -1,0 +1,117 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import "../node_modules/@fortawesome/fontawesome-free/css/all.min.css";
+
+body {
+  background-color: whitesmoke;
+}
+a {
+  color: inherit;
+}
+
+.logo {
+  width: 135px;
+  height: 34px;
+}
+
+.logo-sm {
+  width: 34px;
+}
+
+.logo svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* profile style */
+
+.cover-bg {
+  background: url("./assets/imgs/Cover.PNG") 50% / cover;
+  height: 12rem;
+}
+.btn-color {
+  background-color: #0073b1;
+  color: white;
+}
+.Profile-img {
+  width: 55%;
+  position: absolute;
+  top: -6rem;
+  left: 2rem;
+}
+.Profile-img img,
+.pViewed img {
+  width: 100%;
+  border-radius: 50%;
+}
+.name {
+  font-size: 2rem;
+}
+.lin-edu img {
+  height: 2rem;
+}
+.open-jop {
+  background-color: #ebebeb;
+  border-radius: 0.5rem;
+}
+.edit-icon {
+  cursor: pointer;
+}
+section,
+.dashboard-a,
+.adds {
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15), 0 2px 3px rgba(0, 0, 0, 0.2);
+}
+.featured {
+  border: dashed 2px rgba(0, 0, 0, 0.25);
+}
+.dashboard {
+  background-color: #f3f6f8;
+}
+.dashboard-a {
+  background-color: white;
+}
+.dashboard-a a,
+.education a {
+  text-decoration: none;
+}
+h6 {
+  font-style: italic;
+}
+
+.numDash {
+  font-size: 1.7rem;
+}
+
+.education img {
+  width: 4rem;
+  height: 4rem;
+}
+.ed-detail::after {
+  content: "";
+  display: block;
+  border-bottom: 1px solid #e6e9ec;
+  margin-left: 100px;
+}
+.text-dec a {
+  font-size: 1.2rem;
+  text-decoration: none;
+}
+.adds {
+  border: 10px solid white;
+  cursor: pointer;
+}
+.deg-con::before {
+  content: "\2022";
+}
+.courses {
+  border-top: 1px solid #cfcfcf;
+}
+.pViewed-Video img {
+  width: 5rem;
+}
+.pViewed-Video div {
+  position: absolute;
+  top: 0.7rem;
+  left: 3rem;
+}
