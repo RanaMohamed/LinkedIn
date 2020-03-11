@@ -1,0 +1,50 @@
+<section class="card mt-3 p-3 education">
+    <app-education-form [opened]="formOpened" (closeForm)="formOpened = !formOpened"></app-education-form>
+    <div>
+        <div class="row">
+            <div class="col-10">
+                <h4>Education</h4>
+            </div>
+            <div class="col-2 d-flex justify-content-end">
+                <div class="edit-icon" (click)="formOpened = !formOpened">
+                    <i class="fas fa-plus text-primary"></i>
+                </div>
+            </div>
+        </div>
+        <a href="#" class="ed-detail">
+            <div class="row p-2">
+                <div class="col-2">
+                    <img src="./assets/imgs/logoF.png" />
+                </div>
+                <div class="col-8">
+                    <h4>Fayoum University</h4>
+                    <p>Computer Science</p>
+                    <p class="text-secondary">2015 - 2019</p>
+                </div>
+                <div class="col-2 d-flex justify-content-end">
+                    <div class="edit-icon">
+                        <i class="fas fa-pen text-primary"></i>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <a href="#">
+            <div class="row p-2">
+                <div class="col-2">
+                    <img src="./assets/imgs/itiLogo.png" />
+                </div>
+                <div class="col-8">
+                    <h4>Information Technology Institute(ITI)</h4>
+                    <p>Web and UI Development</p>
+                    <p class="text-secondary">2019 - 2020</p>
+                </div>
+                <div class="col-2 d-flex justify-content-end">
+                    <div class="edit-icon">
+                        <i class="fas fa-pen text-primary"></i>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</section>

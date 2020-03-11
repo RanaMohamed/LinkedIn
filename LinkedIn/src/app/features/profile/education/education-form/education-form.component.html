@@ -1,0 +1,80 @@
+<div class="modal fade" [ngClass]="{'show d-block': opened}" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Education</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeForm.next()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body overflow-auto" style="max-height: 430px;">
+                <form>
+                    <div class="form-group">
+                        <label for="School">School*</label>
+                        <input type="text" class="form-control" id="School" placeholder="Ex: Boston University">
+                    </div>
+                    <div class="form-group">
+                        <label for="Degree">Degree</label>
+                        <input type="text" class="form-control" id="Degree" placeholder="Ex: Bachelor's">
+                    </div>
+                    <div class="form-group">
+                        <label for="Field">Field of study</label>
+                        <input type="text" class="form-control" id="Field" placeholder="Ex: Business">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="Start">Start Year</label>
+                            <select id="Start" class="form-control">
+                                <option selected>Year</option>
+                                <option>2020</option>
+                                <option>2019</option>
+                                <option>2018</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="End">End Year (or expected)</label>
+                            <select id="End" class="form-control">
+                                <option selected>Year</option>
+                                <option>2020</option>
+                                <option>2019</option>
+                                <option>2018</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Grade">Grade</label>
+                        <input type="text" class="form-control" id="Grade" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label for="Activities">Activities and societies</label>
+                        <textarea class="form-control" id="Activities" rows="3"></textarea>
+                        <small class="form-text text-muted">
+                            Ex: Alpha Phi Omega, Marching Band, Volleyball
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="Description">Description</label>
+                        <textarea class="form-control" id="Description" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputAddress2">Media <br>
+                            Add or link to external documents, photos, sites, videos, and presentations.</label>
+                        <div class="d-flex mb-3">
+                            <button class="btn btn-primary flex-fill mr-2">Upload</button>
+                            <button class="btn btn-outline-primary flex-fill ml-2">Link</button>
+                        </div>
+                        <input type="text" class="form-control" id="Link"
+                            placeholder="Paste or type a link to a file or video">
+                        <button class="btn btn-link float-right">Add</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                    (click)="closeForm.next()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-backdrop fade d-none" [ngClass]="{'show d-block': opened}"></div>
