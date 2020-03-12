@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import { Education } from "src/app/_models/education";
+import { EducationService } from "./education.service";
 
 @Component({
   selector: "app-education",
@@ -7,7 +9,23 @@ import { Component, OnInit } from "@angular/core";
 })
 export class EducationComponent implements OnInit {
   formOpened = false;
-  constructor() {}
+  education: Education[] = [];
+  selectedEducation: Education = null;
+  constructor(private educationService: EducationService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.educationService.getAll().subscribe(ed => {
+      this.education = ed;
+    });
+  }
+
+  editEducation(ed) {
+    this.selectedEducation = ed;
+    this.formOpened = true;
+  }
+
+  closeModal() {
+    this.selectedEducation = null;
+    this.formOpened = false;
+  }
 }

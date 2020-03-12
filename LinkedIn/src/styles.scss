@@ -87,7 +87,7 @@ h6 {
   width: 4rem;
   height: 4rem;
 }
-.ed-detail::after {
+.ed-detail:not(:last-of-type)::after {
   content: "";
   display: block;
   border-bottom: 1px solid #e6e9ec;

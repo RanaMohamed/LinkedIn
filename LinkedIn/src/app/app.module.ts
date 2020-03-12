@@ -1,5 +1,6 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
+import { ReactiveFormsModule } from "@angular/forms";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -8,6 +9,7 @@ import { ProfileComponent } from "./features/profile/profile.component";
 import { HomeComponent } from "./features/home/home.component";
 import { EducationComponent } from "./features/profile/education/education.component";
 import { EducationFormComponent } from "./features/profile/education/education-form/education-form.component";
+import { ConfirmationComponent } from './shared/confirmation/confirmation.component';
 
 @NgModule({
   declarations: [
@@ -16,9 +18,10 @@ import { EducationFormComponent } from "./features/profile/education/education-f
     ProfileComponent,
     HomeComponent,
     EducationComponent,
-    EducationFormComponent
+    EducationFormComponent,
+    ConfirmationComponent
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule],
   providers: [],
   bootstrap: [AppComponent]
 })
