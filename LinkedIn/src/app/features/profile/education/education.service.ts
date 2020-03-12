@@ -17,8 +17,8 @@ export class EducationService {
           "https://media-exp1.licdn.com/dms/image/C560BAQGK3uuhQer46g/company-logo_100_100/0?e=1591833600&v=beta&t=bZJwqK3Xxk0jUrI8dS9dYCWOnpFOmOEIcmtg90HeOtw"
       },
       field: "Web and UI Development",
-      start: 2019,
-      end: 2020
+      start: { year: 2019 },
+      end: { year: 2020 }
     },
     {
       id: 2,
@@ -30,8 +30,8 @@ export class EducationService {
       },
       degree: "Bachelor's degree",
       field: "Computer Software Engineering",
-      start: 2014,
-      end: 2018
+      start: { year: 2014 },
+      end: { year: 2018 }
     }
   ];
   private lastId = 2;
@@ -52,7 +52,6 @@ export class EducationService {
 
   add(education: Education) {
     education.id = ++this.lastId;
-    education.school.image = "https://via.placeholder.com/64";
     this.list.unshift(education);
     this.education.next(this.list);
   }
@@ -60,9 +59,8 @@ export class EducationService {
   edit(education: Education) {
     const index = this.list.findIndex(ed => ed.id === education.id);
     education.school.image =
-      this.list[index].school.name === education.school.name
-        ? this.list[index].school.image
-        : "https://via.placeholder.com/64";
+      this.list[index].school.name === education.school.name &&
+      this.list[index].school.image;
     this.list[index] = education;
     this.education.next(this.list);
   }

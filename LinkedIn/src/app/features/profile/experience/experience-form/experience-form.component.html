@@ -1,0 +1,131 @@
+<div class="modal fade show d-block" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Experience</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form [formGroup]="experienceForm" (ngSubmit)="submitForm()">
+                <div class="modal-body overflow-auto" style="max-height: 430px;">
+                    <div class="form-group">
+                        <label for="Title">Title*</label>
+                        <input type="text" class="form-control" id="Title" placeholder="Ex: Retail Sales Manager"
+                            formControlName="title" [ngClass]="{'is-invalid': title.dirty && title.invalid }">
+                        <small class="text-danger" *ngIf="title.dirty && title.invalid">Please enter your title.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="Type">Employment type</label>
+                        <select id="Type" class="form-control" formControlName="type">
+                            <option value="null">-</option>
+                            <option value="Full-time">Full-time</option>
+                            <option value="Part-time">Part-time</option>
+                            <option value="Self-employed">Self-employed</option>
+                            <option value="Freelance">Freelance</option>
+                            <option value="Contract">Contract</option>
+                            <option value="Internship">Internship</option>
+                            <option value="Apprenticeship">Apprenticeship</option>
+                        </select>
+                    </div>
+                    <div class="form-group" formGroupName="company">
+                        <label for="Company">Company*</label>
+                        <input type="text" class="form-control" id="Company" placeholder="Ex: Microsoft"
+                            formControlName="name" [ngClass]="{'is-invalid': company.dirty && company.invalid}">
+                        <small class="text-danger" *ngIf="company.dirty && company.invalid">Please enter a company
+                            name.</small>
+                    </div>
+                    <div class="form-group">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="Currently">
+                            <label class="custom-control-label" for="Currently">I am currently working in this
+                                role</label>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6" formGroupName="start">
+                            <label for="Start">Start Date*</label>
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <select id="StartM" class="form-control" formControlName="month">
+                                        <option value="null" selected disabled>Month</option>
+                                        <option *ngFor="let month of months; let i = index" [value]="i+1">{{month}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <select id="Start" class="form-control" formControlName="year"
+                                        [ngClass]="{'is-invalid': experienceForm.dirty && experienceForm.invalid && experienceForm.errors?.range }">
+                                        <option value="null" selected disabled>Year</option>
+                                        <option *ngFor="let year of years" [value]="year">{{year}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <small class="text-danger"
+                                *ngIf="experienceForm.dirty && experienceForm.invalid && experienceForm.errors?.range">Your
+                                end date can’t be earlier than your start date.</small>
+                            <!-- <small class="text-danger">Please enter a start date.</small> -->
+                            <small class="text-danger">Start date can’t be past today’s date.</small>
+                        </div>
+                        <div class="form-group col-md-6" formGroupName="end">
+                            <label for="End">End Date*</label>
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <select id="StartM" class="form-control" formControlName="month">
+                                        <option value="null" selected disabled>Month</option>
+                                        <option *ngFor="let month of months; let i = index" [value]="i+1">{{month}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <select id="End" class="form-control" formControlName="year"
+                                        [ngClass]="{'is-invalid': experienceForm.dirty && experienceForm.invalid && experienceForm.errors?.range }">
+                                        <option value="null" disabled>Year</option>
+                                        <option *ngFor="let year of years" [value]="year">{{year}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- <small class="text-danger">Please enter an end date.</small> -->
+                            <small class="text-danger">End date can’t be past today’s date.</small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Description">Description</label>
+                        <textarea class="form-control" id="Description" rows="3"
+                            formControlName="description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputAddress2">Media <br>
+                            Add or link to external documents, photos, sites, videos, and presentations.</label>
+                        <div class="d-flex mb-3">
+                            <button class="btn btn-primary flex-fill mr-2" type="button">Upload</button>
+                            <button class="btn btn-outline-primary flex-fill ml-2" type="button"
+                                (click)="linkOpened = !linkOpened">Link</button>
+                        </div>
+                        <ng-container *ngIf="linkOpened">
+                            <input type="text" class="form-control" id="Link"
+                                placeholder="Paste or type a link to a file or video">
+                            <button class="btn btn-link float-right">Add</button>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary mr-auto" type="button" *ngIf="experience"
+                        (click)="deleteEducation()">Delete</button>
+                    <button type="button" class="btn btn-primary" type="submit"
+                        [disabled]="experienceForm.invalid">Save</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        (click)="close()">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal-backdrop fade show"></div>
+<app-confirmation *ngIf="confirmDeleteOpened" message="delete this education" button="Delete"
+    (closeModal)="confirmDelete($event)">
+</app-confirmation>
+
+<app-confirmation *ngIf="confirmCloseOpened" message="discard changes to this" button="Discard"
+    (closeModal)="confirmClose($event)">
+</app-confirmation>

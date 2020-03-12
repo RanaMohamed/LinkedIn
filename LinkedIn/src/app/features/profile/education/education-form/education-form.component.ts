@@ -7,6 +7,7 @@ import {
 } from "@angular/forms";
 import { Education } from "src/app/_models/education";
 import { EducationService } from "../education.service";
+import { years, rangeValidator } from "src/app/_utilities/utilities";
 
 @Component({
   selector: "app-education-form",
@@ -20,12 +21,8 @@ export class EducationFormComponent implements OnInit {
   linkOpened = false;
   confirmDeleteOpened = false;
   confirmCloseOpened = false;
-  years: number[] = [];
-  constructor(private educationService: EducationService) {
-    for (let i = 1990; i < 2030; i++) {
-      this.years.unshift(i);
-    }
-  }
+  years = years(1990, 2030);
+  constructor(private educationService: EducationService) {}
 
   ngOnInit() {
     this.educationForm = new FormGroup(
@@ -37,8 +34,14 @@ export class EducationFormComponent implements OnInit {
         }),
         degree: new FormControl(this.education && this.education.degree),
         field: new FormControl(this.education && this.education.field),
-        start: new FormControl(this.education && this.education.start),
-        end: new FormControl(this.education && this.education.end),
+        start: new FormGroup({
+          month: new FormControl(this.education && this.education.start.month),
+          year: new FormControl(this.education && this.education.start.year)
+        }),
+        end: new FormGroup({
+          month: new FormControl(this.education && this.education.end.month),
+          year: new FormControl(this.education && this.education.end.year)
+        }),
         grade: new FormControl(this.education && this.education.grade),
         activities: new FormControl(
           this.education && this.education.activities
@@ -47,7 +50,7 @@ export class EducationFormComponent implements OnInit {
           this.education && this.education.description
         )
       },
-      { validators: [this.rangeValidator] }
+      { validators: [rangeValidator] }
     );
   }
 
@@ -81,14 +84,6 @@ export class EducationFormComponent implements OnInit {
 
   get description() {
     return this.educationForm.get("description");
-  }
-
-  rangeValidator(formGroup: FormGroup) {
-    const start = formGroup.get("start").value;
-    const end = formGroup.get("end").value;
-    return start !== null && end !== null && start > end
-      ? { range: true }
-      : null;
   }
 
   submitForm() {

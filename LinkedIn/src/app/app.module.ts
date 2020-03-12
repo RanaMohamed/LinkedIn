@@ -10,6 +10,8 @@ import { HomeComponent } from "./features/home/home.component";
 import { EducationComponent } from "./features/profile/education/education.component";
 import { EducationFormComponent } from "./features/profile/education/education-form/education-form.component";
 import { ConfirmationComponent } from './shared/confirmation/confirmation.component';
+import { ExperienceComponent } from './features/profile/experience/experience.component';
+import { ExperienceFormComponent } from './features/profile/experience/experience-form/experience-form.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { ConfirmationComponent } from './shared/confirmation/confirmation.compon
     HomeComponent,
     EducationComponent,
     EducationFormComponent,
-    ConfirmationComponent
+    ConfirmationComponent,
+    ExperienceComponent,
+    ExperienceFormComponent
   ],
   imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule],
   providers: [],
