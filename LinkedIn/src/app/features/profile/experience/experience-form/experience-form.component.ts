@@ -8,6 +8,7 @@ import {
   years,
   rangeValidator
 } from "../../../../_utilities/utilities";
+import { invalid } from "@angular/compiler/src/render3/view/util";
 
 @Component({
   selector: "app-experience-form",
@@ -47,11 +48,12 @@ export class ExperienceFormComponent implements OnInit {
             Validators.required
           ])
         }),
+        currently: new FormControl(
+          !(this.experience && this.experience.end.year)
+        ),
         end: new FormGroup({
           month: new FormControl(this.experience && this.experience.end.month),
-          year: new FormControl(this.experience && this.experience.end.year, [
-            Validators.required
-          ])
+          year: new FormControl(this.experience && this.experience.end.year)
         }),
         description: new FormControl(
           this.experience && this.experience.description
@@ -59,6 +61,20 @@ export class ExperienceFormComponent implements OnInit {
       },
       { validators: [rangeValidator] }
     );
+    this.experienceForm.get("currently").valueChanges.subscribe(value => {
+      if (value) {
+        this.experienceForm
+          .get("end")
+          .get("year")
+          .clearValidators();
+        this.experienceForm.get("end").reset();
+      } else {
+        this.experienceForm
+          .get("end")
+          .get("year")
+          .setValidators([Validators.required]);
+      }
+    });
   }
 
   get title() {
@@ -71,6 +87,10 @@ export class ExperienceFormComponent implements OnInit {
 
   get start() {
     return this.experienceForm.get("start").get("year");
+  }
+
+  get currently() {
+    return this.experienceForm.get("currently").value;
   }
 
   get end() {

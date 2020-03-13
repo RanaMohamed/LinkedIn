@@ -23,8 +23,16 @@
                     <h4>{{ex.title}}</h4>
                     <p class="mb-0">{{ex.company.name}} <span *ngIf="ex.type"> &bull; </span> {{ex.type}}</p>
                     <p class="text-secondary mb-0">{{months[ex.start.month - 1]}} {{ex.start.year}} -
-                        {{months[ex.end.month - 1]}} {{ex.end.year}} <span> &bull; </span>
-                        {{getDateDifference(ex.start,ex.end)}}</p>
+                        {{ex.end.year ? (months[ex.end.month - 1] || '') + ' ' + ex.end.year : 'Present'}} <span> &bull;
+                        </span>
+                        <span
+                            *ngIf="getDateDifference(ex.start,ex.end).years > 0">{{getDateDifference(ex.start,ex.end).years}}
+                            yrs </span>
+                        <span
+                            *ngIf="getDateDifference(ex.start,ex.end).months">{{getDateDifference(ex.start,ex.end).months}}
+                            mos</span>
+
+                    </p>
                     <p class="text-secondary mb-0" *ngIf="ex.location">{{ex.location}}</p>
                     <p class="mt-2">{{ex.description}}</p>
                 </div>

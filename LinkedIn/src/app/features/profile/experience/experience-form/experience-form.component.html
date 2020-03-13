@@ -37,7 +37,8 @@
                     </div>
                     <div class="form-group">
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="Currently">
+                            <input type="checkbox" class="custom-control-input" id="Currently"
+                                formControlName="currently">
                             <label class="custom-control-label" for="Currently">I am currently working in this
                                 role</label>
                         </div>
@@ -47,7 +48,8 @@
                             <label for="Start">Start Date*</label>
                             <div class="form-row">
                                 <div class="col-md-6">
-                                    <select id="StartM" class="form-control" formControlName="month">
+                                    <select id="StartM" class="form-control" formControlName="month"
+                                        [ngClass]="{'is-invalid': experienceForm.dirty && experienceForm.invalid && (experienceForm.errors?.rangeStart || false) }">
                                         <option value="null" selected disabled>Month</option>
                                         <option *ngFor="let month of months; let i = index" [value]="i+1">{{month}}
                                         </option>
@@ -55,23 +57,25 @@
                                 </div>
                                 <div class="col-md-6">
                                     <select id="Start" class="form-control" formControlName="year"
-                                        [ngClass]="{'is-invalid': experienceForm.dirty && experienceForm.invalid && experienceForm.errors?.range }">
+                                        [ngClass]="{'is-invalid': experienceForm.dirty && experienceForm.invalid && (experienceForm.errors?.range || experienceForm.errors?.rangeStart || false) }">
                                         <option value="null" selected disabled>Year</option>
                                         <option *ngFor="let year of years" [value]="year">{{year}}</option>
                                     </select>
                                 </div>
                             </div>
                             <small class="text-danger"
-                                *ngIf="experienceForm.dirty && experienceForm.invalid && experienceForm.errors?.range">Your
+                                *ngIf="experienceForm.dirty && experienceForm.invalid && (experienceForm.errors?.range || false)">Your
                                 end date can’t be earlier than your start date.</small>
-                            <!-- <small class="text-danger">Please enter a start date.</small> -->
-                            <small class="text-danger">Start date can’t be past today’s date.</small>
+                            <small class="text-danger"
+                                *ngIf="experienceForm.dirty && experienceForm.invalid && (experienceForm.errors?.rangeStart || false)">Start
+                                date can’t be past today’s date.</small>
                         </div>
                         <div class="form-group col-md-6" formGroupName="end">
                             <label for="End">End Date*</label>
-                            <div class="form-row">
+                            <div class="form-row" *ngIf="!currently">
                                 <div class="col-md-6">
-                                    <select id="StartM" class="form-control" formControlName="month">
+                                    <select id="StartM" class="form-control" formControlName="month"
+                                        [ngClass]="{'is-invalid': experienceForm.dirty && experienceForm.invalid &&  (experienceForm.errors?.rangeEnd || false) }">
                                         <option value="null" selected disabled>Month</option>
                                         <option *ngFor="let month of months; let i = index" [value]="i+1">{{month}}
                                         </option>
@@ -79,14 +83,16 @@
                                 </div>
                                 <div class="col-md-6">
                                     <select id="End" class="form-control" formControlName="year"
-                                        [ngClass]="{'is-invalid': experienceForm.dirty && experienceForm.invalid && experienceForm.errors?.range }">
+                                        [ngClass]="{'is-invalid': experienceForm.dirty && experienceForm.invalid && (experienceForm.errors?.range || experienceForm.errors?.rangeEnd || false) }">
                                         <option value="null" disabled>Year</option>
                                         <option *ngFor="let year of years" [value]="year">{{year}}</option>
                                     </select>
                                 </div>
                             </div>
-                            <!-- <small class="text-danger">Please enter an end date.</small> -->
-                            <small class="text-danger">End date can’t be past today’s date.</small>
+                            <p class="mb-0" *ngIf="currently">Present</p>
+                            <small class="text-danger"
+                                *ngIf="experienceForm.dirty && experienceForm.invalid && (experienceForm.errors?.rangeEnd || false)">End
+                                date can’t be past today’s date.</small>
                         </div>
                     </div>
                     <div class="form-group">
