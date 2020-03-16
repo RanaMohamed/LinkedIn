@@ -1,0 +1,100 @@
+<div class="modal fade show d-block" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Education</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form [formGroup]="educationForm" (ngSubmit)="submitForm()">
+                <div class="modal-body overflow-auto" style="max-height: 430px;">
+                    <div class="form-group" formGroupName="school">
+                        <label for="School">School*</label>
+                        <input type="text" class="form-control" id="School" placeholder="Ex: Boston University"
+                            formControlName="name" [ngClass]="{'is-invalid': school.dirty && school.invalid }">
+                        <small class="text-danger" *ngIf="school.dirty && school.invalid">Please enter a school
+                            name.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="Degree">Degree</label>
+                        <input type="text" class="form-control" id="Degree" placeholder="Ex: Bachelor's"
+                            formControlName="degree">
+                    </div>
+                    <div class="form-group">
+                        <label for="Field">Field of study</label>
+                        <input type="text" class="form-control" id="Field" placeholder="Ex: Business"
+                            formControlName="field">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6" formGroupName="start">
+                            <label for="Start">Start Year</label>
+                            <select id="Start" class="form-control" formControlName="year"
+                                [ngClass]="{'is-invalid': educationForm.dirty && educationForm.invalid && educationForm.errors?.range }">
+                                <option value="null" selected disabled>Year</option>
+                                <option *ngFor="let year of years" [value]="year">{{year}}</option>
+                            </select>
+                            <small class="text-danger"
+                                *ngIf="educationForm.dirty && educationForm.invalid && educationForm.errors?.range">Your
+                                end year can’t be earlier than your start year.</small>
+                        </div>
+                        <div class="form-group col-md-6" formGroupName="end">
+                            <label for="End">End Year (or expected)</label>
+                            <select id="End" class="form-control" formControlName="year"
+                                [ngClass]="{'is-invalid': educationForm.dirty && educationForm.invalid && educationForm.errors?.range }">
+                                <option value="null" disabled>Year</option>
+                                <option *ngFor="let year of years" [value]="year">{{year}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Grade">Grade</label>
+                        <input type="text" class="form-control" id="Grade" placeholder="" formControlName="grade">
+                    </div>
+                    <div class="form-group">
+                        <label for="Activities">Activities and societies</label>
+                        <textarea class="form-control" id="Activities" rows="3" formControlName="activities"></textarea>
+                        <small class="form-text text-muted">
+                            Ex: Alpha Phi Omega, Marching Band, Volleyball
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="Description">Description</label>
+                        <textarea class="form-control" id="Description" rows="3"
+                            formControlName="description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputAddress2">Media <br>
+                            Add or link to external documents, photos, sites, videos, and presentations.</label>
+                        <div class="d-flex mb-3">
+                            <button class="btn btn-primary flex-fill mr-2" type="button">Upload</button>
+                            <button class="btn btn-outline-primary flex-fill ml-2" type="button"
+                                (click)="linkOpened = !linkOpened">Link</button>
+                        </div>
+                        <ng-container *ngIf="linkOpened">
+                            <input type="text" class="form-control" id="Link"
+                                placeholder="Paste or type a link to a file or video">
+                            <button class="btn btn-link float-right">Add</button>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary mr-auto" type="button" *ngIf="education"
+                        (click)="deleteEducation()">Delete</button>
+                    <button type="button" class="btn btn-primary" type="submit"
+                        [disabled]="educationForm.invalid">Save</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        (click)="close()">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal-backdrop fade show"></div>
+<app-confirmation *ngIf="confirmDeleteOpened" message="delete this education" button="Delete"
+    (closeModal)="confirmDelete($event)">
+</app-confirmation>
+
+<app-confirmation *ngIf="confirmCloseOpened" message="discard changes to this" button="Discard"
+    (closeModal)="confirmClose($event)">
+</app-confirmation>
