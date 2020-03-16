@@ -1,0 +1,114 @@
+<section class="card">
+  <app-intro-form *ngIf="formOpened" (closeForm)="closeModal()">
+  </app-intro-form>
+
+  <div class="cover-bg"></div>
+  <div class="cover-setting row">
+    <div class="col-4">
+      <div class="Profile-img">
+        <img [src]="intro.imageUrl" />
+      </div>
+    </div>
+    <div class="col-8">
+      <div class="d-flex justify-content-end">
+        <div class="dropdown m-2">
+          <button
+            class="btn dropdown-toggle btn-color"
+            type="button"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            Add profile section
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">Intro</a>
+            <a class="dropdown-item" href="#">About</a>
+            <a class="dropdown-item" href="#">Background</a>
+            <a class="dropdown-item" href="#">Skills</a>
+            <a class="dropdown-item" href="#">Accomplishments</a>
+            <a class="dropdown-item" href="#">Additional information</a>
+            <a class="dropdown-item" href="#">Supported Languages</a>
+          </div>
+        </div>
+        <div class="btn-group d-block m-2">
+          <button
+            type="button"
+            class="btn btn-outline-secondary dropdown-toggle"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            More...
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#"
+              ><i class="far fa-share-square"></i> Share Profile via Message</a
+            >
+            <a class="dropdown-item" href="#">
+              <i class="fas fa-download"></i> Save to PDF</a
+            >
+          </div>
+        </div>
+        <div class="m-2 p-2 edit-icon" (click)="formOpened = !formOpened">
+          <i class="fas fa-pen text-primary"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cover-info d-flex mt-3">
+    <div class="ml-3">
+      <span class="name">{{ intro.Fname + " " + intro.Lname }}</span>
+      <h4>{{ intro.headLine }}</h4>
+
+      <ul class="list-unstyled d-flex">
+        <li class="mr-2 mt-2 mb-2">
+          {{ intro.country }}
+        </li>
+        <li class="m-2">
+          <a href="" id="" class="text-primary">
+            <span class="">
+              222 connections
+            </span>
+          </a>
+        </li>
+
+        <li class="m-2">
+          <a (click)="OpenContact()" id="" class="text-primary">
+            <span class="">
+              Contact info
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="ml-3">
+      <a *ngFor="let edu of intro.education" class="lin-edu" href="#">
+        <img [src]="edu.school.image" />
+        <span>{{ edu.school.name }}</span>
+        <br />
+      </a>
+    </div>
+  </div>
+
+  <div class="p-3 m-3 open-jop">
+    <div class="row">
+      <div class="col-10">
+        <div>open to jop opportunities</div>
+        <a href="#" class="text-primary">see all details</a>
+      </div>
+      <div class="col-2 d-flex justify-content-end">
+        <div class="edit-icon">
+          <i class="fas fa-pen text-primary"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-contact
+  *ngIf="openContact"
+  [contactInfo]="intro.contactInfo"
+  (closeForm)="OpenContact()"
+></app-contact>

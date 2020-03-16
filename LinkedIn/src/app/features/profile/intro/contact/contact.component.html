@@ -1,0 +1,105 @@
+<div class="modal fade show d-block" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit intro</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="close()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="row pl-3 pr-3 pt-3">
+        <div class="col-10">
+          <h5>Contact Info</h5>
+        </div>
+        <div class="col-2 d-flex justify-content-end">
+          <div class="edit-icon" (click)="openContactInfo()">
+            <i class="fas fa-pen text-primary"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="row p-3">
+        <div class="col-1">
+          <i class="fab fa-linkedin"></i>
+        </div>
+        <div class="col-11">
+          <p class="m-0">Your Profile</p>
+          <a href="#" class="text-primary">{{ contactInfo.profileUrl }}</a>
+        </div>
+      </div>
+
+      <div class="row p-3" *ngIf="contactInfo.urls.length !== 0">
+        <div class="col-1">
+          <i class="fas fa-link"></i>
+        </div>
+        <div class="col-11">
+          <p class="m-0">WebSites</p>
+          <div *ngFor="let url of contactInfo.urls">
+            <a href="#" class="text-primary">{{ url.url }}</a>
+            <span class="text-secondary">({{ url.type }} Website) </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row p-3" *ngIf="contactInfo.phone.num">
+        <div class="col-1">
+          <i class="fas fa-phone-alt"></i>
+        </div>
+        <div class="col-11">
+          <p class="m-0">Phone</p>
+          <span class="text-secondary"
+            >{{ contactInfo.phone.num }}({{ contactInfo.phone.type }})
+          </span>
+        </div>
+      </div>
+
+      <div class="row p-3">
+        <div class="col-1">
+          <i class="far fa-envelope"></i>
+        </div>
+        <div class="col-11">
+          <p class="m-0">Email</p>
+          <a href="#" class="text-primary">{{ contactInfo.email }}</a>
+        </div>
+      </div>
+
+      <div class="row p-3" *ngIf="contactInfo.instantMess.length !== 0">
+        <div class="col-1">
+          <i class="far fa-comments"></i>
+        </div>
+        <div class="col-11">
+          <p class="m-0">IM</p>
+          <div *ngFor="let im of contactInfo.instantMess">
+            <a href="#" class="text-primary">{{ im.inMess }}</a>
+            <span class="text-secondary">({{ im.type }}) </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row p-3" *ngIf="contactInfo.birthday.month">
+        <div class="col-1">
+          <i class="fas fa-birthday-cake"></i>
+        </div>
+        <div class="col-11">
+          <p class="m-0">Birthday</p>
+          <span>{{
+            contactInfo.birthday.month + " " + contactInfo.birthday.day
+          }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-backdrop fade show"></div>
+<app-contact-info-form
+  *ngIf="contactInfOpened"
+  (ContactInfoAdded)="infoFromContact($event)"
+  [contactInfo]="contactInfo"
+  (closeForm)="openContactInfo()"
+></app-contact-info-form>

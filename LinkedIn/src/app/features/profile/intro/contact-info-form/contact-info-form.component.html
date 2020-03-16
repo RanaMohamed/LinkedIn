@@ -1,0 +1,196 @@
+<div
+  class="modal fade show d-block"
+  *ngIf="backTointroForm"
+  tabindex="-1"
+  role="dialog"
+>
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          <i class="fas fa-arrow-left" (click)="close()"></i> Edit contact info
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="close()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form [formGroup]="contactForm" (ngSubmit)="OnApplyForm()">
+        <div class="modal-body overflow-auto" style="max-height: 430px;">
+          <div class="form-group">
+            <label for="Profile" class="d-block">Profile URL </label>
+            <a href="#" class="text-primary"
+              >{{ contactInfo.profileUrl }}
+              <i class="fas fa-share-square"></i>
+            </a>
+          </div>
+
+          <div class="form-group" formArrayName="urls">
+            <div
+              class="form-row"
+              *ngFor="let ul of contactInfo.urls; let i = index"
+              [formGroupName]="i"
+            >
+              <div class="col-md-8">
+                <label for="">Website URL </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="WURL"
+                  formControlName="url"
+                  [value]="ul.url"
+                />
+              </div>
+              <div class="col-md-4 mt-2">
+                <label></label>
+                <select class="form-control" formControlName="type">
+                  <option *ngFor="let Wtype of webSiteType" [value]="Wtype">{{
+                    Wtype
+                  }}</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <small
+                  class="text-primary float-right"
+                  (click)="RemoveWebsite(i)"
+                  >Remove website</small
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <small class="text-primary" (click)="AddNewWebsite()"
+              >+ Add website</small
+            >
+          </div>
+
+          <div class="form-group" formGroupName="phone">
+            <div class="form-row">
+              <div class="col-md-8">
+                <label for="phone">Phone</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="phone"
+                  formControlName="num"
+                />
+              </div>
+              <div class="col-md-4 mt-2">
+                <label></label>
+                <select class="form-control" formControlName="type">
+                  <option *ngFor="let Ptype of PhoneType" [value]="Ptype">{{
+                    Ptype
+                  }}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group mb-2">
+            <label for="Address">Address</label>
+            <textarea
+              class="form-control"
+              id="Address"
+              rows="2"
+              formControlName="address"
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="Profile" class="d-block">Email address </label>
+            <a href="#" class="text-primary"
+              >{{ contactInfo.email }}
+              <i class="fas fa-share-square"></i>
+            </a>
+          </div>
+
+          <div class="form-group" formArrayName="instantMess">
+            <div
+              class="form-group"
+              *ngFor="let inM of contactInfo.instantMess; let i = index"
+              [formGroupName]="i"
+            >
+              <div class="form-row">
+                <div class="col-md-8">
+                  <label for="">Instant messenger </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id=""
+                    formControlName="inMess"
+                    [value]="inM.inMess"
+                  />
+                </div>
+                <div class="col-md-4 mt-2">
+                  <label></label>
+                  <select class="form-control" formControlName="type">
+                    <option *ngFor="let IMtype of IMTypes" [value]="IMtype">{{
+                      IMtype
+                    }}</option>
+                  </select>
+                </div>
+                <div class="col-12">
+                  <small class="text-primary float-right" (click)="RemoveIM(i)"
+                    >Remove IM</small
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <small class="text-primary" (click)="AddNewIM()"
+              >+ instant messenger</small
+            >
+          </div>
+
+          <div class="form-group" formGroupName="birthday">
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="WURL">Birthday </label>
+                <select class="form-control" formControlName="month">
+                  <option *ngFor="let month of months" [value]="month">{{
+                    month
+                  }}</option>
+                </select>
+              </div>
+              <div class="col-md-6 mt-2">
+                <label></label>
+                <select class="form-control" formControlName="day">
+                  <option [value]="">Day</option>
+                  <option *ngFor="let day of days" [value]="day">{{
+                    day
+                  }}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-primary"
+              type="submit"
+              [disabled]="contactForm.invalid"
+            >
+              Apply
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="modal-backdrop fade show"></div>
+<app-confirmation
+  *ngIf="confirmCloseOpened"
+  message="discard changes to this"
+  button="Discard"
+  (closeModal)="confirmClose($event)"
+>
+</app-confirmation>
