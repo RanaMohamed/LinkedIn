@@ -1,0 +1,52 @@
+<div class="bg-info reg-container">
+    <!-- <img src="../../../../assets/imgs/linkedin (1).jpg" /> -->
+    <app-logo></app-logo>
+
+    <!-- [(ngModel)]="registerData.email" -->
+    <div class="card bg-light w-50 mx-auto">
+        <form #f="ngForm" (ngSubmit)="registerUser(f)" class="card-body">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+
+                <input required ngModel name="email" #email="ngModel" type="email" class="form-control"
+                    id="exampleInputEmail1" aria-describedby="emailHelp"
+                    pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" />
+
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                    else.</small>
+                <div class="alert alert-danger" *ngIf="email.touched && !email.valid">
+                    <div *ngIf="email.errors.required">Email is required</div>
+                    <div *ngIf="email.errors.pattern">Invalid Email</div>
+                </div>
+            </div>
+            <!-- [(ngModel)]="registerData.password")] -->
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input required minlength="8" ngModel #password="ngModel" name="password" type="password"
+                    class="form-control" id="exampleInputPassword1" />
+                <small id="passHelp" class="form-text text-muted">8 characters at least</small>
+                <div class="alert alert-danger" *ngIf="password.touched && !password.valid">
+                    <div *ngIf="password.errors.required">Password is required</div>
+                    <div *ngIf="password.errors.minlength">
+                        Password should be minimum
+                        {{ password.errors.minlength.requiredLength }} characters long
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <!-- <input type="checkbox" class="form-check-input" id="exampleCheck1"> -->
+                <label class="form-check-label" for="exampleCheck1">
+                    By clicking Agree & Join, you agree to the LinkedIn User Agreement,
+                    Privacy Policy, and Cookie Policy.</label>
+            </div>
+            <button [disabled]="!f.valid" type="submit" class="btn btn-primary p-30 mt-auto">
+                Agree & Join
+            </button>
+            <div></div>
+            <small>Already on LinkedIn? <a routerLink="/login">Sign in</a> </small>
+        </form>
+    </div>
+
+</div>

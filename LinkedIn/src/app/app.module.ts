@@ -1,8 +1,10 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
 
 import { AppRoutingModule } from "./app-routing.module";
+
 import { AppComponent } from "./app.component";
 import { HeaderComponent } from "./core/header/header.component";
 import { ProfileComponent } from "./features/profile/profile.component";
@@ -12,7 +14,10 @@ import { EducationFormComponent } from "./features/profile/education/education-f
 import { ConfirmationComponent } from "./shared/confirmation/confirmation.component";
 import { ExperienceComponent } from "./features/profile/experience/experience.component";
 import { ExperienceFormComponent } from "./features/profile/experience/experience-form/experience-form.component";
-import { PostFormComponent } from './features/home/post/post-form/post-form.component';
+import { PostFormComponent } from "./features/home/post/post-form/post-form.component";
+import { LoginComponent } from "./features/auth/login/login.component";
+import { RegisterationComponent } from "./features/auth/registeration/registeration.component";
+import { LogoComponent } from './shared/logo/logo.component';
 
 @NgModule({
   declarations: [
@@ -25,9 +30,18 @@ import { PostFormComponent } from './features/home/post/post-form/post-form.comp
     ConfirmationComponent,
     ExperienceComponent,
     ExperienceFormComponent,
-    PostFormComponent
+    PostFormComponent,
+    LoginComponent,
+    RegisterationComponent,
+    LogoComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, FormsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
