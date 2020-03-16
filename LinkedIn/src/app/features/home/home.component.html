@@ -2,10 +2,13 @@
     <div class="row">
         <div class="col-3">
             <div class="card">
-                <img src="https://via.placeholder.com/150" class="card-img-top m-auto rounded-circle w-25" alt="...">
+                <div class="cover-bg h-auto text-center"
+                    style="background: url(Cover.PNG) no-repeat top;background-size: 135%;">
+                    <img [src]="user.image" class="card-img-top mt-4 rounded-circle w-25" alt="...">
+                </div>
                 <div class="card-body text-center">
-                    <h5 class="card-title">Rana Mohamed</h5>
-                    <p class="card-text">Web and UI Student at Information Technology Institute (ITI)</p>
+                    <h5 class="card-title">{{user.name}}</h5>
+                    <p class="card-text">{{user.headline}}</p>
                 </div>
                 <hr>
                 <div class="card-body">
@@ -25,41 +28,44 @@
                 <div class="col-7">
                     <div class="card">
                         <ul class="list-group list-group-horizontal">
-                            <li class="list-group-item flex-fill"><a href=""><i class="far fa-edit"></i> Start a
-                                    post</a>
+                            <li class="list-group-item flex-fill btn-link btn text-left" (click)="formOpened = true">
+                                <i class="far fa-edit"></i> Start a post
                             </li>
-                            <li class="list-group-item"><a href=""><i class="fa fa-camera"></i></a></li>
-                            <li class="list-group-item"><a href=""><i class="fa fa-video"></i></a></li>
-                            <li class="list-group-item"><a href=""><i class="fa fa-file"></i></a></li>
+                            <li class="list-group-item btn btn-link" (click)="formOpened = true"><i
+                                    class="fa fa-camera"></i></li>
+                            <li class="list-group-item btn btn-link" (click)="formOpened = true"><i
+                                    class="fa fa-video"></i></li>
+                            <li class="list-group-item btn btn-link" (click)="formOpened = true"><i
+                                    class="fa fa-file"></i></li>
                         </ul>
                         <div class="card-footer">
                             <a href="#" class="text-info">Write an article</a> on LinkedIn
                         </div>
                     </div>
                     <hr>
-                    <div class="card mb-3">
+                    <app-post-form *ngIf="formOpened" (closeForm)="closeModal()" [user]="user">
+                    </app-post-form>
+                    <div class="card mb-3" *ngFor="let post of posts">
                         <div class="card-body">
                             <div class="d-flex mb-2">
-                                <img src="https://via.placeholder.com/60" class="rounded-circle mr-2" alt="">
+                                <img [src]="post.user?.image" class="rounded-circle mr-2" alt=""
+                                    style="width: 48px; height: 48px;">
                                 <div>
-                                    <p class="mb-0">Valeo</p>
-                                    <p class="mb-0 text-muted small">679,771 followers</p>
-                                    <p class="mb-0 text-muted small">1mo</p>
+                                    <p class="mb-0">{{post.user.name}}</p>
+                                    <p class="mb-0 text-muted small">{{post.user.headline}}</p>
+                                    <p class="mb-0 text-muted small">{{moment(post.date).fromNow()}}</p>
                                 </div>
                             </div>
-                            <p class="mb-0">Leveraging AI and the information captured by various sensors to deliver
-                                ultimate
-                                personalized comfort, Valeo provides a
-                                customized comfort bubble to suit each vehicle occupant with Valeo Smart Cocoon. By
-                                practically rendering the vehicle
-                                empathetic, this innovative technology takes the state of its driver and passengers
-                                into
-                                account, detecting signs of
-                                fatigue, distraction, emotion and stress.</p>
+                            <p class="mb-0">{{post.description}}</p>
                         </div>
-                        <img src="https://via.placeholder.com/500x300" alt="">
+                        <div class="post-images">
+                            <img *ngFor="let image of post.images" [src]="image" alt="">
+                        </div>
                         <div class="card-body text-muted">
-                            <a href="">377</a> &bull; <a href="">9 Comments</a>
+                            <a href="" *ngIf="post.likes"><i class="fa fa-thumbs-up text-primary"></i>
+                                {{post.likes}}</a>
+                            <span *ngIf="post.likes && post.comments.length > 0" class="mx-2">&bull;</span>
+                            <a href="" *ngIf="post.comments.length > 0">{{post.comments.length}} Comments</a>
                             <hr>
                             <a href="" class="mr-3"><i class="far fa-thumbs-up"></i> Like</a>
                             <a href="" class="mr-3"><i class="far fa-comment-alt"></i> Comment</a>
@@ -78,64 +84,6 @@
                                     </div>
                                 </form>
                             </div>
-                        </div>
-                    </div>
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <div class="d-flex mb-2">
-                                <img src="https://via.placeholder.com/60" class="rounded-circle mr-2" alt="">
-                                <div>
-                                    <p class="mb-0">Valeo</p>
-                                    <p class="mb-0 text-muted small">679,771 followers</p>
-                                    <p class="mb-0 text-muted small">1mo</p>
-                                </div>
-                            </div>
-                            <p class="mb-0">Leveraging AI and the information captured by various sensors to deliver
-                                ultimate
-                                personalized comfort, Valeo provides a
-                                customized comfort bubble to suit each vehicle occupant with Valeo Smart Cocoon. By
-                                practically rendering the vehicle
-                                empathetic, this innovative technology takes the state of its driver and passengers
-                                into
-                                account, detecting signs of
-                                fatigue, distraction, emotion and stress.</p>
-                        </div>
-                        <img src="https://via.placeholder.com/500x300" alt="">
-                        <div class="card-body text-muted">
-                            <a href="">377</a> &bull; <a href="">9 Comments</a>
-                            <hr>
-                            <a href="" class="mr-3"><i class="far fa-thumbs-up"></i> Like</a>
-                            <a href="" class="mr-3"><i class="far fa-comment-alt"></i> Comment</a>
-                            <a href="" class="mr-3"><i class="fa fa-share"></i> Share</a>
-                        </div>
-                    </div>
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <div class="d-flex mb-2">
-                                <img src="https://via.placeholder.com/60" class="rounded-circle mr-2" alt="">
-                                <div>
-                                    <p class="mb-0">Valeo</p>
-                                    <p class="mb-0 text-muted small">679,771 followers</p>
-                                    <p class="mb-0 text-muted small">1mo</p>
-                                </div>
-                            </div>
-                            <p class="mb-0">Leveraging AI and the information captured by various sensors to deliver
-                                ultimate
-                                personalized comfort, Valeo provides a
-                                customized comfort bubble to suit each vehicle occupant with Valeo Smart Cocoon. By
-                                practically rendering the vehicle
-                                empathetic, this innovative technology takes the state of its driver and passengers
-                                into
-                                account, detecting signs of
-                                fatigue, distraction, emotion and stress.</p>
-                        </div>
-                        <img src="https://via.placeholder.com/500x300" alt="">
-                        <div class="card-body text-muted">
-                            <a href="">377</a> &bull; <a href="">9 Comments</a>
-                            <hr>
-                            <a href="" class="mr-3"><i class="far fa-thumbs-up"></i> Like</a>
-                            <a href="" class="mr-3"><i class="far fa-comment-alt"></i> Comment</a>
-                            <a href="" class="mr-3"><i class="fa fa-share"></i> Share</a>
                         </div>
                     </div>
                 </div>

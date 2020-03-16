@@ -6,7 +6,8 @@ import { Subject } from "rxjs";
   providedIn: "root"
 })
 export class EducationService {
-  private education: Subject<Education[]>;
+  private educations: Subject<Education[]>;
+  private education: Subject<Education>;
   private list: Education[] = [
     {
       id: 1,
@@ -36,24 +37,28 @@ export class EducationService {
   ];
   private lastId = 2;
   constructor() {
-    this.education = new Subject<Education[]>();
+    this.educations = new Subject<Education[]>();
+    this.education = new Subject<Education>();
   }
 
   getAll(): Subject<Education[]> {
     setTimeout(() => {
-      this.education.next(this.list);
+      this.educations.next(this.list);
     }, 5);
-    return this.education;
+    return this.educations;
   }
 
-  getById(id: number): Education {
-    return null;
+  getById(id: number): Subject<Education> {
+    setTimeout(() => {
+      this.education.next(this.list.find(ed => ed.id === id));
+    }, 5);
+    return this.education;
   }
 
   add(education: Education) {
     education.id = ++this.lastId;
     this.list.unshift(education);
-    this.education.next(this.list);
+    this.educations.next(this.list);
   }
 
   edit(education: Education) {
@@ -62,11 +67,11 @@ export class EducationService {
       this.list[index].school.name === education.school.name &&
       this.list[index].school.image;
     this.list[index] = education;
-    this.education.next(this.list);
+    this.educations.next(this.list);
   }
 
   delete(id: number) {
     this.list = this.list.filter(ed => ed.id !== id);
-    this.education.next(this.list);
+    this.educations.next(this.list);
   }
 }

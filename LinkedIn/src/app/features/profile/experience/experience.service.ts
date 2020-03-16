@@ -7,8 +7,10 @@ import { Experience } from "src/app/_models/experience";
 })
 export class ExperienceService {
   private experiences: Subject<Experience[]>;
+  private experience: Subject<Experience>;
   private list: Experience[] = [
     {
+      id: 1,
       title: "Frontend Developer",
       type: "Full-time",
       company: { name: "Ennwa" },
@@ -16,6 +18,7 @@ export class ExperienceService {
       end: { month: 8, year: 2019 }
     },
     {
+      id: 2,
       title: "Frontend Developer",
       company: {
         name: "dotdev",
@@ -29,6 +32,7 @@ export class ExperienceService {
   private lastId = 2;
   constructor() {
     this.experiences = new Subject<Experience[]>();
+    this.experience = new Subject<Experience>();
   }
 
   getAll() {
@@ -38,8 +42,11 @@ export class ExperienceService {
     return this.experiences;
   }
 
-  getById(id: number): Experience {
-    return null;
+  getById(id: number): Subject<Experience> {
+    setTimeout(() => {
+      this.experience.next(this.list.find(ex => ex.id === id));
+    }, 5);
+    return this.experience;
   }
 
   add(experience: Experience) {

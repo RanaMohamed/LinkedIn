@@ -23,6 +23,18 @@ a {
   height: 100%;
 }
 
+.post-images {
+  display: flex;
+  flex-wrap: wrap;
+  img {
+    width: 50%;
+    flex-grow: 1;
+    &:first-of-type {
+      width: 100%;
+    }
+  }
+}
+
 /* profile style */
 
 .cover-bg {

@@ -12,6 +12,7 @@ import { EducationFormComponent } from "./features/profile/education/education-f
 import { ConfirmationComponent } from "./shared/confirmation/confirmation.component";
 import { ExperienceComponent } from "./features/profile/experience/experience.component";
 import { ExperienceFormComponent } from "./features/profile/experience/experience-form/experience-form.component";
+import { PostFormComponent } from './features/home/post/post-form/post-form.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ExperienceFormComponent } from "./features/profile/experience/experienc
     EducationFormComponent,
     ConfirmationComponent,
     ExperienceComponent,
-    ExperienceFormComponent
+    ExperienceFormComponent,
+    PostFormComponent
   ],
   imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, FormsModule],
   providers: [],
