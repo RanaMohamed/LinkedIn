@@ -6,25 +6,31 @@ import { User } from "src/app/_models/user";
   providedIn: "root"
 })
 export class AuthService {
-  private _registerUrl = "http://localhost:3000/users";
-  private _loginUrl = "http://localhost:3000/users";
+  private registerUrl = "http://localhost:3000/users";
+  private loginUrl = "http://localhost:3000/users";
   user: User = null;
   constructor(private http: HttpClient) {}
 
   registerUser(user) {
-    return this.http.post<any>(this._registerUrl, user);
+    return this.http.post<any>(this.registerUrl, user);
   }
 
   loginUser(user) {
     this.user = user;
-    // return this.http.post<any>(this._loginUrl, user);
+    localStorage.setItem("user", user);
+    // return this.http.post<any>(this.loginUrl, user);
   }
 
   getAll() {
     return this.http.get<any>("http://localhost:3000/users");
   }
 
+  logout() {
+    this.user = null;
+    localStorage.removeItem("user");
+  }
+
   isLoggedIn() {
-    return this.user ? true : false;
+    return this.user || localStorage.getItem("user") ? true : false;
   }
 }
