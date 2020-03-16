@@ -1,0 +1,48 @@
+<section class="card mt-3 p-3 education mb-3">
+    <app-experience-form *ngIf="formOpened" (closeForm)="closeModal()" [experience]="selectedExperience">
+    </app-experience-form>
+    <div>
+        <div class="row">
+            <div class="col-10">
+                <h4>Experience</h4>
+            </div>
+            <div class="col-2 d-flex justify-content-end">
+                <div class="edit-icon" (click)="formOpened = !formOpened">
+                    <i class="fas fa-plus text-primary"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="ed-detail" *ngFor="let ex of experiences">
+
+            <div class="row p-2">
+                <div class="col-2">
+                    <img [src]="ex.company.image || 'https://via.placeholder.com/64'" />
+                </div>
+                <div class="col-8">
+                    <h4>{{ex.title}}</h4>
+                    <p class="mb-0">{{ex.company.name}} <span *ngIf="ex.type"> &bull; </span> {{ex.type}}</p>
+                    <p class="text-secondary mb-0">{{months[ex.start.month - 1]}} {{ex.start.year}} -
+                        {{ex.end.year ? (months[ex.end.month - 1] || '') + ' ' + ex.end.year : 'Present'}} <span> &bull;
+                        </span>
+                        <span
+                            *ngIf="getDateDifference(ex.start,ex.end).years > 0">{{getDateDifference(ex.start,ex.end).years}}
+                            yrs </span>
+                        <span
+                            *ngIf="getDateDifference(ex.start,ex.end).months">{{getDateDifference(ex.start,ex.end).months}}
+                            mos</span>
+
+                    </p>
+                    <p class="text-secondary mb-0" *ngIf="ex.location">{{ex.location}}</p>
+                    <p class="mt-2">{{ex.description}}</p>
+                </div>
+                <div class="col-2 d-flex justify-content-end">
+                    <div class="edit-icon" (click)="editExperience(ex)">
+                        <i class="fas fa-pen text-primary"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

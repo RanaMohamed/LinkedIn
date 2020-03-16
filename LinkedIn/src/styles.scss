@@ -23,6 +23,18 @@ a {
   height: 100%;
 }
 
+.post-images {
+  display: flex;
+  flex-wrap: wrap;
+  img {
+    width: 50%;
+    flex-grow: 1;
+    &:first-of-type {
+      width: 100%;
+    }
+  }
+}
+
 /* profile style */
 
 .cover-bg {
@@ -114,4 +126,16 @@ h6 {
   position: absolute;
   top: 0.7rem;
   left: 3rem;
+}
+
+.reg-container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+a {
+  cursor: pointer;
 }

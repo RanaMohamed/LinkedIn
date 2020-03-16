@@ -13,18 +13,18 @@
             </div>
         </div>
 
-        <div class="ed-detail" *ngFor="let ed of education">
+        <div class="ed-detail" *ngFor="let ed of educations">
 
             <div class="row p-2">
                 <div class="col-2">
-                    <img [src]="ed.school.image" />
+                    <img [src]="ed.school.image || 'https://via.placeholder.com/64'" />
                 </div>
                 <div class="col-8">
                     <h4>{{ed.school.name}}</h4>
                     <p class="mb-0" *ngIf="ed.degree || ed.field || ed.grade">{{ed.degree}}<span
                             *ngIf="ed.degree && (ed.field || ed.grade)">,</span>
                         {{ed.field}}<span *ngIf="ed.field && ed.grade">,</span> {{ed.grade}}</p>
-                    <p class="text-secondary mb-0" *ngIf="ed.start || ed.end">{{ed.start}} - {{ed.end}}</p>
+                    <p class="text-secondary mb-0" *ngIf="ed.start || ed.end">{{ed.start.year}} - {{ed.end.year}}</p>
                     <p class="text-secondary mb-0" *ngIf="ed.activities">Activities and Societies: {{ed.activities}}</p>
                     <p class="mt-2">{{ed.description}}</p>
                 </div>
@@ -35,24 +35,5 @@
                 </div>
             </div>
         </div>
-
-        <!-- <div class="ed-detail">
-            <div class="row p-2">
-                <div class="col-2">
-                    <img src="./assets/imgs/itiLogo.png" />
-                </div>
-                <div class="col-8">
-                    <h4>Information Technology Institute(ITI)</h4>
-                    <p>Web and UI Development</p>
-                    <p class="text-secondary">2019 - 2020</p>
-                </div>
-                <div class="col-2 d-flex justify-content-end">
-                    <div class="edit-icon">
-                        <i class="fas fa-pen text-primary"></i>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
     </div>
 </section>

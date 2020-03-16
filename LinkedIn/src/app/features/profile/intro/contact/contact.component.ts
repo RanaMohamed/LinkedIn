@@ -12,9 +12,7 @@ export class ContactComponent implements OnInit {
   contactInfOpened = false;
   constructor() {}
 
-  ngOnInit() {
-    console.log("contact ", this.contactInfo);
-  }
+  ngOnInit() {}
 
   openContactInfo() {
     this.contactInfOpened = !this.contactInfOpened;
@@ -24,8 +22,6 @@ export class ContactComponent implements OnInit {
     this.closeForm.next();
   }
   infoFromContact(e) {
-    // this.contact = e;
-    console.log(" contact ", e);
     this.contactInfo = e;
   }
 }

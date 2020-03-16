@@ -26,8 +26,8 @@ export class IntroService {
               "https://media-exp1.licdn.com/dms/image/C560BAQGK3uuhQer46g/company-logo_100_100/0?e=1591833600&v=beta&t=bZJwqK3Xxk0jUrI8dS9dYCWOnpFOmOEIcmtg90HeOtw"
           },
           field: "Web and UI Development",
-          start: 2019,
-          end: 2020
+          start: { year: 2019 },
+          end: { year: 2020 }
         },
         {
           id: 2,
@@ -39,8 +39,8 @@ export class IntroService {
           },
           degree: "Bachelor's degree",
           field: "Computer Software Engineering",
-          start: 2014,
-          end: 2018
+          start: { year: 2019 },
+          end: { year: 2020 }
         }
       ],
       country: "Egypt",

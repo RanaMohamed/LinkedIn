@@ -6,7 +6,8 @@ import { Subject } from "rxjs";
   providedIn: "root"
 })
 export class EducationService {
-  private education: Subject<Education[]>;
+  private educations: Subject<Education[]>;
+  private education: Subject<Education>;
   private list: Education[] = [
     {
       id: 1,
@@ -17,8 +18,8 @@ export class EducationService {
           "https://media-exp1.licdn.com/dms/image/C560BAQGK3uuhQer46g/company-logo_100_100/0?e=1591833600&v=beta&t=bZJwqK3Xxk0jUrI8dS9dYCWOnpFOmOEIcmtg90HeOtw"
       },
       field: "Web and UI Development",
-      start: 2019,
-      end: 2020
+      start: { year: 2019 },
+      end: { year: 2020 }
     },
     {
       id: 2,
@@ -30,45 +31,47 @@ export class EducationService {
       },
       degree: "Bachelor's degree",
       field: "Computer Software Engineering",
-      start: 2014,
-      end: 2018
+      start: { year: 2014 },
+      end: { year: 2018 }
     }
   ];
   private lastId = 2;
   constructor() {
-    this.education = new Subject<Education[]>();
+    this.educations = new Subject<Education[]>();
+    this.education = new Subject<Education>();
   }
 
   getAll(): Subject<Education[]> {
     setTimeout(() => {
-      this.education.next(this.list);
+      this.educations.next(this.list);
+    }, 5);
+    return this.educations;
+  }
+
+  getById(id: number): Subject<Education> {
+    setTimeout(() => {
+      this.education.next(this.list.find(ed => ed.id === id));
     }, 5);
     return this.education;
   }
 
-  getById(id: number): Education {
-    return null;
-  }
-
   add(education: Education) {
     education.id = ++this.lastId;
-    education.school.image = "https://via.placeholder.com/64";
     this.list.unshift(education);
-    this.education.next(this.list);
+    this.educations.next(this.list);
   }
 
   edit(education: Education) {
     const index = this.list.findIndex(ed => ed.id === education.id);
     education.school.image =
-      this.list[index].school.name === education.school.name
-        ? this.list[index].school.image
-        : "https://via.placeholder.com/64";
+      this.list[index].school.name === education.school.name &&
+      this.list[index].school.image;
     this.list[index] = education;
-    this.education.next(this.list);
+    this.educations.next(this.list);
   }
 
   delete(id: number) {
     this.list = this.list.filter(ed => ed.id !== id);
-    this.education.next(this.list);
+    this.educations.next(this.list);
   }
 }

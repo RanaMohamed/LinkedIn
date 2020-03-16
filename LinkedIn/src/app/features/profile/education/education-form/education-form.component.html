@@ -27,24 +27,24 @@
                             formControlName="field">
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-6" formGroupName="start">
                             <label for="Start">Start Year</label>
-                            <select id="Start" class="form-control" formControlName="start"
+                            <select id="Start" class="form-control" formControlName="year"
                                 [ngClass]="{'is-invalid': educationForm.dirty && educationForm.invalid && educationForm.errors?.range }">
                                 <option value="null" selected disabled>Year</option>
-                                <option *ngFor="let year of years" [value]="year">{{year}}</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="End">End Year (or expected)</label>
-                            <select id="End" class="form-control" formControlName="end"
-                                [ngClass]="{'is-invalid': educationForm.dirty && educationForm.invalid && educationForm.errors?.range }">
-                                <option value="null" disabled>Year</option>
                                 <option *ngFor="let year of years" [value]="year">{{year}}</option>
                             </select>
                             <small class="text-danger"
                                 *ngIf="educationForm.dirty && educationForm.invalid && educationForm.errors?.range">Your
                                 end year can’t be earlier than your start year.</small>
+                        </div>
+                        <div class="form-group col-md-6" formGroupName="end">
+                            <label for="End">End Year (or expected)</label>
+                            <select id="End" class="form-control" formControlName="year"
+                                [ngClass]="{'is-invalid': educationForm.dirty && educationForm.invalid && educationForm.errors?.range }">
+                                <option value="null" disabled>Year</option>
+                                <option *ngFor="let year of years" [value]="year">{{year}}</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">

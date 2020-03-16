@@ -1,1 +1,3 @@
-<app-header></app-header> <router-outlet></router-outlet>
+<app-header *ngIf="_auth.isLoggedIn()"></app-header>
+
+<router-outlet></router-outlet>

@@ -9,13 +9,13 @@ import { EducationService } from "./education.service";
 })
 export class EducationComponent implements OnInit {
   formOpened = false;
-  education: Education[] = [];
+  educations: Education[] = [];
   selectedEducation: Education = null;
   constructor(private educationService: EducationService) {}
 
   ngOnInit() {
     this.educationService.getAll().subscribe(ed => {
-      this.education = ed;
+      this.educations = ed;
     });
   }
 
