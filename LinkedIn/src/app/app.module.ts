@@ -22,8 +22,8 @@ import { PostFormComponent } from "./features/home/post/post-form/post-form.comp
 import { LoginComponent } from "./features/auth/login/login.component";
 import { RegisterationComponent } from "./features/auth/registeration/registeration.component";
 import { LogoComponent } from "./shared/logo/logo.component";
-// import { AboutComponent } from "./features/profile/about/about.component";
-// import { AboutFormComponent } from "./features/profile/about/about-form/about-form.component";
+import { AboutComponent } from "./features/profile/about/about.component";
+import { AboutFormComponent } from "./features/profile/about/about-form/about-form.component";
 import { PostComponent } from "./features/home/post/post/post.component";
 import { PostImageFormComponent } from "./features/home/post/post-image-form/post-image-form.component";
 
@@ -47,9 +47,9 @@ import { PostImageFormComponent } from "./features/home/post/post-image-form/pos
     RegisterationComponent,
     LogoComponent,
     PostComponent,
-    PostImageFormComponent
-    // AboutComponent,
-    // AboutFormComponent,
+    PostImageFormComponent,
+    AboutComponent,
+    AboutFormComponent
   ],
   imports: [
     BrowserModule,

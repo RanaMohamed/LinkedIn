@@ -1,0 +1,85 @@
+<div class="modal fade show d-block" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit about</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="close()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form [formGroup]="aboutForm" (ngSubmit)="SaveForm()">
+        <div class="modal-body overflow-auto" style="max-height: 430px;">
+          <div class="form-group">
+            <label for="Summary">Summary</label>
+            <textarea
+              class="form-control"
+              id="Summary"
+              rows="3"
+              formControlName="summary"
+              [value]="about.summary"
+            ></textarea>
+          </div>
+          <div class="form-group" formArrayName="media">
+            <label for="inputAddress2" class="text-secondary"
+              >Media <br />
+              Add or link to external documents, photos, sites, videos, and
+              presentations.</label
+            >
+            <div class="d-flex mb-3">
+              <button class="btn btn-primary flex-fill mr-2" type="button">
+                Upload
+              </button>
+              <button
+                class="btn btn-outline-primary flex-fill ml-2"
+                type="button"
+                (click)="linkclicked = !linkclicked"
+              >
+                Link
+              </button>
+            </div>
+          </div>
+          <ng-container *ngIf="linkclicked" class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              id="Link"
+              placeholder="Paste or type a link to a file or video"
+              formControlName="link"
+              [ngClass]="{ 'is-invalid': Link.dirty && Link.invalid }"
+            />
+            <small class="text-danger" *ngIf="Link.dirty && Link.invalid"
+              >Url is incorrectly formatted.</small
+            >
+            <button
+              class="btn btn-link float-right"
+              type="button"
+              [disabled]="aboutForm.invalid"
+              (click)="addClicked = !addClicked"
+            >
+              Add
+            </button>
+          </ng-container>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" type="submit">
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="modal-backdrop fade show"></div>
+<app-confirmation
+  *ngIf="confirmCloseOpened"
+  message="discard changes to this"
+  button="Discard"
+  (closeModal)="confirmClose($event)"
+>
+</app-confirmation>
