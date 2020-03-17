@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { ContactInfo } from "src/app/_models/contactInfo";
+import { ContactInfo } from "../../../../_models/contactInfo";
 import { FormGroup, FormArray, FormControl } from "@angular/forms";
 import { months } from "../../../../_utilities/utilities";
 @Component({
@@ -81,7 +81,7 @@ export class ContactInfoFormComponent implements OnInit {
         this.contactInfo.email = "amalelkady4@gmail.com";
         this.ContactInfoAdded.next(this.contactInfo);
       }
-      this.close();
+      this.closeForm.next();
     }
   }
 

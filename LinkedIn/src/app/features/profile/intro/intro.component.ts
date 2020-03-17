@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { IntroService } from "./intro.service";
-import { Intro } from "src/app/_models/intro";
-import { months } from "src/app/_utilities/utilities";
+import { Intro } from "../../../_models/intro";
+import { months } from "../../../_utilities/utilities";
 
 @Component({
   selector: "app-intro",
@@ -24,8 +24,8 @@ export class IntroComponent implements OnInit {
           image: ""
         },
         field: "",
-        start: 2019,
-        end: 2020
+        start: { month: 2, year: 2019 },
+        end: { month: 2, year: 2020 }
       }
     ],
     country: "",
@@ -59,5 +59,8 @@ export class IntroComponent implements OnInit {
   }
   closeModal() {
     this.formOpened = false;
+  }
+  editContact(e) {
+    this.intro.contactInfo = e;
   }
 }

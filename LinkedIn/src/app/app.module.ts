@@ -22,6 +22,7 @@ import { PostFormComponent } from "./features/home/post/post-form/post-form.comp
 import { LoginComponent } from "./features/auth/login/login.component";
 import { RegisterationComponent } from "./features/auth/registeration/registeration.component";
 import { LogoComponent } from "./shared/logo/logo.component";
+import { AboutComponent } from './features/profile/about/about.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { LogoComponent } from "./shared/logo/logo.component";
     PostFormComponent,
     LoginComponent,
     RegisterationComponent,
-    LogoComponent
+    LogoComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,

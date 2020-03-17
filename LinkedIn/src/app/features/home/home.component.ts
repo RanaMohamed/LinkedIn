@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Post, User } from "src/app/_models/post";
 import { PostService } from "./post/post.service";
-const moment = require("moment");
+// const moment = require("moment");
 
 @Component({
   selector: "app-home",
@@ -10,7 +10,7 @@ const moment = require("moment");
 })
 export class HomeComponent implements OnInit {
   posts: Post[] = [];
-  moment = moment;
+  // moment = moment;
   formOpened = false;
   user: User = {
     name: "Rana Mohamed",

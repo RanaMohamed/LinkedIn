@@ -1,5 +1,5 @@
 <section class="card">
-  <app-intro-form *ngIf="formOpened" (closeForm)="closeModal()">
+  <app-intro-form *ngIf="formOpened" [intro]="intro" (closeForm)="closeModal()">
   </app-intro-form>
 
   <div class="cover-bg"></div>
@@ -111,4 +111,5 @@
   *ngIf="openContact"
   [contactInfo]="intro.contactInfo"
   (closeForm)="OpenContact()"
+  (contactEdit)="editContact($event)"
 ></app-contact>
