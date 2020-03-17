@@ -1,0 +1,62 @@
+<div class="card mb-3">
+    <div class="card-body">
+        <div class="d-flex mb-2">
+            <img [src]="post.user?.image" class="rounded-circle mr-2" alt="" style="width: 48px; height: 48px;" />
+            <div>
+                <p class="mb-0">{{ post.user.name }}</p>
+                <p class="mb-0 text-muted small">{{ post.user.headline }}</p>
+                <p class="mb-0 text-muted small">{{moment(post.date).fromNow()}}</p>
+            </div>
+        </div>
+        <p class="mb-0">{{ post.description }}</p>
+    </div>
+    <div class="post-images">
+        <img *ngFor="let image of post.images" [src]="image" alt="" />
+    </div>
+    <div class="card-body text-muted">
+        <a href="" *ngIf="post.likes"><i class="fa fa-thumbs-up text-primary"></i>
+            {{ post.likes }}</a>
+        <span *ngIf="post.likes && post.comments.length > 0" class="mx-2">&bull;</span>
+        <a *ngIf="post.comments.length > 0" (click)="commentsOpened = !commentsOpened">{{ post.comments.length }}
+            Comments</a>
+        <hr />
+        <a class=" mr-3" [ngClass]="{'text-primary': post.isLiked}" (click)="likePost()"><i
+                class="far fa-thumbs-up"></i>
+            Like</a>
+        <a class="mr-3" (click)="commentsOpened = !commentsOpened"><i class=" far fa-comment-alt"></i>
+            Comment</a>
+        <a href="" class="mr-3"><i class="fa fa-share"></i> Share</a>
+        <div class="comments" *ngIf="commentsOpened">
+            <div class="d-flex mt-2 align-items-start">
+                <img [src]="user.image" style="width: 48px; height: 48px;" alt=""
+                    class=" rounded-circle d-block mr-2" />
+                <form [formGroup]="commentForm" (ngSubmit)="submitForm()" class="my-2 my-lg-0 mr-auto flex-fill">
+                    <div class="input-group">
+                        <input class="form-control" type="text" placeholder="Add a Comment..." aria-label="Comment"
+                            formControlName="comment" [ngClass]="{'is-invalid': comment.dirty && comment.invalid}" />
+                        <div class="input-group-append">
+                            <button class="btn btn-info my-2 my-sm-0" type="submit">
+                                <i class="fa fa-camera"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <span class="text-danger" *ngIf="comment.dirty && comment.invalid">You have exceeded the
+                        maximum character limit</span>
+                    <button type="submit" class="btn btn-primary mt-2" *ngIf="commentForm.dirty"
+                        [disabled]="commentForm.invalid">Post</button>
+                </form>
+            </div>
+
+            <div class=" d-flex mt-2 align-items-start" *ngFor="let comment of post.comments">
+                <img [src]="comment.user?.image" style="width: 48px; height: 48px;" alt=""
+                    class="rounded-circle d-block mr-2" />
+                <div class="my-2 my-lg-0 mr-auto flex-fill bg-light p-2 small">
+                    <span class="text-muted small float-right">{{moment(comment.date).fromNow()}}</span>
+                    <span class="d-block">{{comment.user?.name}}</span>
+                    <span class="text-muted d-block">{{comment.user?.headline}}</span>
+                    <span class="d-block mt-2">{{comment.comment}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

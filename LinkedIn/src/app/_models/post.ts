@@ -6,6 +6,7 @@ export interface Post {
   images?: string[];
   likes?: number;
   comments?: Comment[];
+  isLiked?: boolean;
 }
 
 export interface User {
