@@ -153,7 +153,11 @@
             <div class="form-row">
               <div class="col-md-6">
                 <label for="WURL">Birthday </label>
-                <select class="form-control" formControlName="month">
+                <select
+                  class="form-control"
+                  formControlName="month"
+                  [value]="contactInfo.birthday.month"
+                >
                   <option *ngFor="let month of months" [value]="month">{{
                     month
                   }}</option>
@@ -161,7 +165,11 @@
               </div>
               <div class="col-md-6 mt-2">
                 <label></label>
-                <select class="form-control" formControlName="day">
+                <select
+                  class="form-control"
+                  formControlName="day"
+                  [value]="contactInfo.birthday.day"
+                >
                   <option [value]="">Day</option>
                   <option *ngFor="let day of days" [value]="day">{{
                     day

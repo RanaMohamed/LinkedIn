@@ -2,10 +2,10 @@ import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { FormGroup, FormControl, FormArray, Validators } from "@angular/forms";
 import { Intro } from "src/app/_models/intro";
 import { IntroService } from "../intro.service";
-import { Education } from "src/app/_models/education";
+import { Education } from "../../../../_models/education";
 import { EducationService } from "../../education/education.service";
-import { months } from "src/app/_utilities/utilities";
-import { ContactInfo } from "src/app/_models/contactInfo";
+import { months } from "../../../../_utilities/utilities";
+import { ContactInfo } from "../../../../_models/contactInfo";
 
 @Component({
   selector: "app-intro-form",
@@ -28,8 +28,8 @@ export class IntroFormComponent implements OnInit {
           image: ""
         },
         field: "",
-        start: 2019,
-        end: 2020
+        start: { month: 2, year: 2019 },
+        end: { month: 2, year: 2020 }
       }
     ],
     country: "",
@@ -97,8 +97,6 @@ export class IntroFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.introService.getById(1).subscribe(r => (this.intro = r));
-
     this.IntroForm = new FormGroup({
       Fname: new FormControl(this.intro && this.intro.Fname, [
         Validators.required
@@ -133,6 +131,26 @@ export class IntroFormComponent implements OnInit {
     });
   }
 
+  get Fname() {
+    return this.IntroForm.get("Fname");
+  }
+
+  get Lname() {
+    return this.IntroForm.get("Lname");
+  }
+
+  get HeadLine() {
+    return this.IntroForm.get("headLine");
+  }
+
+  get Country() {
+    return this.IntroForm.get("country");
+  }
+
+  get Industry() {
+    return this.IntroForm.get("industry");
+  }
+
   openContactInfo() {
     this.contactInfOpened = !this.contactInfOpened;
     this.editIntrOpened = !this.editIntrOpened;
@@ -151,10 +169,7 @@ export class IntroFormComponent implements OnInit {
         intro.id = +this.intro.id;
         if (this.disableEdu) intro.education = this.educations;
         intro.contactInfo = this.contact;
-        console.log("intro", intro);
         this.introService.edit(intro);
-      } else {
-        console.log("false", intro);
       }
       this.closeForm.next();
     }

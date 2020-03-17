@@ -9,6 +9,7 @@ import { ContactInfo } from "src/app/_models/contactInfo";
 export class ContactComponent implements OnInit {
   @Input() contactInfo: ContactInfo;
   @Output() closeForm = new EventEmitter();
+  @Output() contactEdit = new EventEmitter();
   contactInfOpened = false;
   constructor() {}
 
@@ -23,5 +24,6 @@ export class ContactComponent implements OnInit {
   }
   infoFromContact(e) {
     this.contactInfo = e;
+    this.contactEdit.next(this.contactInfo);
   }
 }

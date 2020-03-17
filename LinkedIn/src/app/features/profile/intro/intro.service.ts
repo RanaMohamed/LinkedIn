@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Subject } from "rxjs";
-import { Intro } from "src/app/_models/intro";
-import { months } from "../../../_utilities/utilities";
+import { Intro } from "../../../_models/intro";
+import { ContactInfo } from "../../../_models/contactInfo";
 
 @Injectable({
   providedIn: "root"

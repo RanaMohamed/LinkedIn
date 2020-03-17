@@ -45,6 +45,7 @@
                 placeholder="First Name"
                 formControlName="Fname"
                 [value]="intro.Fname"
+                [ngClass]="{ 'is-invalid': Fname.dirty && Fname.invalid }"
               />
             </div>
             <div class="form-group col-md-6">
@@ -58,6 +59,7 @@
                 placeholder="Last Name"
                 formControlName="Lname"
                 [value]="intro.Lname"
+                [ngClass]="{ 'is-invalid': Lname.dirty && Lname.invalid }"
               />
             </div>
           </div>
@@ -71,6 +73,7 @@
               rows="2"
               formControlName="headLine"
               [value]="intro.headLine"
+              [ngClass]="{ 'is-invalid': HeadLine.dirty && HeadLine.invalid }"
             ></textarea>
           </div>
           <div class="form-group">
@@ -126,6 +129,7 @@
               placeholder="Country"
               formControlName="country"
               [value]="intro.country"
+              [ngClass]="{ 'is-invalid': Country.dirty && Country.invalid }"
             />
           </div>
 
