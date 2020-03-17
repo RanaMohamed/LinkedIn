@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Post } from "src/app/_models/post";
+import { Post, Comment } from "src/app/_models/post";
 import { Subject } from "rxjs";
 
 @Injectable({
@@ -16,11 +16,22 @@ export class PostService {
         headline: "679,771 followers",
         image: "https://via.placeholder.com/60"
       },
-      date: new Date(),
+      date: new Date("01/28/2020"),
       description:
         "Leveraging AI and the information captured by various sensors to deliver ultimate personalized comfort, Valeo provides a customized comfort bubble to suit each vehicle occupant with Valeo Smart Cocoon.By practically rendering the vehicle empathetic, this innovative technology takes the state of its driver and passengers into account, detecting signs of fatigue, distraction, emotion and stress.",
       likes: 5,
-      comments: []
+      comments: [
+        {
+          user: {
+            name: "khaled Nasser",
+            headline: "Software Team leader at Mind Cloud",
+            image:
+              "https://media-exp1.licdn.com/dms/image/C5603AQH955_PzrUuEw/profile-displayphoto-shrink_100_100/0?e=1590019200&v=beta&t=TbPeKcdYtbJ1JsbjpWo7m3p_LgprlBI2zt3irxiNVH8"
+          },
+          comment: "Test",
+          date: new Date("01/29/2020")
+        }
+      ]
     },
     {
       id: 2,
@@ -39,9 +50,29 @@ export class PostService {
       ],
       likes: 32,
       comments: [
-        { comment: "Congratulations" },
-        { comment: "Thanks Aishwarya N." }
-      ]
+        {
+          comment: "Congratulations",
+          user: {
+            name: "Rana Mohamed",
+            headline:
+              "Web and UI Student at Information Technology Institute (ITI)",
+            image:
+              "https://media-exp1.licdn.com/dms/image/C4E03AQFksu7c46jpMw/profile-displayphoto-shrink_100_100/0?e=1590019200&v=beta&t=mk9MYi7svRtZ9ph1tafi_j-4Ix--HAI_MYmoDBp_tKY"
+          },
+          date: new Date("03/17/2020")
+        },
+        {
+          comment: "Thanks Aishwarya N.",
+          user: {
+            name: "khaled Nasser",
+            headline: "Software Team leader at Mind Cloud",
+            image:
+              "https://media-exp1.licdn.com/dms/image/C5603AQH955_PzrUuEw/profile-displayphoto-shrink_100_100/0?e=1590019200&v=beta&t=TbPeKcdYtbJ1JsbjpWo7m3p_LgprlBI2zt3irxiNVH8"
+          },
+          date: new Date("03/17/2020")
+        }
+      ],
+      date: new Date("03/17/2020")
     }
   ];
   private lastId = 2;
@@ -66,6 +97,10 @@ export class PostService {
 
   add(post: Post) {
     post.id = ++this.lastId;
+    post.comments = [];
+    post.images = [];
+    post.isLiked = false;
+    post.likes = 0;
     this.list.unshift(post);
     this.posts.next(this.list);
   }
@@ -78,6 +113,21 @@ export class PostService {
 
   delete(id: number) {
     this.list = this.list.filter(p => p.id !== id);
+    this.posts.next(this.list);
+  }
+
+  addComment(id: number, comment: Comment) {
+    const index = this.list.findIndex(p => p.id === id);
+    this.list[index].comments.push(comment);
+    this.posts.next(this.list);
+  }
+
+  likePost(id: number) {
+    const index = this.list.findIndex(p => p.id === id);
+    this.list[index].isLiked
+      ? this.list[index].likes--
+      : this.list[index].likes++;
+    this.list[index].isLiked = !this.list[index].isLiked;
     this.posts.next(this.list);
   }
 }

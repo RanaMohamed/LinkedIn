@@ -33,4 +33,14 @@ export class AuthService {
   isLoggedIn() {
     return this.user || localStorage.getItem("user") ? true : false;
   }
+
+  getLoggedUser() {
+    const user = {
+      name: "Rana Mohamed",
+      headline: "Web and UI Student at Information Technology Institute (ITI)",
+      image:
+        "https://media-exp1.licdn.com/dms/image/C4E03AQFksu7c46jpMw/profile-displayphoto-shrink_100_100/0?e=1590019200&v=beta&t=mk9MYi7svRtZ9ph1tafi_j-4Ix--HAI_MYmoDBp_tKY"
+    };
+    return user;
+  }
 }

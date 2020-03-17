@@ -37,8 +37,6 @@ export class PostFormComponent implements OnInit {
       const post = this.postForm.getRawValue();
       post.user = this.user;
       post.date = new Date();
-      post.comments = [];
-      post.images = [];
       this.postService.add(post);
       this.closeForm.next();
     }
