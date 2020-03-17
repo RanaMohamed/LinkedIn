@@ -30,10 +30,10 @@
               <li class="list-group-item flex-fill btn-link btn text-left" (click)="formOpened = true">
                 <i class="far fa-edit"></i> Start a post
               </li>
-              <li class="list-group-item btn btn-link" (click)="formOpened = true">
+              <li class="list-group-item btn btn-link" (click)="imageFormOpened = true">
                 <i class="fa fa-camera"></i>
               </li>
-              <li class="list-group-item btn btn-link" (click)="formOpened = true">
+              <li class="list-group-item btn btn-link" (click)="imageFormOpened = true">
                 <i class="fa fa-video"></i>
               </li>
               <li class="list-group-item btn btn-link" (click)="formOpened = true">
@@ -47,6 +47,8 @@
           <hr />
           <app-post-form *ngIf="formOpened" (closeForm)="closeModal()" [user]="user">
           </app-post-form>
+          <app-post-image-form *ngIf="imageFormOpened" (closeForm)="closeImageModal()">
+          </app-post-image-form>
           <app-post *ngFor="let post of posts" [post]="post"></app-post>
 
         </div>

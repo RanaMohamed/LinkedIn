@@ -13,7 +13,6 @@ export class PostFormComponent implements OnInit {
   @Output() closeForm = new EventEmitter();
   confirmCloseOpened = false;
   postForm: FormGroup;
-  images: File[];
   constructor(private postService: PostService) {}
 
   ngOnInit() {
@@ -26,16 +25,11 @@ export class PostFormComponent implements OnInit {
     return this.postForm.get("description");
   }
 
-  onFileChange(event) {
-    if (event.target.files && event.target.files.length) {
-      this.images = Array.from(event.target.files);
-    }
-  }
-
   submitForm() {
     if (this.postForm.valid) {
       const post = this.postForm.getRawValue();
       post.user = this.user;
+      post.images = [];
       post.date = new Date();
       this.postService.add(post);
       this.closeForm.next();

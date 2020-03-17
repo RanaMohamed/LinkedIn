@@ -98,7 +98,6 @@ export class PostService {
   add(post: Post) {
     post.id = ++this.lastId;
     post.comments = [];
-    post.images = [];
     post.isLiked = false;
     post.likes = 0;
     this.list.unshift(post);

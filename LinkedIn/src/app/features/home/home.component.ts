@@ -11,6 +11,7 @@ import { AuthService } from "../auth/auth.service";
 export class HomeComponent implements OnInit {
   posts: Post[] = [];
   formOpened = false;
+  imageFormOpened = false;
   user: User = {};
   constructor(private postService: PostService, private auth: AuthService) {}
 
@@ -21,5 +22,8 @@ export class HomeComponent implements OnInit {
 
   closeModal() {
     this.formOpened = false;
+  }
+  closeImageModal() {
+    this.imageFormOpened = false;
   }
 }

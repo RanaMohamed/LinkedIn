@@ -23,6 +23,7 @@ import { LoginComponent } from "./features/auth/login/login.component";
 import { RegisterationComponent } from "./features/auth/registeration/registeration.component";
 import { LogoComponent } from "./shared/logo/logo.component";
 import { PostComponent } from "./features/home/post/post/post.component";
+import { PostImageFormComponent } from './features/home/post/post-image-form/post-image-form.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { PostComponent } from "./features/home/post/post/post.component";
     LoginComponent,
     RegisterationComponent,
     LogoComponent,
-    PostComponent
+    PostComponent,
+    PostImageFormComponent
   ],
   imports: [
     BrowserModule,

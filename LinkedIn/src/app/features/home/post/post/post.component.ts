@@ -21,7 +21,10 @@ export class PostComponent implements OnInit {
   ngOnInit() {
     this.user = this.auth.getLoggedUser();
     this.commentForm = new FormGroup({
-      comment: new FormControl(null, [Validators.maxLength(1300)])
+      comment: new FormControl(null, [
+        Validators.maxLength(1300),
+        Validators.required
+      ])
     });
   }
 
