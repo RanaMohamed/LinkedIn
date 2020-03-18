@@ -11,7 +11,10 @@
         <p class="mb-0">{{ post.description }}</p>
     </div>
     <div class="post-images">
-        <img *ngFor="let image of post.images" [src]="image" alt="" />
+        <div class="position-relative img d-flex" *ngFor="let image of post.images | slice:0:4; let i = index">
+            <img [src]="image" alt="" (click)="startSlide = i; sliderOpened = true" />
+            <div class="overlay" *ngIf="post.images.length > 4 && i === 3">+{{post.images.length - 4}}</div>
+        </div>
     </div>
     <div class="card-body text-muted">
         <a href="" *ngIf="post.likes"><i class="fa fa-thumbs-up text-primary"></i>
@@ -60,3 +63,9 @@
         </div>
     </div>
 </div>
+
+<ng-container *ngIf="sliderOpened">
+    <app-modal (closeModal)="sliderOpened = false">
+        <app-slider [images]="post.images" [startSlide]="startSlide"></app-slider>
+    </app-modal>
+</ng-container>

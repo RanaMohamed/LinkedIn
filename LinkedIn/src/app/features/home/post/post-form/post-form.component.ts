@@ -10,9 +10,13 @@ import { PostService } from "../post.service";
 })
 export class PostFormComponent implements OnInit {
   @Input() user: User;
+  @Input() imageFormOpened: boolean;
   @Output() closeForm = new EventEmitter();
   confirmCloseOpened = false;
   postForm: FormGroup;
+  images: string[] = [];
+  startSlide = 0;
+  sliderOpened = false;
   constructor(private postService: PostService) {}
 
   ngOnInit() {
@@ -29,7 +33,7 @@ export class PostFormComponent implements OnInit {
     if (this.postForm.valid) {
       const post = this.postForm.getRawValue();
       post.user = this.user;
-      post.images = [];
+      post.images = this.images;
       post.date = new Date();
       this.postService.add(post);
       this.closeForm.next();
@@ -37,10 +41,12 @@ export class PostFormComponent implements OnInit {
   }
 
   close() {
-    if (this.postForm.touched) {
-      this.confirmCloseOpened = true;
-    } else {
-      this.closeForm.next();
+    if (!this.sliderOpened) {
+      if (this.postForm.dirty || this.images.length > 0) {
+        this.confirmCloseOpened = true;
+      } else {
+        this.closeForm.next();
+      }
     }
   }
 
@@ -50,5 +56,10 @@ export class PostFormComponent implements OnInit {
     } else {
       this.confirmCloseOpened = false;
     }
+  }
+
+  closeImageModal(e) {
+    this.images = e;
+    this.imageFormOpened = false;
   }
 }

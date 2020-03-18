@@ -1,0 +1,9 @@
+<div class="modal-backdrop fade show" (click)="closeModal.next()" [style.zIndex]="top ? 1060 : 1050">
+</div>
+<div class="modal fade show d-block" [style.zIndex]="top ? 1070 : 1060">
+    <div class="modal-dialog modal-dialog-centered" role="document" [ngClass]="size">
+        <div class="modal-content">
+            <ng-content></ng-content>
+        </div>
+    </div>
+</div>

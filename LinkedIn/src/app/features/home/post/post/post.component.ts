@@ -16,6 +16,8 @@ export class PostComponent implements OnInit {
   moment = moment;
   user: User;
   commentForm: FormGroup;
+  startSlide = 0;
+  sliderOpened = false;
   constructor(private postService: PostService, private auth: AuthService) {}
 
   ngOnInit() {

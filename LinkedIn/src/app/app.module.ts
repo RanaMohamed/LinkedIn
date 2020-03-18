@@ -26,6 +26,8 @@ import { AboutComponent } from "./features/profile/about/about.component";
 import { AboutFormComponent } from "./features/profile/about/about-form/about-form.component";
 import { PostComponent } from "./features/home/post/post/post.component";
 import { PostImageFormComponent } from "./features/home/post/post-image-form/post-image-form.component";
+import { SliderComponent } from "./shared/slider/slider.component";
+import { ModalComponent } from './shared/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import { PostImageFormComponent } from "./features/home/post/post-image-form/pos
     PostComponent,
     PostImageFormComponent,
     AboutComponent,
-    AboutFormComponent
+    AboutFormComponent,
+    SliderComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,

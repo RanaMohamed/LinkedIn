@@ -111,7 +111,7 @@ export class ExperienceFormComponent implements OnInit {
   }
 
   close() {
-    if (this.experienceForm.touched) {
+    if (this.experienceForm.dirty) {
       this.confirmCloseOpened = true;
     } else {
       this.closeForm.next();

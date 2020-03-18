@@ -30,10 +30,10 @@
               <li class="list-group-item flex-fill btn-link btn text-left" (click)="formOpened = true">
                 <i class="far fa-edit"></i> Start a post
               </li>
-              <li class="list-group-item btn btn-link" (click)="imageFormOpened = true">
+              <li class="list-group-item btn btn-link" (click)="formOpened = true; imageFormOpened = true">
                 <i class="fa fa-camera"></i>
               </li>
-              <li class="list-group-item btn btn-link" (click)="imageFormOpened = true">
+              <li class="list-group-item btn btn-link" (click)="formOpened = true">
                 <i class="fa fa-video"></i>
               </li>
               <li class="list-group-item btn btn-link" (click)="formOpened = true">
@@ -45,10 +45,9 @@
             </div>
           </div>
           <hr />
-          <app-post-form *ngIf="formOpened" (closeForm)="closeModal()" [user]="user">
+          <app-post-form *ngIf="formOpened" (closeForm)="closeModal()" [user]="user"
+            [imageFormOpened]="imageFormOpened">
           </app-post-form>
-          <app-post-image-form *ngIf="imageFormOpened" (closeForm)="closeImageModal()">
-          </app-post-image-form>
           <app-post *ngFor="let post of posts" [post]="post"></app-post>
 
         </div>
@@ -63,7 +62,7 @@
                   <p class="mb-0 text-muted small">679,771 followers</p>
                   <p class="mb-0 text-muted small">1mo</p>
                 </div>
-                <button class="btn btn-outline-info ml-auto">
+                <button class="btn btn-outline-info ml-auto btn-sm">
                   <i class="fa fa-plus"></i> Follow
                 </button>
               </div>
@@ -74,7 +73,7 @@
                   <p class="mb-0 text-muted small">679,771 followers</p>
                   <p class="mb-0 text-muted small">1mo</p>
                 </div>
-                <button class="btn btn-outline-info ml-auto">
+                <button class="btn btn-outline-info ml-auto btn-sm">
                   <i class="fa fa-plus"></i> Follow
                 </button>
               </div>
@@ -85,7 +84,7 @@
                   <p class="mb-0 text-muted small">679,771 followers</p>
                   <p class="mb-0 text-muted small">1mo</p>
                 </div>
-                <button class="btn btn-outline-info ml-auto">
+                <button class="btn btn-outline-info ml-auto btn-sm">
                   <i class="fa fa-plus"></i> Follow
                 </button>
               </div>

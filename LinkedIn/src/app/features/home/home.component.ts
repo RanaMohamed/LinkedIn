@@ -22,8 +22,6 @@ export class HomeComponent implements OnInit {
 
   closeModal() {
     this.formOpened = false;
-  }
-  closeImageModal() {
     this.imageFormOpened = false;
   }
 }

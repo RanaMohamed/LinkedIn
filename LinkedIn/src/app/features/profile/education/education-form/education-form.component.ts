@@ -100,7 +100,7 @@ export class EducationFormComponent implements OnInit {
   }
 
   close() {
-    if (this.educationForm.touched) {
+    if (this.educationForm.dirty) {
       this.confirmCloseOpened = true;
     } else {
       this.closeForm.next();

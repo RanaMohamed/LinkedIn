@@ -26,12 +26,27 @@ a {
 .post-images {
   display: flex;
   flex-wrap: wrap;
-  img {
-    width: 50%;
+  .img {
+    width: calc(100% / 3);
     flex-grow: 1;
+    img {
+      width: 100%;
+    }
     &:first-of-type {
       width: 100%;
     }
+  }
+  .overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    pointer-events: none;
   }
 }
 
@@ -138,4 +153,13 @@ h6 {
 
 a {
   cursor: pointer;
+}
+
+.modal {
+  pointer-events: none;
+}
+
+.carousel-control-next,
+.carousel-control-prev {
+  background-color: rgba($color: #000000, $alpha: 0.1);
 }
