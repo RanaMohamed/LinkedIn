@@ -1,6 +1,8 @@
+import { Intro } from "./intro";
+
 export interface Post {
   id?: number;
-  user?: User;
+  user?: Intro;
   date?: Date;
   description?: string;
   images?: string[];
@@ -10,15 +12,9 @@ export interface Post {
   isLiked?: boolean;
 }
 
-export interface User {
-  name?: string;
-  headline?: string;
-  image?: string;
-}
-
 export interface Comment {
   id?: number;
-  user?: User;
+  user?: Intro;
   comment?: string;
   date?: Date;
 }

@@ -88,9 +88,9 @@ export class EducationFormComponent implements OnInit {
 
   submitForm() {
     if (this.educationForm.valid) {
-      const education: Education = this.educationForm.getRawValue();
+      let education: Education = this.educationForm.getRawValue();
       if (this.education) {
-        education.id = this.education.id;
+        education = { ...this.education, ...education };
         this.educationService.edit(education);
       } else {
         this.educationService.add(education);

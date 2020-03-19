@@ -8,10 +8,10 @@
     <form [formGroup]="postForm" (ngSubmit)="submitForm()">
         <div class="modal-body overflow-auto" style="max-height: 430px; height: 370px;">
             <div class="d-flex mb-2">
-                <img [src]="user.image" class="card-img-top mr-2 rounded-circle" style="width: 60px; height: 60px;"
+                <img [src]="user.imageUrl" class="card-img-top mr-2 rounded-circle" style="width: 60px; height: 60px;"
                     alt="...">
                 <div class="flex-fill">
-                    <p class="mb-1">{{user.name}}</p>
+                    <p class="mb-1">{{user.Fname}} {{user.Lname}}</p>
                     <a href="/" class="btn btn-outline-secondary btn-sm"><i class="fa fa-globe-africa"></i>
                         Anyone <i class="fa fa-caret-down"></i></a>
                 </div>

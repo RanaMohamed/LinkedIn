@@ -1,5 +1,5 @@
 <div class=" d-flex mt-2 align-items-start">
-    <img [src]="comment.user?.image" style="width: 48px; height: 48px;" alt="" class="rounded-circle d-block mr-2" />
+    <img [src]="comment.user?.imageUrl" style="width: 48px; height: 48px;" alt="" class="rounded-circle d-block mr-2" />
     <div class="my-2 my-lg-0 mr-auto flex-fill bg-light p-2 small">
         <div class="dropdown float-right">
             <button class="btn py-0 mt-n2" type="button" id="dropdownMenuButton" data-toggle="dropdown"
@@ -13,8 +13,8 @@
             </div>
         </div>
         <span class="text-muted small float-right">{{moment(comment.date).fromNow()}}</span>
-        <span class="d-block">{{comment.user?.name}}</span>
-        <span class="text-muted d-block">{{comment.user?.headline}}</span>
+        <span class="d-block">{{comment.user?.Fname}} {{comment.user?.Lname}}</span>
+        <span class="text-muted d-block">{{comment.user?.headLine}}</span>
         <span class="d-block mt-2">{{comment.comment}}</span>
     </div>
 </div>

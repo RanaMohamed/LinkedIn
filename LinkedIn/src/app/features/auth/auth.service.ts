@@ -1,46 +1,41 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { User } from "src/app/_models/user";
+import { Intro } from "src/app/_models/intro";
 
 @Injectable({
   providedIn: "root"
 })
 export class AuthService {
-  private registerUrl = "http://localhost:3000/users";
-  private loginUrl = "http://localhost:3000/users";
-  user: User = null;
+  userId: number;
   constructor(private http: HttpClient) {}
 
   registerUser(user) {
-    return this.http.post<any>(this.registerUrl, user);
+    return this.http.post<any>("http://localhost:3000/logins", user);
   }
 
   loginUser(user) {
-    this.user = user;
-    localStorage.setItem("user", user);
-    // return this.http.post<any>(this.loginUrl, user);
+    this.userId = user.userId;
+    localStorage.setItem("user", user.userId);
   }
 
   getAll() {
-    return this.http.get<any>("http://localhost:3000/users");
+    return this.http.get<any>("http://localhost:3000/logins");
   }
 
   logout() {
-    this.user = null;
+    this.userId = null;
     localStorage.removeItem("user");
   }
 
   isLoggedIn() {
-    return this.user || localStorage.getItem("user") ? true : false;
+    this.userId = JSON.parse(localStorage.getItem("user"));
+    return this.userId || localStorage.getItem("user") ? true : false;
   }
-
+  getLoggedUserId() {
+    return this.userId;
+  }
   getLoggedUser() {
-    const user = {
-      name: "Rana Mohamed",
-      headline: "Web and UI Student at Information Technology Institute (ITI)",
-      image:
-        "https://media-exp1.licdn.com/dms/image/C4E03AQFksu7c46jpMw/profile-displayphoto-shrink_100_100/0?e=1590019200&v=beta&t=mk9MYi7svRtZ9ph1tafi_j-4Ix--HAI_MYmoDBp_tKY"
-    };
-    return user;
+    return this.http.get<Intro>(`http://localhost:3000/users/${this.userId}`);
   }
 }

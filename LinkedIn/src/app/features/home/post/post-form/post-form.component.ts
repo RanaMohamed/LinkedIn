@@ -1,7 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, Input } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { User, Post } from "src/app/_models/post";
+import { Post } from "src/app/_models/post";
 import { PostService } from "../post.service";
+import { Intro } from "src/app/_models/intro";
 
 @Component({
   selector: "app-post-form",
@@ -9,7 +10,7 @@ import { PostService } from "../post.service";
   styleUrls: ["./post-form.component.scss"]
 })
 export class PostFormComponent implements OnInit {
-  @Input() user: User;
+  @Input() user: Intro;
   @Input() post: Post;
   @Input() imageFormOpened: boolean;
   @Input() videoFormOpened: boolean;
@@ -47,7 +48,6 @@ export class PostFormComponent implements OnInit {
         post = { ...this.post, ...post };
         this.postService.edit(post);
       } else {
-        post.user = this.user;
         post.date = new Date();
         this.postService.add(post);
       }

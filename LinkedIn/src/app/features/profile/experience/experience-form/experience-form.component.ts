@@ -99,9 +99,9 @@ export class ExperienceFormComponent implements OnInit {
 
   submitForm() {
     if (this.experienceForm.valid) {
-      const experience: Experience = this.experienceForm.getRawValue();
+      let experience: Experience = this.experienceForm.getRawValue();
       if (this.experience) {
-        experience.id = this.experience.id;
+        experience = { ...this.experience, ...experience };
         this.experienceService.edit(experience);
       } else {
         this.experienceService.add(experience);
