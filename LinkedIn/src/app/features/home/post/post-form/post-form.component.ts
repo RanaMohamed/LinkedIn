@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from "@angular/core";
-import { FormGroup, FormControl, Validators, FormArray } from "@angular/forms";
-import { User } from "src/app/_models/post";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { User, Post } from "src/app/_models/post";
 import { PostService } from "../post.service";
 
 @Component({
@@ -10,6 +10,7 @@ import { PostService } from "../post.service";
 })
 export class PostFormComponent implements OnInit {
   @Input() user: User;
+  @Input() post: Post;
   @Input() imageFormOpened: boolean;
   @Input() videoFormOpened: boolean;
   @Output() closeForm = new EventEmitter();
@@ -23,8 +24,14 @@ export class PostFormComponent implements OnInit {
 
   ngOnInit() {
     this.postForm = new FormGroup({
-      description: new FormControl(null, [Validators.maxLength(1300)])
+      description: new FormControl(this.post && this.post.description, [
+        Validators.maxLength(1300)
+      ])
     });
+    if (this.post) {
+      this.images = this.post.images;
+      this.video = this.post.video;
+    }
   }
 
   get description() {
@@ -33,12 +40,17 @@ export class PostFormComponent implements OnInit {
 
   submitForm() {
     if (this.postForm.valid) {
-      const post = this.postForm.getRawValue();
-      post.user = this.user;
+      let post = this.postForm.getRawValue();
       post.images = this.images;
       post.video = this.video;
-      post.date = new Date();
-      this.postService.add(post);
+      if (this.post) {
+        post = { ...this.post, ...post };
+        this.postService.edit(post);
+      } else {
+        post.user = this.user;
+        post.date = new Date();
+        this.postService.add(post);
+      }
       this.closeForm.next();
     }
   }

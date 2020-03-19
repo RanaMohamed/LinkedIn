@@ -19,9 +19,11 @@ export class PostService {
       date: new Date("01/28/2020"),
       description:
         "Leveraging AI and the information captured by various sensors to deliver ultimate personalized comfort, Valeo provides a customized comfort bubble to suit each vehicle occupant with Valeo Smart Cocoon.By practically rendering the vehicle empathetic, this innovative technology takes the state of its driver and passengers into account, detecting signs of fatigue, distraction, emotion and stress.",
+      images: [],
       likes: 5,
       comments: [
         {
+          id: 1,
           user: {
             name: "khaled Nasser",
             headline: "Software Team leader at Mind Cloud",
@@ -51,6 +53,7 @@ export class PostService {
       likes: 32,
       comments: [
         {
+          id: 2,
           comment: "Congratulations",
           user: {
             name: "Rana Mohamed",
@@ -62,6 +65,7 @@ export class PostService {
           date: new Date("03/17/2020")
         },
         {
+          id: 3,
           comment: "Thanks Aishwarya N.",
           user: {
             name: "khaled Nasser",
@@ -76,6 +80,7 @@ export class PostService {
     }
   ];
   private lastId = 2;
+  private lastCommentId = 3;
   constructor() {
     this.posts = new Subject<Post[]>();
     this.post = new Subject<Post>();
@@ -117,7 +122,16 @@ export class PostService {
 
   addComment(id: number, comment: Comment) {
     const index = this.list.findIndex(p => p.id === id);
+    comment.id = ++this.lastCommentId;
     this.list[index].comments.push(comment);
+    this.posts.next(this.list);
+  }
+
+  deleteComment(id: number, postId: number) {
+    const index = this.list.findIndex(p => p.id === postId);
+    this.list[index].comments = this.list[index].comments.filter(
+      c => c.id !== id
+    );
     this.posts.next(this.list);
   }
 

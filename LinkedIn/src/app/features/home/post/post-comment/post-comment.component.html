@@ -1,0 +1,24 @@
+<div class=" d-flex mt-2 align-items-start">
+    <img [src]="comment.user?.image" style="width: 48px; height: 48px;" alt="" class="rounded-circle d-block mr-2" />
+    <div class="my-2 my-lg-0 mr-auto flex-fill bg-light p-2 small">
+        <div class="dropdown float-right">
+            <button class="btn py-0 mt-n2" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false" (click)="optionsOpened = !optionsOpened">
+                <i class="fa fa-ellipsis-h"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton"
+                [ngClass]="{'show': optionsOpened}">
+                <a class="dropdown-item" (click)="editPostOpened = true">Edit</a>
+                <a class="dropdown-item" (click)="confirmDeleteOpened = true">Delete</a>
+            </div>
+        </div>
+        <span class="text-muted small float-right">{{moment(comment.date).fromNow()}}</span>
+        <span class="d-block">{{comment.user?.name}}</span>
+        <span class="text-muted d-block">{{comment.user?.headline}}</span>
+        <span class="d-block mt-2">{{comment.comment}}</span>
+    </div>
+</div>
+
+<app-confirmation *ngIf="confirmDeleteOpened" message="delete this comment" button="Delete"
+    (closeModal)="confirmDelete($event)">
+</app-confirmation>

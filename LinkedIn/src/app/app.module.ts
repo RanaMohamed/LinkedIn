@@ -29,6 +29,7 @@ import { PostImageFormComponent } from "./features/home/post/post-image-form/pos
 import { SliderComponent } from "./shared/slider/slider.component";
 import { ModalComponent } from './shared/modal/modal.component';
 import { PostVideoFormComponent } from './features/home/post/post-video-form/post-video-form.component';
+import { PostCommentComponent } from './features/home/post/post-comment/post-comment.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { PostVideoFormComponent } from './features/home/post/post-video-form/pos
     AboutFormComponent,
     SliderComponent,
     ModalComponent,
-    PostVideoFormComponent
+    PostVideoFormComponent,
+    PostCommentComponent
   ],
   imports: [
     BrowserModule,

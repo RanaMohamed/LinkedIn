@@ -17,6 +17,7 @@ export interface User {
 }
 
 export interface Comment {
+  id?: number;
   user?: User;
   comment?: string;
   date?: Date;

@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { Post, User } from "src/app/_models/post";
 import * as moment from "moment";
-import { AuthService } from "src/app/features/auth/auth.service";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { Post, User } from "src/app/_models/post";
 import { PostService } from "../post.service";
+import { AuthService } from "src/app/features/auth/auth.service";
 
 @Component({
   selector: "app-post",
@@ -18,6 +18,9 @@ export class PostComponent implements OnInit {
   commentForm: FormGroup;
   startSlide = 0;
   sliderOpened = false;
+  optionsOpened = false;
+  confirmDeleteOpened = false;
+  editPostOpened = false;
   constructor(private postService: PostService, private auth: AuthService) {}
 
   ngOnInit() {
@@ -46,5 +49,13 @@ export class PostComponent implements OnInit {
 
   likePost() {
     this.postService.likePost(this.post.id);
+  }
+
+  confirmDelete(confirm: boolean) {
+    if (confirm) {
+      this.postService.delete(this.post.id);
+    } else {
+      this.confirmDeleteOpened = false;
+    }
   }
 }
