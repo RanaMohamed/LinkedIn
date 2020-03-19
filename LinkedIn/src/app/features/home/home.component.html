@@ -35,7 +35,8 @@
                 (click)="formOpened = true; imageFormOpened = true">
                 <i class="fa fa-camera"></i>
               </li>
-              <li class="list-group-item btn rounded-0 text-secondary" (click)="formOpened = true">
+              <li class="list-group-item btn rounded-0 text-secondary"
+                (click)="formOpened = true; videoFormOpened = true">
                 <i class="fa fa-video"></i>
               </li>
               <li class="list-group-item btn rounded-0 text-secondary" (click)="formOpened = true">
@@ -47,8 +48,8 @@
             </div>
           </div>
           <hr />
-          <app-post-form *ngIf="formOpened" (closeForm)="closeModal()" [user]="user"
-            [imageFormOpened]="imageFormOpened">
+          <app-post-form *ngIf="formOpened" (closeForm)="closeModal()" [user]="user" [imageFormOpened]="imageFormOpened"
+            [videoFormOpened]="videoFormOpened">
           </app-post-form>
           <app-post *ngFor="let post of posts" [post]="post"></app-post>
 

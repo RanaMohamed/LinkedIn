@@ -4,6 +4,7 @@ export interface Post {
   date?: Date;
   description?: string;
   images?: string[];
+  video?: string;
   likes?: number;
   comments?: Comment[];
   isLiked?: boolean;

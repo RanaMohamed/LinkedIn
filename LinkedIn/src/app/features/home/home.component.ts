@@ -12,6 +12,7 @@ export class HomeComponent implements OnInit {
   posts: Post[] = [];
   formOpened = false;
   imageFormOpened = false;
+  videoFormOpened = false;
   user: User = {};
   constructor(private postService: PostService, private auth: AuthService) {}
 
@@ -23,5 +24,6 @@ export class HomeComponent implements OnInit {
   closeModal() {
     this.formOpened = false;
     this.imageFormOpened = false;
+    this.videoFormOpened = false;
   }
 }

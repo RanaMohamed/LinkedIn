@@ -16,6 +16,7 @@
             <div class="overlay" *ngIf="post.images.length > 4 && i === 3">+{{post.images.length - 4}}</div>
         </div>
     </div>
+    <video *ngIf="post.video" [src]="post.video" width="100%" controls></video>
     <div class="card-body text-muted">
         <a href="" *ngIf="post.likes"><i class="fa fa-thumbs-up text-primary"></i>
             {{ post.likes }}</a>

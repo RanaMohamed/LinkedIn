@@ -1,0 +1,21 @@
+<app-modal (closeModal)="close()">
+    <div class="modal-header">
+        <h5 class="modal-title">Edit your video</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form [formGroup]="videoForm" (ngSubmit)="submitForm()">
+        <div class="modal-body overflow-auto" style="max-height: 430px; height: 370px;">
+            <div class="form-group">
+                <input type="file" name="" id="" class="form-control-file" accept="video/*"
+                    (change)="onFileChange($event)">
+            </div>
+            <video *ngIf="video" [src]="video" width="100%" controls></video>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" type="submit">Next</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="close()">Cancel</button>
+        </div>
+    </form>
+</app-modal>

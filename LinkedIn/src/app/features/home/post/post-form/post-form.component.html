@@ -28,10 +28,13 @@
                     <div class="overlay" *ngIf="images.length > 4 && i === 3">+{{images.length - 4}}</div>
                 </div>
             </div>
+            <video *ngIf="video" [src]="video" width="100%" controls></video>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn text-secondary mr-auto" (click)="imageFormOpened = true"><i
+            <button type="button" class="btn text-secondary" (click)="imageFormOpened = true" [disabled]="video"><i
                     class="fa fa-camera"></i></button>
+            <button type="button" class="btn text-secondary mr-auto" (click)="videoFormOpened = true"
+                [disabled]="images.length > 0"><i class="fa fa-video"></i></button>
             <button type="button" class="btn btn-primary" type="submit">Save</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="close()">Close</button>
         </div>
@@ -40,6 +43,8 @@
 
 <app-post-image-form *ngIf="imageFormOpened" (closeForm)="closeImageModal($event)">
 </app-post-image-form>
+<app-post-video-form *ngIf="videoFormOpened" (closeForm)="closeVideoModal($event)">
+</app-post-video-form>
 
 <app-confirmation *ngIf="confirmCloseOpened" message="discard changes to this" button="Discard"
     (closeModal)="confirmClose($event)">

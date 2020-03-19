@@ -11,10 +11,12 @@ import { PostService } from "../post.service";
 export class PostFormComponent implements OnInit {
   @Input() user: User;
   @Input() imageFormOpened: boolean;
+  @Input() videoFormOpened: boolean;
   @Output() closeForm = new EventEmitter();
   confirmCloseOpened = false;
   postForm: FormGroup;
   images: string[] = [];
+  video: string;
   startSlide = 0;
   sliderOpened = false;
   constructor(private postService: PostService) {}
@@ -34,6 +36,7 @@ export class PostFormComponent implements OnInit {
       const post = this.postForm.getRawValue();
       post.user = this.user;
       post.images = this.images;
+      post.video = this.video;
       post.date = new Date();
       this.postService.add(post);
       this.closeForm.next();
@@ -61,5 +64,10 @@ export class PostFormComponent implements OnInit {
   closeImageModal(e) {
     this.images = e;
     this.imageFormOpened = false;
+  }
+
+  closeVideoModal(e) {
+    this.video = e;
+    this.videoFormOpened = false;
   }
 }

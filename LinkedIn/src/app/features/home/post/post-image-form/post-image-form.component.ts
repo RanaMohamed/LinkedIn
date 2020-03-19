@@ -11,7 +11,6 @@ import { AuthService } from "src/app/features/auth/auth.service";
 })
 export class PostImageFormComponent implements OnInit {
   @Output() closeForm = new EventEmitter<string[]>();
-  confirmCloseOpened = false;
   imageForm: FormGroup = new FormGroup({});
   images: string[] = [];
   files: File[] = [];
