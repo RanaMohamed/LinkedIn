@@ -1,21 +1,14 @@
-<div class="modal fade show d-block" tabindex="0" role="dialog" [style.zIndex]="1070">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Are you sure you want to {{message}}?</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
-                    (click)="closeModal.next(false)">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" (click)="closeModal.next(true)">{{button}}</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModal.next(false)">No
-                    thanks</button>
-            </div>
-
-        </div>
+<app-modal [top]="true">
+    <div class="modal-header">
+        <h5 class="modal-title">Are you sure you want to {{message}}?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal.next(false)">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
-</div>
-<div class="modal-backdrop fade show" [style.zIndex]="1060"></div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="closeModal.next(true)">{{button}}</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModal.next(false)">No
+            thanks</button>
+    </div>
+</app-modal>
