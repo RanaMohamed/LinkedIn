@@ -26,6 +26,8 @@ import { AboutComponent } from "./features/profile/about/about.component";
 import { AboutFormComponent } from "./features/profile/about/about-form/about-form.component";
 import { PostComponent } from "./features/home/post/post/post.component";
 import { PostImageFormComponent } from "./features/home/post/post-image-form/post-image-form.component";
+import { JobsComponent } from './features/jobs/jobs.component';
+import { JobCardComponent } from './features/jobs/job-card/job-card.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import { PostImageFormComponent } from "./features/home/post/post-image-form/pos
     PostComponent,
     PostImageFormComponent,
     AboutComponent,
-    AboutFormComponent
+    AboutFormComponent,
+    JobsComponent,
+    JobCardComponent
   ],
   imports: [
     BrowserModule,

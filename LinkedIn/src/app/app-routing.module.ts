@@ -4,6 +4,7 @@ import { ProfileComponent } from "./features/profile/profile.component";
 import { HomeComponent } from "./features/home/home.component";
 import { RegisterationComponent } from "./features/auth/registeration/registeration.component";
 import { LoginComponent } from "./features/auth/login/login.component";
+import { JobsComponent } from "./features/jobs/jobs.component";
 import { AuthGuard } from "./features/auth/auth.guard";
 
 const routes: Routes = [
@@ -13,6 +14,7 @@ const routes: Routes = [
   },
   { path: "login", component: LoginComponent },
   { path: "profile", component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: "jobs", component: JobsComponent, canActivate: [AuthGuard] },
   { path: "", component: HomeComponent, canActivate: [AuthGuard] }
 ];
 
