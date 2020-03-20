@@ -16,7 +16,7 @@ export class PostCommentComponent implements OnInit {
   moment = moment;
   optionsOpened = false;
   confirmDeleteOpened = false;
-  constructor(private postService: PostService, private auth: AuthService) {}
+  constructor(private postService: PostService, protected auth: AuthService) {}
 
   ngOnInit() {}
 
