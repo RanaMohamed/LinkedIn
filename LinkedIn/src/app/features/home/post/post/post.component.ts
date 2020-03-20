@@ -23,7 +23,7 @@ export class PostComponent implements OnInit {
   confirmDeleteOpened = false;
   editPostOpened = false;
   comments: Comment[] = [];
-  constructor(private postService: PostService, private auth: AuthService) {}
+  constructor(private postService: PostService, protected auth: AuthService) {}
 
   ngOnInit() {
     this.commentForm = new FormGroup({

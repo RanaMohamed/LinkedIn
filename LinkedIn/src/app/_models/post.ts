@@ -7,7 +7,7 @@ export interface Post {
   description?: string;
   images?: string[];
   video?: string;
-  likes?: number;
+  likes?: any[];
   comments?: Comment[];
   isLiked?: boolean;
 }

@@ -1,6 +1,6 @@
 <div class="card mb-3">
     <div class="card-body">
-        <div class="dropdown float-right">
+        <div class="dropdown float-right" *ngIf="post.user.id === auth.getLoggedUserId()">
             <button class="btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false" (click)="optionsOpened = !optionsOpened">
                 <i class="fa fa-ellipsis-h"></i>
@@ -16,7 +16,8 @@
             <div>
                 <p class="mb-0">{{ post.user.Fname }} {{post.user.Lname}}</p>
                 <p class="mb-0 text-muted small">{{ post.user.headLine }}</p>
-                <p class="mb-0 text-muted small">{{moment(post.date).fromNow()}}</p>
+                <p class="mb-0 text-muted small">
+                    {{moment(post.date, ["MM/DD/YYYY", "YYYY-MM-DDTHH:mm:ss:sssZ"]).fromNow()}}</p>
             </div>
         </div>
         <p class="mb-0">{{ post.description }}</p>
@@ -29,9 +30,9 @@
     </div>
     <video *ngIf="post.video" [src]="post.video" width="100%" controls></video>
     <div class="card-body text-muted">
-        <a href="" *ngIf="post.likes"><i class="fa fa-thumbs-up text-primary"></i>
-            {{ post.likes }}</a>
-        <span *ngIf="post.likes && post.comments.length > 0" class="mx-2">&bull;</span>
+        <a href="" *ngIf="post.likes.length > 0"><i class="fa fa-thumbs-up text-primary"></i>
+            {{ post.likes.length }}</a>
+        <span *ngIf="post.likes.length > 0 && post.comments.length > 0" class="mx-2">&bull;</span>
         <a *ngIf="post.comments.length > 0" (click)="openComments()">{{ post.comments.length }}
             Comments</a>
         <hr />

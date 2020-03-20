@@ -12,6 +12,7 @@ export class PostService {
   private list: Post[] = [];
   private postsUrl = "http://localhost:3000/posts";
   private commentsUrl = "http://localhost:3000/comments";
+  private likesUrl = "http://localhost:3000/likes";
   constructor(private http: HttpClient, private auth: AuthService) {
     this.posts = new Subject<Post[]>();
   }
@@ -19,10 +20,17 @@ export class PostService {
   getAll() {
     this.http
       .get<Post[]>(
-        `${this.postsUrl}?_embed=comments&_expand=user&_sort=id&_order=desc`
+        `${this.postsUrl}?_embed=comments&_embed=likes&_expand=user&_sort=id&_order=desc`
       )
       .subscribe(res => {
-        this.list = res;
+        this.list = res.map(post => ({
+          ...post,
+          isLiked: post.likes.find(
+            l => l.userId === this.auth.getLoggedUserId()
+          )
+            ? true
+            : false
+        }));
         this.posts.next(this.list);
       });
     return this.posts;
@@ -35,7 +43,6 @@ export class PostService {
   }
 
   add(post: Post) {
-    post.likes = 0;
     this.http
       .post<Post>(this.postsUrl, {
         userId: this.auth.getLoggedUserId(),
@@ -43,8 +50,9 @@ export class PostService {
       })
       .subscribe(res => {
         this.getById(res.id).subscribe(resp => {
-          this.list.unshift(resp);
-          this.posts.next(this.list);
+          // this.list.unshift(resp);
+          // this.posts.next(this.list);
+          this.getAll();
         });
       });
   }
@@ -54,9 +62,10 @@ export class PostService {
     delete post.comments;
     this.http.put<Post>(`${this.postsUrl}/${post.id}`, post).subscribe(res => {
       this.getById(res.id).subscribe(resp => {
-        const index = this.list.findIndex(p => p.id === post.id);
-        this.list[index] = resp;
-        this.posts.next(this.list);
+        // const index = this.list.findIndex(p => p.id === post.id);
+        // this.list[index] = resp;
+        // this.posts.next(this.list);
+        this.getAll();
       });
     });
   }
@@ -106,9 +115,25 @@ export class PostService {
 
   likePost(id: number) {
     const index = this.list.findIndex(p => p.id === id);
-    this.list[index].isLiked
-      ? this.list[index].likes--
-      : this.list[index].likes++;
+    if (this.list[index].isLiked) {
+      const ind = this.list[index].likes.findIndex(
+        l => l.userId === this.auth.getLoggedUserId()
+      );
+      this.http
+        .delete<any>(`${this.likesUrl}/${this.list[index].likes[ind].id}`)
+        .subscribe(res => {
+          this.list[index].likes.splice(ind, 1);
+        });
+    } else {
+      this.http
+        .post<any>(`${this.likesUrl}`, {
+          postId: id,
+          userId: this.auth.getLoggedUserId()
+        })
+        .subscribe(res => {
+          this.list[index].likes.push(res);
+        });
+    }
     this.list[index].isLiked = !this.list[index].isLiked;
     this.posts.next(this.list);
   }

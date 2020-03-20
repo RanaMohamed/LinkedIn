@@ -227,8 +227,7 @@
       "userId": 1,
       "date": "01/28/2020",
       "description": "Leveraging AI and the information captured by various sensors to deliver ultimate personalized comfort, Valeo provides a customized comfort bubble to suit each vehicle occupant with Valeo Smart Cocoon.By practically rendering the vehicle empathetic, this innovative technology takes the state of its driver and passengers into account, detecting signs of fatigue, distraction, emotion and stress.",
-      "images": [],
-      "likes": 5
+      "images": []
     },
     {
       "id": 2,
@@ -239,7 +238,6 @@
         "https://media-exp1.licdn.com/dms/image/C5622AQHJyTok9athiw/feedshare-shrink_800/0?e=1586995200&v=beta&t=GuY2ATxkMPO1iOVZa04hn3gDTs6F7whCZkiiDNDYjqs",
         "https://media-exp1.licdn.com/dms/image/C5622AQFnb1_syIg1nA/feedshare-shrink_800/0?e=1586995200&v=beta&t=vY1GznQavUILGycPU_SbzJpDTeEmX5-M15EY5j4mXpE"
       ],
-      "likes": 32,
       "date": "03/17/2020"
     }
   ],
@@ -265,5 +263,11 @@
       "userId": 2,
       "date": "03/17/2020"
     }
+  ],
+  "likes": [
+    { "id": 1, "postId": 1, "userId": 1 },
+    { "id": 2, "postId": 1, "userId": 2 },
+    { "id": 3, "postId": 1, "userId": 3 },
+    { "id": 4, "postId": 2, "userId": 2 }
   ]
 }

@@ -3,6 +3,7 @@ import * as moment from "moment";
 
 import { Comment } from "src/app/_models/post";
 import { PostService } from "../post.service";
+import { AuthService } from "src/app/features/auth/auth.service";
 
 @Component({
   selector: "app-post-comment",
@@ -15,7 +16,7 @@ export class PostCommentComponent implements OnInit {
   moment = moment;
   optionsOpened = false;
   confirmDeleteOpened = false;
-  constructor(private postService: PostService) {}
+  constructor(private postService: PostService, private auth: AuthService) {}
 
   ngOnInit() {}
 

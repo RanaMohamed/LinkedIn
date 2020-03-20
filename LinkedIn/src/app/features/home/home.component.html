@@ -4,7 +4,8 @@
       <div class="card">
         <div class="cover-bg h-auto text-center"
           style="background: url(Cover.PNG) no-repeat top;background-size: 135%;">
-          <img [src]="user.imageUrl" class="card-img-top mt-4 rounded-circle w-25" alt="..." />
+          <img [src]="user.imageUrl || 'https://via.placeholder.com/150'" class="card-img-top mt-4 rounded-circle w-25"
+            alt="..." />
         </div>
         <div class="card-body text-center">
           <h5 class="card-title">{{ user.Fname }} {{user.Lname}}</h5>
