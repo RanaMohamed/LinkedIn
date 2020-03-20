@@ -59,7 +59,7 @@ export class ExperienceFormComponent implements OnInit {
           this.experience && this.experience.description
         )
       },
-      { validators: [rangeValidator] }
+      { validators: [rangeValidator(true)] }
     );
     this.experienceForm.get("currently").valueChanges.subscribe(value => {
       if (value) {

@@ -50,7 +50,7 @@ export class EducationFormComponent implements OnInit {
           this.education && this.education.description
         )
       },
-      { validators: [rangeValidator] }
+      { validators: [rangeValidator(false)] }
     );
   }
 
