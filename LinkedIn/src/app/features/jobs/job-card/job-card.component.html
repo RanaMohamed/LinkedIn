@@ -1,0 +1,31 @@
+<a href="#">
+  <!--Company Logo-->
+  <div class="card-head d-flex">
+    <img [src]="job.company.image" />
+  </div>
+  <!--Job Title-->
+  <div class="card-content">
+    <h5>{{ job.title }}</h5>
+    <!--Company Name-->
+    <h6>{{ job.company.name }}</h6>
+    <!--Job Location-->
+    <p>{{ job.location }}</p>
+    <!--connections-->
+    <div class="row">
+      <img
+        class="col-3"
+        src="https://media-exp1.licdn.com/dms/image/C560BAQGK3uuhQer46g/company-logo_100_100/0?e=1592438400&v=beta&t=0m5grKqp1ct-2UNfeaoe277BABGa0zqbxgqQeyP6Q5s"
+      />
+      <span>4 alumni</span>
+    </div>
+  </div>
+  <div class="card-foot d-flex">
+    <!--Job Time-->
+    <p class="m-2">{{ job.time }}</p>
+    <div class="apply d-flex m-2">
+      <span class="text-secondary">.</span>
+      <i class="fab fa-linkedin text-primary m-1"></i>
+      <p>Easy Apply</p>
+    </div>
+  </div>
+</a>

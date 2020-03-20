@@ -1,0 +1,45 @@
+<div class="container">
+  <nav class="navbar navbar-light bg-light bg-div p-4 pl-5 ">
+    <h3 class="mb-4 text-dark">Your dream job’s just a search away…</h3>
+    <form class="form-inline w-100">
+      <div class="search bg-white col-5 mr-1">
+        <i class="fas fa-search"></i>
+        <input
+          #searchJob
+          class="form-control mr-sm-2 border-0"
+          type="search"
+          placeholder="Search jobs"
+          aria-label="Search"
+        />
+      </div>
+      <div class="search bg-white col-5 mr-3">
+        <i class="fas fa-map-marker-alt"></i>
+        <input
+          #searchLocation
+          class="form-control mr-sm-2 border-0"
+          type="search"
+          placeholder="Search location"
+          aria-label="Search"
+        />
+      </div>
+      <button
+        class="btn btn-primary my-2 my-sm-0"
+        type="button"
+        (click)="filterJobs(searchJob, searchLocation)"
+      >
+        Search
+      </button>
+    </form>
+  </nav>
+
+  <div class="bg-div bg-white mt-4 p-3">
+    <h3>Based on your profile</h3>
+    <div class="row ml-5">
+      <app-job-card
+        *ngFor="let job of jobs"
+        [job]="job"
+        class="card col-3 m-3"
+      ></app-job-card>
+    </div>
+  </div>
+</div>
