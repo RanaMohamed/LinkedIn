@@ -59,7 +59,7 @@ export class ExperienceFormComponent implements OnInit {
           this.experience && this.experience.description
         )
       },
-      { validators: [rangeValidator] }
+      { validators: [rangeValidator(true)] }
     );
     this.experienceForm.get("currently").valueChanges.subscribe(value => {
       if (value) {
@@ -99,9 +99,9 @@ export class ExperienceFormComponent implements OnInit {
 
   submitForm() {
     if (this.experienceForm.valid) {
-      const experience: Experience = this.experienceForm.getRawValue();
+      let experience: Experience = this.experienceForm.getRawValue();
       if (this.experience) {
-        experience.id = this.experience.id;
+        experience = { ...this.experience, ...experience };
         this.experienceService.edit(experience);
       } else {
         this.experienceService.add(experience);
@@ -111,7 +111,7 @@ export class ExperienceFormComponent implements OnInit {
   }
 
   close() {
-    if (this.experienceForm.touched) {
+    if (this.experienceForm.dirty) {
       this.confirmCloseOpened = true;
     } else {
       this.closeForm.next();

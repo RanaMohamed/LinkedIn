@@ -50,7 +50,7 @@ export class EducationFormComponent implements OnInit {
           this.education && this.education.description
         )
       },
-      { validators: [rangeValidator] }
+      { validators: [rangeValidator(false)] }
     );
   }
 
@@ -88,9 +88,9 @@ export class EducationFormComponent implements OnInit {
 
   submitForm() {
     if (this.educationForm.valid) {
-      const education: Education = this.educationForm.getRawValue();
+      let education: Education = this.educationForm.getRawValue();
       if (this.education) {
-        education.id = this.education.id;
+        education = { ...this.education, ...education };
         this.educationService.edit(education);
       } else {
         this.educationService.add(education);
@@ -100,7 +100,7 @@ export class EducationFormComponent implements OnInit {
   }
 
   close() {
-    if (this.educationForm.touched) {
+    if (this.educationForm.dirty) {
       this.confirmCloseOpened = true;
     } else {
       this.closeForm.next();

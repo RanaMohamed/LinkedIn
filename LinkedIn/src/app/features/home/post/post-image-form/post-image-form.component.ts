@@ -10,13 +10,10 @@ import { AuthService } from "src/app/features/auth/auth.service";
   styleUrls: ["./post-image-form.component.scss"]
 })
 export class PostImageFormComponent implements OnInit {
-  @Output() closeForm = new EventEmitter();
-  confirmCloseOpened = false;
+  @Output() closeForm = new EventEmitter<string[]>();
   imageForm: FormGroup = new FormGroup({});
   images: string[] = [];
   files: File[] = [];
-  activeSlide = 0;
-  Math = Math;
   constructor(private postService: PostService, private auth: AuthService) {}
 
   ngOnInit() {}
@@ -24,7 +21,7 @@ export class PostImageFormComponent implements OnInit {
   onFileChange(event) {
     this.images = [];
     this.files = Array.from(event.target.files);
-    if (event.target.files && event.target.files.length < 9) {
+    if (event.target.files && event.target.files.length <= 9) {
       this.files.map(image => {
         const reader = new FileReader();
         reader.readAsDataURL(image);
@@ -36,27 +33,10 @@ export class PostImageFormComponent implements OnInit {
   }
 
   submitForm() {
-    const post: Post = {};
-    post.user = this.auth.getLoggedUser();
-    post.images = this.images;
-    post.date = new Date();
-    this.postService.add(post);
-    this.closeForm.next();
+    this.closeForm.next(this.images);
   }
 
   close() {
-    if (!this.confirmCloseOpened) {
-      this.confirmCloseOpened = true;
-    } else {
-      this.closeForm.next();
-    }
-  }
-
-  confirmClose(confirm: boolean) {
-    if (confirm) {
-      this.closeForm.next();
-    } else {
-      this.confirmCloseOpened = false;
-    }
+    this.closeForm.next([]);
   }
 }

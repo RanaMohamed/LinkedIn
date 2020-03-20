@@ -1,34 +1,50 @@
 <div class="card mb-3">
     <div class="card-body">
+        <div class="dropdown float-right" *ngIf="post.user.id === auth.getLoggedUserId()">
+            <button class="btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false" (click)="optionsOpened = !optionsOpened">
+                <i class="fa fa-ellipsis-h"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton"
+                [ngClass]="{'show': optionsOpened}">
+                <a class="dropdown-item" (click)="editPostOpened = true">Edit</a>
+                <a class="dropdown-item" (click)="confirmDeleteOpened = true">Delete</a>
+            </div>
+        </div>
         <div class="d-flex mb-2">
-            <img [src]="post.user?.image" class="rounded-circle mr-2" alt="" style="width: 48px; height: 48px;" />
+            <img [src]="post.user?.imageUrl" class="rounded-circle mr-2" alt="" style="width: 48px; height: 48px;" />
             <div>
-                <p class="mb-0">{{ post.user.name }}</p>
-                <p class="mb-0 text-muted small">{{ post.user.headline }}</p>
-                <p class="mb-0 text-muted small">{{moment(post.date).fromNow()}}</p>
+                <p class="mb-0">{{ post.user.Fname }} {{post.user.Lname}}</p>
+                <p class="mb-0 text-muted small">{{ post.user.headLine }}</p>
+                <p class="mb-0 text-muted small">
+                    {{moment(post.date, ["MM/DD/YYYY", "YYYY-MM-DDTHH:mm:ss:sssZ"]).fromNow()}}</p>
             </div>
         </div>
         <p class="mb-0">{{ post.description }}</p>
     </div>
     <div class="post-images">
-        <img *ngFor="let image of post.images" [src]="image" alt="" />
+        <div class="position-relative img d-flex" *ngFor="let image of post.images | slice:0:4; let i = index">
+            <img [src]="image" alt="" (click)="startSlide = i; sliderOpened = true" />
+            <div class="overlay" *ngIf="post.images.length > 4 && i === 3">+{{post.images.length - 4}}</div>
+        </div>
     </div>
+    <video *ngIf="post.video" [src]="post.video" width="100%" controls></video>
     <div class="card-body text-muted">
-        <a href="" *ngIf="post.likes"><i class="fa fa-thumbs-up text-primary"></i>
-            {{ post.likes }}</a>
-        <span *ngIf="post.likes && post.comments.length > 0" class="mx-2">&bull;</span>
-        <a *ngIf="post.comments.length > 0" (click)="commentsOpened = !commentsOpened">{{ post.comments.length }}
+        <a href="" *ngIf="post.likes.length > 0"><i class="fa fa-thumbs-up text-primary"></i>
+            {{ post.likes.length }}</a>
+        <span *ngIf="post.likes.length > 0 && post.comments.length > 0" class="mx-2">&bull;</span>
+        <a *ngIf="post.comments.length > 0" (click)="openComments()">{{ post.comments.length }}
             Comments</a>
         <hr />
         <a class=" mr-3" [ngClass]="{'text-primary': post.isLiked}" (click)="likePost()"><i
                 class="far fa-thumbs-up"></i>
             Like</a>
-        <a class="mr-3" (click)="commentsOpened = !commentsOpened"><i class=" far fa-comment-alt"></i>
+        <a class="mr-3" (click)="openComments()"><i class=" far fa-comment-alt"></i>
             Comment</a>
         <a href="" class="mr-3"><i class="fa fa-share"></i> Share</a>
         <div class="comments" *ngIf="commentsOpened">
             <div class="d-flex mt-2 align-items-start">
-                <img [src]="user.image" style="width: 48px; height: 48px;" alt=""
+                <img [src]="user.imageUrl" style="width: 48px; height: 48px;" alt=""
                     class=" rounded-circle d-block mr-2" />
                 <form [formGroup]="commentForm" (ngSubmit)="submitForm()" class="my-2 my-lg-0 mr-auto flex-fill">
                     <div class="input-group">
@@ -46,17 +62,22 @@
                         [disabled]="commentForm.invalid">Post</button>
                 </form>
             </div>
-
-            <div class=" d-flex mt-2 align-items-start" *ngFor="let comment of post.comments">
-                <img [src]="comment.user?.image" style="width: 48px; height: 48px;" alt=""
-                    class="rounded-circle d-block mr-2" />
-                <div class="my-2 my-lg-0 mr-auto flex-fill bg-light p-2 small">
-                    <span class="text-muted small float-right">{{moment(comment.date).fromNow()}}</span>
-                    <span class="d-block">{{comment.user?.name}}</span>
-                    <span class="text-muted d-block">{{comment.user?.headline}}</span>
-                    <span class="d-block mt-2">{{comment.comment}}</span>
-                </div>
-            </div>
+            <app-post-comment *ngFor="let comment of post.comments" [comment]="comment" [postId]="post.id">
+            </app-post-comment>
         </div>
     </div>
 </div>
+
+<ng-container *ngIf="sliderOpened">
+    <app-modal (closeModal)="sliderOpened = false">
+        <app-slider [images]="post.images" [startSlide]="startSlide"></app-slider>
+    </app-modal>
+</ng-container>
+
+<app-confirmation *ngIf="confirmDeleteOpened" message="delete this post" button="Delete"
+    (closeModal)="confirmDelete($event)">
+</app-confirmation>
+
+<app-post-form *ngIf="editPostOpened" (closeForm)="editPostOpened = false" [post]="post" [user]="user"
+    [imageFormOpened]="false" [videoFormOpened]="false">
+</app-post-form>

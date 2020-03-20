@@ -26,8 +26,12 @@ import { AboutComponent } from "./features/profile/about/about.component";
 import { AboutFormComponent } from "./features/profile/about/about-form/about-form.component";
 import { PostComponent } from "./features/home/post/post/post.component";
 import { PostImageFormComponent } from "./features/home/post/post-image-form/post-image-form.component";
-import { JobsComponent } from './features/jobs/jobs.component';
-import { JobCardComponent } from './features/jobs/job-card/job-card.component';
+import { JobsComponent } from "./features/jobs/jobs.component";
+import { JobCardComponent } from "./features/jobs/job-card/job-card.component";
+import { SliderComponent } from "./shared/slider/slider.component";
+import { ModalComponent } from "./shared/modal/modal.component";
+import { PostVideoFormComponent } from "./features/home/post/post-video-form/post-video-form.component";
+import { PostCommentComponent } from "./features/home/post/post-comment/post-comment.component";
 
 @NgModule({
   declarations: [
@@ -53,7 +57,11 @@ import { JobCardComponent } from './features/jobs/job-card/job-card.component';
     AboutComponent,
     AboutFormComponent,
     JobsComponent,
-    JobCardComponent
+    JobCardComponent,
+    SliderComponent,
+    ModalComponent,
+    PostVideoFormComponent,
+    PostCommentComponent
   ],
   imports: [
     BrowserModule,

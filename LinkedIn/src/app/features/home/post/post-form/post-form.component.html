@@ -1,42 +1,57 @@
-<p>post-form works!</p>
-<div class="modal fade show d-block" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Create a Post</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form [formGroup]="postForm" (ngSubmit)="submitForm()">
-                <div class="modal-body overflow-auto" style="max-height: 430px;">
-                    <div class="d-flex mb-2">
-                        <img [src]="user.image" class="card-img-top mr-2 rounded-circle"
-                            style="width: 60px; height: 60px;" alt="...">
-                        <div class="flex-fill">
-                            <p class="mb-1">{{user.name}}</p>
-                            <a href="/" class="btn btn-outline-secondary btn-sm"><i class="fa fa-globe-africa"></i>
-                                Anyone <i class="fa fa-caret-down"></i></a>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <textarea class="form-control" id="Description" rows="10" formControlName="description"
-                            [ngClass]="{'is-invalid': description.dirty && description.invalid}"></textarea>
-                        <span class="text-danger" *ngIf="description.dirty && description.invalid">You have exceeded the
-                            maximum character limit</span>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" type="submit">Save</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                        (click)="close()">Close</button>
-                </div>
-            </form>
-        </div>
+<app-modal (closeModal)="close()">
+    <div class="modal-header">
+        <h5 class="modal-title">Create a Post</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
-</div>
-<div class="modal-backdrop fade show"></div>
+    <form [formGroup]="postForm" (ngSubmit)="submitForm()">
+        <div class="modal-body overflow-auto" style="max-height: 430px; height: 370px;">
+            <div class="d-flex mb-2">
+                <img [src]="user.imageUrl" class="card-img-top mr-2 rounded-circle" style="width: 60px; height: 60px;"
+                    alt="...">
+                <div class="flex-fill">
+                    <p class="mb-1">{{user.Fname}} {{user.Lname}}</p>
+                    <a href="/" class="btn btn-outline-secondary btn-sm"><i class="fa fa-globe-africa"></i>
+                        Anyone <i class="fa fa-caret-down"></i></a>
+                </div>
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" id="Description" rows="8" formControlName="description"
+                    [ngClass]="{'is-invalid': description.dirty && description.invalid}"></textarea>
+                <span class="text-danger" *ngIf="description.dirty && description.invalid">You have exceeded the
+                    maximum character limit</span>
+            </div>
+            <div class="post-images">
+                <div class="position-relative img d-flex" *ngFor="let image of images | slice:0:4; let i = index">
+                    <img [src]="image" alt="" (click)="startSlide = i; sliderOpened = true" />
+                    <div class="overlay" *ngIf="images.length > 4 && i === 3">+{{images.length - 4}}</div>
+                </div>
+            </div>
+            <video *ngIf="video" [src]="video" width="100%" controls></video>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn text-secondary" (click)="imageFormOpened = true" [disabled]="video"><i
+                    class="fa fa-camera"></i></button>
+            <button type="button" class="btn text-secondary mr-auto" (click)="videoFormOpened = true"
+                [disabled]="images.length > 0"><i class="fa fa-video"></i></button>
+            <button type="button" class="btn btn-primary" type="submit">Save</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="close()">Close</button>
+        </div>
+    </form>
+</app-modal>
+
+<app-post-image-form *ngIf="imageFormOpened" (closeForm)="closeImageModal($event)">
+</app-post-image-form>
+<app-post-video-form *ngIf="videoFormOpened" (closeForm)="closeVideoModal($event)">
+</app-post-video-form>
 
 <app-confirmation *ngIf="confirmCloseOpened" message="discard changes to this" button="Discard"
     (closeModal)="confirmClose($event)">
 </app-confirmation>
+
+<ng-container *ngIf="sliderOpened">
+    <app-modal (closeModal)="sliderOpened = false" [top]="true">
+        <app-slider [images]="images" [startSlide]="startSlide"></app-slider>
+    </app-modal>
+</ng-container>

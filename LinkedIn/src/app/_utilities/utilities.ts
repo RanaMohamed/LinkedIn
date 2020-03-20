@@ -24,34 +24,38 @@ export function years(start, end) {
   return y;
 }
 
-export const rangeValidator = (formGroup: FormGroup) => {
-  const start = formGroup.get("start").value;
-  const end = formGroup.get("end").value;
-  const today: DateData = {
-    month: new Date().getMonth(),
-    year: new Date().getFullYear()
+export const rangeValidator = full => {
+  return (formGroup: FormGroup) => {
+    const start = formGroup.get("start").value;
+    const end = formGroup.get("end").value;
+    const today: DateData = {
+      month: new Date().getMonth(),
+      year: new Date().getFullYear()
+    };
+    if (full) {
+      let rangeStart = false;
+      let rangeEnd = false;
+      if (getDateDifference(start, today).years < 0 && start.year !== null) {
+        rangeStart = true;
+      }
+      if (getDateDifference(end, today).years < 0 && end.year !== null) {
+        rangeEnd = true;
+      }
+      if (rangeStart || rangeEnd) {
+        return { rangeStart, rangeEnd };
+      }
+    }
+    if (
+      (getDateDifference(start, end).years < 0 ||
+        (getDateDifference(start, end).years === 0 &&
+          getDateDifference(start, end).months === 0)) &&
+      start.year !== null &&
+      end.year !== null
+    ) {
+      return { range: true };
+    }
+    return null;
   };
-  let rangeStart = false;
-  let rangeEnd = false;
-  if (getDateDifference(start, today).years < 0 && start.year !== null) {
-    rangeStart = true;
-  }
-  if (getDateDifference(end, today).years < 0 && end.year !== null) {
-    rangeEnd = true;
-  }
-  if (rangeStart || rangeEnd) {
-    return { rangeStart, rangeEnd };
-  }
-  if (
-    (getDateDifference(start, end).years < 0 ||
-      (getDateDifference(start, end).years === 0 &&
-        getDateDifference(start, end).months === 0)) &&
-    start.year !== null &&
-    end.year !== null
-  ) {
-    return { range: true };
-  }
-  return null;
 };
 
 export function getDateDifference(start: DateData, end: DateData) {

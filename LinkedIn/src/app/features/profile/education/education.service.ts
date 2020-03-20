@@ -1,77 +1,125 @@
 import { Injectable } from "@angular/core";
 import { Education } from "src/app/_models/education";
-import { Subject } from "rxjs";
+import { Subject, Observable } from "rxjs";
+import { HttpClient } from "@angular/common/http";
+import { AuthService } from "../../auth/auth.service";
+import { School } from "src/app/_models/school";
 
 @Injectable({
   providedIn: "root"
 })
 export class EducationService {
   private educations: Subject<Education[]>;
-  private education: Subject<Education>;
-  private list: Education[] = [
-    {
-      id: 1,
-      school: {
-        id: 1,
-        name: "Information Technology Institute (ITI)",
-        image:
-          "https://media-exp1.licdn.com/dms/image/C560BAQGK3uuhQer46g/company-logo_100_100/0?e=1591833600&v=beta&t=bZJwqK3Xxk0jUrI8dS9dYCWOnpFOmOEIcmtg90HeOtw"
-      },
-      field: "Web and UI Development",
-      start: { year: 2019 },
-      end: { year: 2020 }
-    },
-    {
-      id: 2,
-      school: {
-        id: 2,
-        name: "Cairo University",
-        image:
-          "https://media-exp1.licdn.com/dms/image/C560BAQGYnGDX58wwLQ/company-logo_100_100/0?e=1591833600&v=beta&t=Nz58hcOnX6Q4BYQyF1B4QGfhyHY73auC2VABEioZLxo"
-      },
-      degree: "Bachelor's degree",
-      field: "Computer Software Engineering",
-      start: { year: 2014 },
-      end: { year: 2018 }
-    }
-  ];
-  private lastId = 2;
-  constructor() {
+  private list: Education[] = [];
+  private educationsUrl = "http://localhost:3000/educations";
+  private schoolsUrl = "http://localhost:3000/schools";
+  constructor(private http: HttpClient, private auth: AuthService) {
     this.educations = new Subject<Education[]>();
-    this.education = new Subject<Education>();
   }
 
   getAll(): Subject<Education[]> {
-    setTimeout(() => {
-      this.educations.next(this.list);
-    }, 5);
+    this.http
+      .get<Education[]>(
+        `${
+          this.educationsUrl
+        }?_expand=school&_sort=end.year&_order=desc&userId=${this.auth.getLoggedUserId()}`
+      )
+      .subscribe(res => {
+        this.list = res;
+        this.educations.next(this.list);
+      });
     return this.educations;
   }
 
-  getById(id: number): Subject<Education> {
-    setTimeout(() => {
-      this.education.next(this.list.find(ed => ed.id === id));
-    }, 5);
-    return this.education;
+  getById(id: number): Observable<Education> {
+    return this.http.get<Education>(
+      `${this.educationsUrl}/${id}?_expand=school`
+    );
   }
 
   add(education: Education) {
-    education.id = ++this.lastId;
-    this.list.unshift(education);
-    this.educations.next(this.list);
+    const school = education.school;
+    delete education.school;
+    this.http
+      .get<School[]>(`${this.schoolsUrl}?name=${school.name}`)
+      .subscribe(comps => {
+        if (comps.length > 0) {
+          this.saveEducation({
+            schoolId: comps[0].id,
+            userId: this.auth.getLoggedUserId(),
+            ...education
+          });
+        } else {
+          this.http
+            .post<School>(`${this.schoolsUrl}`, {
+              name: school.name
+            })
+            .subscribe(comp => {
+              this.saveEducation({
+                schoolId: comp.id,
+                userId: this.auth.getLoggedUserId(),
+                ...education
+              });
+            });
+        }
+      });
+  }
+
+  saveEducation(education) {
+    this.http
+      .post<Education>(`${this.educationsUrl}`, education)
+      .subscribe(res => {
+        this.getAll();
+      });
   }
 
   edit(education: Education) {
-    const index = this.list.findIndex(ed => ed.id === education.id);
-    education.school.image =
-      this.list[index].school.name === education.school.name &&
-      this.list[index].school.image;
-    this.list[index] = education;
-    this.educations.next(this.list);
+    const school = education.school;
+    delete education.school;
+    const index = this.list.findIndex(ex => ex.id === education.id);
+    if (this.list[index].school.name === school.name) {
+      this.editEducation(education);
+    } else {
+      this.http
+        .get<School[]>(`${this.schoolsUrl}?name=${school.name}`)
+        .subscribe(comps => {
+          if (comps.length > 0) {
+            this.editEducation({
+              ...education,
+              schoolId: comps[0].id
+            });
+          } else {
+            this.http
+              .post<School>(`${this.schoolsUrl}`, {
+                name: school.name
+              })
+              .subscribe(comp => {
+                this.editEducation({
+                  ...education,
+                  schoolId: comp.id
+                });
+              });
+          }
+        });
+    }
+  }
+
+  editEducation(education) {
+    this.http
+      .put<Education>(`${this.educationsUrl}/${education.id}`, education)
+      .subscribe(res => {
+        this.getById(res.id).subscribe(resp => {
+          this.getAll();
+        });
+      });
   }
 
   delete(id: number) {
-    this.list = this.list.filter(ed => ed.id !== id);
-    this.educations.next(this.list);
+    this.http
+      .delete<Education>(`${this.educationsUrl}/${id}`)
+      .subscribe(res => {
+        this.list = this.list.filter(ed => ed.id !== id);
+        this.educations.next(this.list);
+      });
   }
 }

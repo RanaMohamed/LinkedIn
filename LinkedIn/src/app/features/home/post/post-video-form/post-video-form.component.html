@@ -1,19 +1,17 @@
 <app-modal (closeModal)="close()">
     <div class="modal-header">
-        <h5 class="modal-title">Edit your photo</h5>
+        <h5 class="modal-title">Edit your video</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <form [formGroup]="imageForm" (ngSubmit)="submitForm()">
+    <form [formGroup]="videoForm" (ngSubmit)="submitForm()">
         <div class="modal-body overflow-auto" style="max-height: 430px; height: 370px;">
             <div class="form-group">
-                <input type="file" name="" id="" class="form-control-file" multiple accept="image/png, image/jpeg"
+                <input type="file" name="" id="" class="form-control-file" accept="video/*"
                     (change)="onFileChange($event)">
             </div>
-            <span class="text-danger" *ngIf="files.length > 9">Please reduce the number of images you are
-                attaching to 9 or fewer and try again.</span>
-            <app-slider [images]="images" [startSlide]="0"></app-slider>
+            <video *ngIf="video" [src]="video" width="100%" controls></video>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-primary" type="submit">Next</button>

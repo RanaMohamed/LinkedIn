@@ -4,11 +4,12 @@
       <div class="card">
         <div class="cover-bg h-auto text-center"
           style="background: url(Cover.PNG) no-repeat top;background-size: 135%;">
-          <img [src]="user.image" class="card-img-top mt-4 rounded-circle w-25" alt="..." />
+          <img [src]="user.imageUrl || 'https://via.placeholder.com/150'" class="card-img-top mt-4 rounded-circle w-25"
+            alt="..." />
         </div>
         <div class="card-body text-center">
-          <h5 class="card-title">{{ user.name }}</h5>
-          <p class="card-text">{{ user.headline }}</p>
+          <h5 class="card-title">{{ user.Fname }} {{user.Lname}}</h5>
+          <p class="card-text">{{ user.headLine }}</p>
         </div>
         <hr />
         <div class="card-body">
@@ -27,16 +28,19 @@
         <div class="col-7">
           <div class="card">
             <ul class="list-group list-group-horizontal">
-              <li class="list-group-item flex-fill btn-link btn text-left" (click)="formOpened = true">
+              <li class="list-group-item flex-fill btn text-left rounded-0 text-secondary btn-link"
+                (click)="formOpened = true">
                 <i class="far fa-edit"></i> Start a post
               </li>
-              <li class="list-group-item btn btn-link" (click)="imageFormOpened = true">
+              <li class="list-group-item btn rounded-0 text-secondary"
+                (click)="formOpened = true; imageFormOpened = true">
                 <i class="fa fa-camera"></i>
               </li>
-              <li class="list-group-item btn btn-link" (click)="imageFormOpened = true">
+              <li class="list-group-item btn rounded-0 text-secondary"
+                (click)="formOpened = true; videoFormOpened = true">
                 <i class="fa fa-video"></i>
               </li>
-              <li class="list-group-item btn btn-link" (click)="formOpened = true">
+              <li class="list-group-item btn rounded-0 text-secondary" (click)="formOpened = true">
                 <i class="fa fa-file"></i>
               </li>
             </ul>
@@ -45,11 +49,10 @@
             </div>
           </div>
           <hr />
-          <app-post-form *ngIf="formOpened" (closeForm)="closeModal()" [user]="user">
+          <app-post-form *ngIf="formOpened" (closeForm)="closeModal()" [user]="user" [imageFormOpened]="imageFormOpened"
+            [videoFormOpened]="videoFormOpened">
           </app-post-form>
-          <app-post-image-form *ngIf="imageFormOpened" (closeForm)="closeImageModal()">
-          </app-post-image-form>
-          <app-post *ngFor="let post of posts" [post]="post"></app-post>
+          <app-post *ngFor="let post of posts" [post]="post" [user]="user"></app-post>
 
         </div>
         <div class="col-5">
@@ -63,7 +66,7 @@
                   <p class="mb-0 text-muted small">679,771 followers</p>
                   <p class="mb-0 text-muted small">1mo</p>
                 </div>
-                <button class="btn btn-outline-info ml-auto">
+                <button class="btn btn-outline-info ml-auto btn-sm">
                   <i class="fa fa-plus"></i> Follow
                 </button>
               </div>
@@ -74,7 +77,7 @@
                   <p class="mb-0 text-muted small">679,771 followers</p>
                   <p class="mb-0 text-muted small">1mo</p>
                 </div>
-                <button class="btn btn-outline-info ml-auto">
+                <button class="btn btn-outline-info ml-auto btn-sm">
                   <i class="fa fa-plus"></i> Follow
                 </button>
               </div>
@@ -85,7 +88,7 @@
                   <p class="mb-0 text-muted small">679,771 followers</p>
                   <p class="mb-0 text-muted small">1mo</p>
                 </div>
-                <button class="btn btn-outline-info ml-auto">
+                <button class="btn btn-outline-info ml-auto btn-sm">
                   <i class="fa fa-plus"></i> Follow
                 </button>
               </div>

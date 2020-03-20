@@ -1,0 +1,273 @@
+{
+  "logins": [
+    {
+      "id": 1,
+      "email": "rana.mohamed.97@hotmail.com",
+      "password": "12345678",
+      "userId": 1
+    },
+    {
+      "id": 2,
+      "email": "test@test.com",
+      "password": "12345678",
+      "userId": 2
+    },
+    {
+      "id": 3,
+      "email": "amalelkady4@gmail.com",
+      "password": "123456789",
+      "userId": 3
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "Fname": "Rana",
+      "Lname": "Mohamed",
+      "imageUrl": "https://media-exp1.licdn.com/dms/image/C4E03AQFksu7c46jpMw/profile-displayphoto-shrink_200_200/0?e=1590019200&v=beta&t=2uEtWnSZNflDWpE0uiknQd4aS37EazkGceT_W_LWYeY",
+      "headLine": "Web and UI Student at Information Technology Institute (ITI)",
+      "country": "Egypt",
+      "industry": "Computer Software",
+      "contactInfo": {
+        "profileUrl": "linkedin.com/in/rana-mohamed-405a35176",
+        "urls": [],
+        "phone": {
+          "num": "01111273318",
+          "type": "Mobile"
+        },
+        "address": "",
+        "email": "rana.mohamed.97@hotmail.com ",
+        "instantMess": [],
+        "birthday": {
+          "day": 29,
+          "month": "January"
+        }
+      }
+    },
+    {
+      "id": 2,
+      "Fname": "khaled",
+      "Lname": " Nasser",
+      "headLine": "Software Team leader at Mind Cloud",
+      "imageUrl": "https://media-exp1.licdn.com/dms/image/C5603AQH955_PzrUuEw/profile-displayphoto-shrink_100_100/0?e=1590019200&v=beta&t=TbPeKcdYtbJ1JsbjpWo7m3p_LgprlBI2zt3irxiNVH8"
+    },
+    {
+      "id": 3,
+      "Fname": "Amal",
+      "Lname": "Elkady",
+      "imageUrl": "../../../../assets/imgs/client-3.jpg",
+      "headLine": "Full Stack Developer (Computer Sciences)",
+      "country": "Egypt",
+      "industry": "Computer Software",
+      "contactInfo": {
+        "profileUrl": "linkedin.com/in/amal-elkady-972009135",
+        "urls": [],
+        "phone": {
+          "num": 0,
+          "type": ""
+        },
+        "address": "",
+        "email": "amalelkady4@gmail.com",
+        "instantMess": [],
+        "birthday": {
+          "day": 21,
+          "month": "September"
+        }
+      }
+    }
+  ],
+  "abouts": [
+    {
+      "id": 1,
+      "userId": 1,
+      "media": [],
+      "summary": "Experienced Frontend Developer with a demonstrated history of working in the computer software industry. Skilled in Vue.js, Cascading Style Sheets (CSS), HTML, and JavaScript. with a Bachelor's degree focused in Computer Software Engineering from Cairo University.",
+      "link": ""
+    },
+    {
+      "id": 3,
+      "userId": 3,
+      "media": [],
+      "summary": "seeking for the opportunity to get Full Stack Developer position , gain more experience in this field and have opportunity to travel and work outside.",
+      "link": ""
+    }
+  ],
+  "experiences": [
+    {
+      "id": 1,
+      "userId": 1,
+      "title": "Frontend Developer",
+      "type": "Full-time",
+      "companyId": 1,
+      "location": null,
+      "start": {
+        "month": 12,
+        "year": 2018
+      },
+      "end": {
+        "month": 8,
+        "year": 2019
+      },
+      "description": ""
+    },
+    {
+      "id": 2,
+      "userId": 1,
+      "title": "Frontend Developer",
+      "type": null,
+      "companyId": 2,
+      "location": null,
+      "start": {
+        "month": 10,
+        "year": 2017
+      },
+      "end": {
+        "month": 11,
+        "year": 2018
+      },
+      "description": null
+    },
+    {
+      "companyId": 2,
+      "userId": 2,
+      "title": "Title",
+      "type": "Full-time",
+      "location": null,
+      "start": {
+        "month": "1",
+        "year": "2019"
+      },
+      "currently": true,
+      "end": {
+        "month": null,
+        "year": null
+      },
+      "description": "Descritption",
+      "id": 3
+    }
+  ],
+  "companies": [
+    {
+      "id": 1,
+      "name": "Ennwa",
+      "image": ""
+    },
+    {
+      "id": 2,
+      "name": "dotdev",
+      "image": "https://media-exp1.licdn.com/dms/image/C4E0BAQGUCihq_TaZsQ/company-logo_100_100/0?e=1591833600&v=beta&t=FALzL3hxk1JgO_S7PqfFMmRiqsmR-C2cP13VYYzGDVE"
+    }
+  ],
+  "educations": [
+    {
+      "id": 1,
+      "userId": 1,
+      "schoolId": 1,
+      "degree": null,
+      "field": "Web and UI Development",
+      "start": {
+        "year": 2019
+      },
+      "end": {
+        "year": 2020
+      },
+      "grade": null,
+      "activities": null,
+      "description": null
+    },
+    {
+      "id": 2,
+      "userId": 1,
+      "schoolId": 2,
+      "degree": "Bachelor's degree",
+      "field": "Computer Software Engineering",
+      "start": {
+        "year": 2014
+      },
+      "end": {
+        "year": 2018
+      },
+      "activities": null,
+      "description": null
+    },
+    {
+      "schoolId": 1,
+      "userId": 2,
+      "degree": "Degree",
+      "field": "Field",
+      "start": {
+        "month": null,
+        "year": "2014"
+      },
+      "end": {
+        "month": null,
+        "year": "2015"
+      },
+      "grade": "Excellent",
+      "activities": "Activities",
+      "description": "Description",
+      "id": 3
+    }
+  ],
+  "schools": [
+    {
+      "id": 1,
+      "name": "Information Technology Institute (ITI)",
+      "image": "https://media-exp1.licdn.com/dms/image/C560BAQGK3uuhQer46g/company-logo_100_100/0?e=1591833600&v=beta&t=bZJwqK3Xxk0jUrI8dS9dYCWOnpFOmOEIcmtg90HeOtw"
+    },
+    {
+      "id": 2,
+      "name": "Cairo University",
+      "image": "https://media-exp1.licdn.com/dms/image/C560BAQGYnGDX58wwLQ/company-logo_100_100/0?e=1591833600&v=beta&t=Nz58hcOnX6Q4BYQyF1B4QGfhyHY73auC2VABEioZLxo"
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "userId": 1,
+      "date": "01/28/2020",
+      "description": "Leveraging AI and the information captured by various sensors to deliver ultimate personalized comfort, Valeo provides a customized comfort bubble to suit each vehicle occupant with Valeo Smart Cocoon.By practically rendering the vehicle empathetic, this innovative technology takes the state of its driver and passengers into account, detecting signs of fatigue, distraction, emotion and stress.",
+      "images": []
+    },
+    {
+      "id": 2,
+      "userId": 2,
+      "description": "I have been working in the last three months on two scholarships and happy to complete them it was an enriching experience where I found a lot of projects and great content 1- Intel® Edge AI Scholarship by Udacity and Intel Corporation I would really thank Michael Virgo for the great content 2- Bertelsmann Tech Scholarship Challenge Course - AI Track and thanks to Udacity for this Great opportunities #deeplearning #computervision #udacityinteltechscholars  #bertelsmann #edgeai #intel",
+      "images": [
+        "https://media-exp1.licdn.com/dms/image/C5622AQEdOoPOQTf6BQ/feedshare-shrink_800/0?e=1586995200&v=beta&t=4qh7ploCTcPLc8IuESWliJQW8gmlucEZZbd2WPcwTxM",
+        "https://media-exp1.licdn.com/dms/image/C5622AQHJyTok9athiw/feedshare-shrink_800/0?e=1586995200&v=beta&t=GuY2ATxkMPO1iOVZa04hn3gDTs6F7whCZkiiDNDYjqs",
+        "https://media-exp1.licdn.com/dms/image/C5622AQFnb1_syIg1nA/feedshare-shrink_800/0?e=1586995200&v=beta&t=vY1GznQavUILGycPU_SbzJpDTeEmX5-M15EY5j4mXpE"
+      ],
+      "date": "03/17/2020"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "postId": 1,
+      "comment": "Test",
+      "userId": 2,
+      "date": "01/29/2020"
+    },
+    {
+      "id": 2,
+      "postId": 2,
+      "comment": "Congratulations",
+      "userId": 1,
+      "date": "03/17/2020"
+    },
+    {
+      "id": 3,
+      "postId": 2,
+      "comment": "Thanks Aishwarya N.",
+      "userId": 2,
+      "date": "03/17/2020"
+    }
+  ],
+  "likes": [
+    { "id": 1, "postId": 1, "userId": 1 },
+    { "id": 2, "postId": 1, "userId": 2 },
+    { "id": 3, "postId": 1, "userId": 3 },
+    { "id": 4, "postId": 2, "userId": 2 }
+  ]
+}

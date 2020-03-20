@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { Post, User } from "src/app/_models/post";
 import * as moment from "moment";
-import { AuthService } from "src/app/features/auth/auth.service";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { Post } from "src/app/_models/post";
 import { PostService } from "../post.service";
+import { AuthService } from "src/app/features/auth/auth.service";
+import { Intro } from "src/app/_models/intro";
 
 @Component({
   selector: "app-post",
@@ -12,14 +13,19 @@ import { PostService } from "../post.service";
 })
 export class PostComponent implements OnInit {
   @Input() post: Post = {};
+  @Input() user: Intro = {};
   commentsOpened = false;
   moment = moment;
-  user: User;
   commentForm: FormGroup;
-  constructor(private postService: PostService, private auth: AuthService) {}
+  startSlide = 0;
+  sliderOpened = false;
+  optionsOpened = false;
+  confirmDeleteOpened = false;
+  editPostOpened = false;
+  comments: Comment[] = [];
+  constructor(private postService: PostService, protected auth: AuthService) {}
 
   ngOnInit() {
-    this.user = this.auth.getLoggedUser();
     this.commentForm = new FormGroup({
       comment: new FormControl(null, [
         Validators.maxLength(1300),
@@ -32,10 +38,18 @@ export class PostComponent implements OnInit {
     return this.commentForm.get("comment");
   }
 
+  openComments() {
+    this.commentsOpened = !this.commentsOpened;
+    if (this.commentsOpened) {
+      this.postService
+        .getComments(this.post.id)
+        .subscribe(res => (this.post.comments = res));
+    }
+  }
+
   submitForm() {
     if (this.commentForm.valid) {
       const comment = this.commentForm.getRawValue();
-      comment.user = this.user;
       comment.date = new Date();
       this.postService.addComment(this.post.id, comment);
       this.commentForm.reset();
@@ -44,5 +58,13 @@ export class PostComponent implements OnInit {
 
   likePost() {
     this.postService.likePost(this.post.id);
+  }
+
+  confirmDelete(confirm: boolean) {
+    if (confirm) {
+      this.postService.delete(this.post.id);
+    } else {
+      this.confirmDeleteOpened = false;
+    }
   }
 }

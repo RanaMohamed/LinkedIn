@@ -1,7 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, Input } from "@angular/core";
-import { FormGroup, FormControl, Validators, FormArray } from "@angular/forms";
-import { User } from "src/app/_models/post";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { Post } from "src/app/_models/post";
 import { PostService } from "../post.service";
+import { Intro } from "src/app/_models/intro";
 
 @Component({
   selector: "app-post-form",
@@ -9,16 +10,29 @@ import { PostService } from "../post.service";
   styleUrls: ["./post-form.component.scss"]
 })
 export class PostFormComponent implements OnInit {
-  @Input() user: User;
+  @Input() user: Intro;
+  @Input() post: Post;
+  @Input() imageFormOpened: boolean;
+  @Input() videoFormOpened: boolean;
   @Output() closeForm = new EventEmitter();
   confirmCloseOpened = false;
   postForm: FormGroup;
+  images: string[] = [];
+  video: string;
+  startSlide = 0;
+  sliderOpened = false;
   constructor(private postService: PostService) {}
 
   ngOnInit() {
     this.postForm = new FormGroup({
-      description: new FormControl(null, [Validators.maxLength(1300)])
+      description: new FormControl(this.post && this.post.description, [
+        Validators.maxLength(1300)
+      ])
     });
+    if (this.post) {
+      this.images = this.post.images;
+      this.video = this.post.video;
+    }
   }
 
   get description() {
@@ -27,20 +41,27 @@ export class PostFormComponent implements OnInit {
 
   submitForm() {
     if (this.postForm.valid) {
-      const post = this.postForm.getRawValue();
-      post.user = this.user;
-      post.images = [];
-      post.date = new Date();
-      this.postService.add(post);
+      let post = this.postForm.getRawValue();
+      post.images = this.images;
+      post.video = this.video;
+      if (this.post) {
+        post = { ...this.post, ...post };
+        this.postService.edit(post);
+      } else {
+        post.date = new Date();
+        this.postService.add(post);
+      }
       this.closeForm.next();
     }
   }
 
   close() {
-    if (this.postForm.touched) {
-      this.confirmCloseOpened = true;
-    } else {
-      this.closeForm.next();
+    if (!this.sliderOpened) {
+      if (this.postForm.dirty || this.images.length > 0) {
+        this.confirmCloseOpened = true;
+      } else {
+        this.closeForm.next();
+      }
     }
   }
 
@@ -50,5 +71,15 @@ export class PostFormComponent implements OnInit {
     } else {
       this.confirmCloseOpened = false;
     }
+  }
+
+  closeImageModal(e) {
+    this.images = e;
+    this.imageFormOpened = false;
+  }
+
+  closeVideoModal(e) {
+    this.video = e;
+    this.videoFormOpened = false;
   }
 }

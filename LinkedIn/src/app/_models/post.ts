@@ -1,22 +1,20 @@
+import { Intro } from "./intro";
+
 export interface Post {
   id?: number;
-  user?: User;
+  user?: Intro;
   date?: Date;
   description?: string;
   images?: string[];
-  likes?: number;
+  video?: string;
+  likes?: any[];
   comments?: Comment[];
   isLiked?: boolean;
 }
 
-export interface User {
-  name?: string;
-  headline?: string;
-  image?: string;
-}
-
 export interface Comment {
-  user?: User;
+  id?: number;
+  user?: Intro;
   comment?: string;
   date?: Date;
 }
