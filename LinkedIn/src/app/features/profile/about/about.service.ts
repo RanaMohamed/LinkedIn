@@ -1,41 +1,47 @@
 import { Injectable } from "@angular/core";
-import { Subject } from "rxjs";
+import { Subject, Observable } from "rxjs";
 import { About } from "./../../../_models/about";
+import { HttpClient } from "@angular/common/http";
+import { AuthService } from "../../auth/auth.service";
 
 @Injectable({
   providedIn: "root"
 })
 export class AboutService {
   private aboutData: Subject<About>;
-
-  private listOfAbouts: About[] = [
-    {
-      id: 1,
-      media: [],
-      summary:
-        "seeking for the opportunity to get Full Stack Developer position , gain more experience in this field and have opportunity to travel and work outside.",
-      link: ""
-    }
-  ];
-
-  constructor() {
+  constructor(private http: HttpClient, private auth: AuthService) {
     this.aboutData = new Subject<About>();
   }
 
-  getById(id: number): Subject<About> {
-    const res = this.listOfAbouts.filter(ab => ab.id === id);
-
-    setTimeout(() => {
-      this.aboutData.next(res[0]);
-    }, 5);
+  getById(): Observable<About> {
+    this.http
+      .get<About>(
+        `http://localhost:3000/abouts?userId=${this.auth.getLoggedUserId()}`
+      )
+      .subscribe(res => {
+        this.aboutData.next(res);
+      });
     return this.aboutData;
   }
 
   add(ab: About) {
-    console.log("add fun in service");
+    this.http.post<About>(`http://localhost:3000/abouts`, ab).subscribe(res => {
+      this.getById().subscribe(ab => {
+        ab => this.aboutData.next(ab);
+      });
+    });
   }
 
   edit(ab: About) {
-    this.aboutData.next(ab);
+    this.http
+      .put<About>(
+        `http://localhost:3000/abouts?userId=${this.auth.getLoggedUserId()}`,
+        ab
+      )
+      .subscribe(res => {
+        this.getById().subscribe(ab => {
+          ab => this.aboutData.next(ab);
+        });
+      });
   }
 }

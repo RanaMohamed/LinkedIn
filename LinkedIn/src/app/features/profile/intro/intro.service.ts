@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
-import { Subject } from "rxjs";
+import { Subject, Observable } from "rxjs";
 import { Intro } from "../../../_models/intro";
 import { ContactInfo } from "../../../_models/contactInfo";
-
+import { HttpClient } from "@angular/common/http";
+import { AuthService } from "../../auth/auth.service";
 @Injectable({
   providedIn: "root"
 })
@@ -63,24 +64,41 @@ export class IntroService {
     }
   ];
 
-  constructor() {
+  constructor(private http: HttpClient, private auth: AuthService) {
     this.introInfo = new Subject<Intro>();
   }
-
-  getById(id: number): Subject<Intro> {
-    const res = this.listOfProfiles.filter(intro => intro.id === id);
-
-    setTimeout(() => {
-      this.introInfo.next(res[0]);
-    }, 5);
+  getById(): Observable<Intro> {
+    this.http
+      .get<Intro>(
+        `http://localhost:3000/users/${this.auth.getLoggedUserId()}?_embed=educations`
+      )
+      .subscribe(res => {
+        this.http.get;
+        this.introInfo.next(res);
+      });
     return this.introInfo;
   }
 
   add(intro: Intro) {
-    console.log("add fun in service");
+    this.http
+      .post<Intro>(`http://localhost:3000/users`, intro)
+      .subscribe(res => {
+        this.getById().subscribe(ab => {
+          ab => this.introInfo.next(ab);
+        });
+      });
   }
 
   edit(intro: Intro) {
-    this.introInfo.next(intro);
+    this.http
+      .put<Intro>(
+        `http://localhost:3000/users/${this.auth.getLoggedUserId()}`,
+        intro
+      )
+      .subscribe(res => {
+        this.getById().subscribe(ab => {
+          ab => this.introInfo.next(ab);
+        });
+      });
   }
 }

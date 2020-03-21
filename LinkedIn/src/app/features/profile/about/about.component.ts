@@ -17,9 +17,8 @@ export class AboutComponent implements OnInit {
   constructor(private aboutService: AboutService) {}
 
   ngOnInit() {
-    this.aboutService.getById(1).subscribe(ab => (this.about = ab));
+    this.aboutService.getById().subscribe(ab => (this.about = ab));
   }
-
   closeModal() {
     this.openForm = false;
   }

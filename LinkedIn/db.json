@@ -52,28 +52,54 @@
       "imageUrl": "https://media-exp1.licdn.com/dms/image/C5603AQH955_PzrUuEw/profile-displayphoto-shrink_100_100/0?e=1590019200&v=beta&t=TbPeKcdYtbJ1JsbjpWo7m3p_LgprlBI2zt3irxiNVH8"
     },
     {
-      "id": 3,
-      "Fname": "Amal",
+      "Fname": "Ama",
       "Lname": "Elkady",
       "imageUrl": "../../../../assets/imgs/client-3.jpg",
       "headLine": "Full Stack Developer (Computer Sciences)",
+      "education": [
+        {
+          "schoolId": 3,
+          "userId": 3,
+          "degree": "BA",
+          "field": "computer science",
+          "start": {
+            "month": null,
+            "year": "2015"
+          },
+          "end": {
+            "month": null,
+            "year": "2019"
+          },
+          "grade": "excellent",
+          "activities": null,
+          "description": null,
+          "id": 4,
+          "school": {
+            "name": "fayoum university",
+            "id": 3
+          }
+        }
+      ],
       "country": "Egypt",
+      "locationInCountry": null,
       "industry": "Computer Software",
       "contactInfo": {
-        "profileUrl": "linkedin.com/in/amal-elkady-972009135",
+        "profileUrl": "",
         "urls": [],
         "phone": {
           "num": 0,
           "type": ""
         },
         "address": "",
-        "email": "amalelkady4@gmail.com",
+        "email": "",
         "instantMess": [],
         "birthday": {
-          "day": 21,
-          "month": "September"
+          "day": 6,
+          "month": "March"
         }
-      }
+      },
+      "showEdu": true,
+      "id": 3
     }
   ],
   "abouts": [
@@ -207,6 +233,24 @@
       "activities": "Activities",
       "description": "Description",
       "id": 3
+    },
+    {
+      "schoolId": 3,
+      "userId": 3,
+      "degree": "BA",
+      "field": "computer science",
+      "start": {
+        "month": null,
+        "year": "2015"
+      },
+      "end": {
+        "month": null,
+        "year": "2019"
+      },
+      "grade": "excellent",
+      "activities": null,
+      "description": null,
+      "id": 4
     }
   ],
   "schools": [
@@ -219,6 +263,10 @@
       "id": 2,
       "name": "Cairo University",
       "image": "https://media-exp1.licdn.com/dms/image/C560BAQGYnGDX58wwLQ/company-logo_100_100/0?e=1591833600&v=beta&t=Nz58hcOnX6Q4BYQyF1B4QGfhyHY73auC2VABEioZLxo"
+    },
+    {
+      "name": "fayoum university",
+      "id": 3
     }
   ],
   "posts": [
@@ -265,9 +313,97 @@
     }
   ],
   "likes": [
-    { "id": 1, "postId": 1, "userId": 1 },
-    { "id": 2, "postId": 1, "userId": 2 },
-    { "id": 3, "postId": 1, "userId": 3 },
-    { "id": 4, "postId": 2, "userId": 2 }
+    {
+      "id": 1,
+      "postId": 1,
+      "userId": 1
+    },
+    {
+      "id": 2,
+      "postId": 1,
+      "userId": 2
+    },
+    {
+      "id": 3,
+      "postId": 1,
+      "userId": 3
+    },
+    {
+      "id": 4,
+      "postId": 2,
+      "userId": 2
+    }
+  ],
+  "Jobs": [
+    {
+      "id": 1,
+      "userId": 3,
+      "company": {
+        "id": 1,
+        "name": "Huawei",
+        "image": "https://media-exp1.licdn.com/dms/image/C510BAQHDjJMzWUhMfg/company-logo_100_100/0?e=1592438400&v=beta&t=kNJDc5wYWYBvMU-HfkJ8VGk0w4i-aEgtzWZeuDlVKJw"
+      },
+      "title": "Software Engineer Intern / UI/UX intern",
+      "description": "",
+      "location": "",
+      "time": "1 Week ago",
+      "connections": []
+    },
+    {
+      "id": 2,
+      "userId": 3,
+      "company": {
+        "id": 1,
+        "name": "Notatee",
+        "image": "https://media-exp1.licdn.com/dms/image/C560BAQHrGfl6p9Xa-A/company-logo_100_100/0?e=1592438400&v=beta&t=MRUMt0wm9Rw9a4cNvVAMolGo0sHWhYbC8E7pmqlYlOM"
+      },
+      "title": "Developer",
+      "description": "",
+      "location": "Cairo Governorate, Egypt",
+      "time": "1 day ago",
+      "connections": []
+    },
+    {
+      "id": 3,
+      "userId": 2,
+      "company": {
+        "id": 1,
+        "name": "CoatConnect",
+        "image": "https://media-exp1.licdn.com/dms/image/C4D0BAQEtvCa-7bHgYA/company-logo_100_100/0?e=1593043200&v=beta&t=sQRDEYnuIGgeNF9CvCQjbitBgNbTJB22Y90PvCHpmWI"
+      },
+      "title": "Frontend Web Developer",
+      "description": "",
+      "location": "Cairo, Egypt",
+      "time": "1 day ago",
+      "connections": []
+    },
+    {
+      "id": 4,
+      "userId": 3,
+      "company": {
+        "id": 1,
+        "name": "DXC Technology",
+        "image": "https://media-exp1.licdn.com/dms/image/C4E0BAQFs5HVdyuXuww/company-logo_100_100/0?e=1593043200&v=beta&t=ZFKlzg2j66dPXaDRqZSckDLqVvQEJXKp9l7xDNFm4r0"
+      },
+      "title": "Senior Frontend Developer",
+      "description": "",
+      "location": "Cairo, Egypt",
+      "time": "1 Week ago",
+      "connections": []
+    },
+    {
+      "id": 5,
+      "userId": 2,
+      "company": {
+        "id": 1,
+        "name": "Orange Business Services",
+        "image": "https://media-exp1.licdn.com/dms/image/C4D0BAQGcL-z5YkeJkw/company-logo_100_100/0?e=1593043200&v=beta&t=Y-KkFA1RzhNRODLPeLBu0NrgSobZP6jVkZtIfdi8rqA"
+      },
+      "title": "PHP Web Developer",
+      "description": "",
+      "location": "Cairo, Egypt",
+      "time": "2 Week ago",
+      "connections": []
+    }
   ]
 }
