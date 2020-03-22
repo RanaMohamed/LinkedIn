@@ -25,23 +25,21 @@ export class AboutService {
   }
 
   add(ab: About) {
-    this.http.post<About>(`http://localhost:3000/abouts`, ab).subscribe(res => {
-      this.getById().subscribe(ab => {
-        ab => this.aboutData.next(ab);
+    this.http
+      .post<About>(`http://localhost:3000/abouts`, {
+        ...ab,
+        userId: this.auth.getLoggedUserId()
+      })
+      .subscribe(res => {
+        this.getById();
       });
-    });
   }
 
   edit(ab: About) {
     this.http
-      .put<About>(
-        `http://localhost:3000/abouts?userId=${this.auth.getLoggedUserId()}`,
-        ab
-      )
+      .put<About>(`http://localhost:3000/abouts/${ab.id}`, ab)
       .subscribe(res => {
-        this.getById().subscribe(ab => {
-          ab => this.aboutData.next(ab);
-        });
+        this.getById();
       });
   }
 }

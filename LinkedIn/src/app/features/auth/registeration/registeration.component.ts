@@ -32,7 +32,7 @@ export class RegisterationComponent implements OnInit {
   registerUser(f: NgForm) {
     this._auth.registerUser(f.value).subscribe(
       res => {
-        this.router.navigate(["/login"]);
+        this._auth.addUser().subscribe(res => this.router.navigate(["/login"]));
       },
       err => console.log(err)
     );

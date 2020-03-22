@@ -17,9 +17,7 @@ export class JobService {
 
   getAll() {
     this.http
-      .get<Job[]>(
-        `http://localhost:3000/Jobs?userId=${this.auth.getLoggedUserId()}`
-      )
+      .get<Job[]>(`http://localhost:3000/Jobs?_expand=company`)
       .subscribe(res => {
         this.jobs.next(res);
       });

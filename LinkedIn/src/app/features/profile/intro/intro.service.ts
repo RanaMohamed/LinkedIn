@@ -73,7 +73,6 @@ export class IntroService {
         `http://localhost:3000/users/${this.auth.getLoggedUserId()}?_embed=educations`
       )
       .subscribe(res => {
-        this.http.get;
         this.introInfo.next(res);
       });
     return this.introInfo;
@@ -81,10 +80,13 @@ export class IntroService {
 
   add(intro: Intro) {
     this.http
-      .post<Intro>(`http://localhost:3000/users`, intro)
+      .post<Intro>(`http://localhost:3000/users`, {
+        ...intro,
+        userId: this.auth.getLoggedUserId()
+      })
       .subscribe(res => {
         this.getById().subscribe(ab => {
-          ab => this.introInfo.next(ab);
+          this.introInfo.next(ab);
         });
       });
   }

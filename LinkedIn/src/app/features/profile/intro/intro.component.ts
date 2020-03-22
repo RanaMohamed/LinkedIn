@@ -51,7 +51,7 @@ export class IntroComponent implements OnInit {
   constructor(private introService: IntroService) {}
 
   ngOnInit() {
-    this.introService.getById(1).subscribe(r => (this.intro = r));
+    this.introService.getById().subscribe(r => (this.intro = r));
   }
 
   OpenContact() {
