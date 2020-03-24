@@ -12,9 +12,10 @@
             </div>
         </div>
         <div class="d-flex mb-2">
-            <img [src]="post.user?.imageUrl" class="rounded-circle mr-2" alt="" style="width: 48px; height: 48px;" />
+            <img [src]="post.user?.imageUrl" [routerLink]="['profile', post.user.id]" class="rounded-circle mr-2" alt=""
+                style="width: 48px; height: 48px;" />
             <div>
-                <p class="mb-0">{{ post.user.Fname }} {{post.user.Lname}}</p>
+                <p class="mb-0" [routerLink]="['profile', post.user.id]">{{ post.user.Fname }} {{post.user.Lname}}</p>
                 <p class="mb-0 text-muted small">{{ post.user.headLine }}</p>
                 <p class="mb-0 text-muted small">
                     {{moment(post.date, ["MM/DD/YYYY", "YYYY-MM-DDTHH:mm:ss:sssZ"]).fromNow()}}</p>

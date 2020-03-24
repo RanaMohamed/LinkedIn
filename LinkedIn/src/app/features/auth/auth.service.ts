@@ -14,9 +14,13 @@ export class AuthService {
     return this.http.post<any>("http://localhost:3000/logins", user);
   }
 
+  addUser() {
+    return this.http.post<any>("http://localhost:3000/users", {});
+  }
+
   loginUser(user) {
     this.userId = user.userId;
-    localStorage.setItem("user", user.userId);
+    localStorage.setItem("user", user.id);
   }
 
   getAll() {

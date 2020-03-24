@@ -17,12 +17,10 @@ export class EducationService {
     this.educations = new Subject<Education[]>();
   }
 
-  getAll(): Subject<Education[]> {
+  getAll(userId: number = this.auth.getLoggedUserId()): Subject<Education[]> {
     this.http
       .get<Education[]>(
-        `${
-          this.educationsUrl
-        }?_expand=school&_sort=end.year&_order=desc&userId=${this.auth.getLoggedUserId()}`
+        `${this.educationsUrl}?_expand=school&_sort=end.year&_order=desc&userId=${userId}`
       )
       .subscribe(res => {
         this.list = res;

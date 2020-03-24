@@ -12,13 +12,11 @@ export class JobsComponent implements OnInit {
   constructor(private jobService: JobService) {}
 
   ngOnInit() {
-    this.jobs = this.jobService.getAll();
+    this.jobService.getAll().subscribe(res => (this.jobs = res));
   }
 
   filterJobs(searchJob, searchLocation) {
-    if (!searchJob.value && !searchLocation.value) {
-      this.jobs = this.jobService.getAll();
-    } else {
+    if (searchJob.value && searchLocation.value) {
       let resSearch = this.jobs.filter(
         p =>
           p.location

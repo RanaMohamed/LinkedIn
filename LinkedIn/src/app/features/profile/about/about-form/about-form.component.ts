@@ -10,7 +10,6 @@ import { AboutService } from "./../about.service";
 })
 export class AboutFormComponent implements OnInit {
   @Input() about: About = {
-    id: 1,
     summary: "",
     media: [],
     link: ""
@@ -24,7 +23,6 @@ export class AboutFormComponent implements OnInit {
   constructor(private aboutService: AboutService) {}
 
   ngOnInit() {
-    console.log(this.about);
     this.aboutForm = new FormGroup({
       summary: new FormControl(this.about && this.about.summary),
       media: new FormArray([]),
@@ -42,13 +40,15 @@ export class AboutFormComponent implements OnInit {
 
   SaveForm() {
     if (this.aboutForm.valid) {
-      const ab: About = this.aboutForm.getRawValue();
-      ab.id = +this.about.id;
-
+      let ab: About = this.aboutForm.getRawValue();
+      ab = { ...this.about, ...ab };
       if (this.about) {
         if (!this.addClicked) ab.link = "";
-        ab.id = +this.about.id;
-        this.aboutService.edit(ab);
+        if (ab.id) {
+          this.aboutService.edit(ab);
+        } else {
+          this.aboutService.add(ab);
+        }
       }
       this.closeForm.next();
     }

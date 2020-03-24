@@ -14,6 +14,11 @@ const routes: Routes = [
     component: RegisterationComponent
   },
   { path: "login", component: LoginComponent },
+  {
+    path: "profile/:id",
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
+  },
   { path: "profile", component: ProfileComponent, canActivate: [AuthGuard] },
   { path: "jobs", component: JobsComponent, canActivate: [AuthGuard] },
   { path: "notifications", component: NotificationsComponent },

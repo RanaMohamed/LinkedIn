@@ -58,6 +58,8 @@ export class IntroFormComponent implements OnInit {
   editIntrOpened = true;
   industries: string[];
   disableEdu = true;
+  educationOpened = false;
+  experienceOpened = false;
   contact: ContactInfo = {
     profileUrl: "",
     urls: [],

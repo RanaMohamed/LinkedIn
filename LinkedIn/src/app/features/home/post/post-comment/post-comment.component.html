@@ -1,6 +1,6 @@
 <div class=" d-flex mt-2 align-items-start">
-    <img [src]="comment.user?.imageUrl || 'https://via.placeholder.com/150'" style="width: 48px; height: 48px;" alt=""
-        class="rounded-circle d-block mr-2" />
+    <img [src]="comment.user?.imageUrl || 'https://via.placeholder.com/150'" [routerLink]="['profile', comment.user.id]"
+        style="width: 48px; height: 48px;" alt="" class="rounded-circle d-block mr-2" />
     <div class="my-2 my-lg-0 mr-auto flex-fill bg-light p-2 small">
         <div class="dropdown float-right" *ngIf="comment.user?.id === auth.getLoggedUserId()">
             <button class="btn py-0 mt-n2" type="button" id="dropdownMenuButton" data-toggle="dropdown"
@@ -15,7 +15,8 @@
         </div>
         <span
             class="text-muted small float-right">{{moment(comment.date, ["MM/DD/YYYY", "YYYY-MM-DDTHH:mm:ss:sssZ"]).fromNow()}}</span>
-        <span class="d-block">{{comment.user?.Fname}} {{comment.user?.Lname}}</span>
+        <span class="d-block" [routerLink]="['profile', comment.user.id]">{{comment.user?.Fname}}
+            {{comment.user?.Lname}}</span>
         <span class="text-muted d-block">{{comment.user?.headLine}}</span>
         <span class="d-block mt-2">{{comment.comment}}</span>
     </div>
