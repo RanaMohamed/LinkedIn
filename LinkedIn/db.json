@@ -265,9 +265,25 @@
     }
   ],
   "likes": [
-    { "id": 1, "postId": 1, "userId": 1 },
-    { "id": 2, "postId": 1, "userId": 2 },
-    { "id": 3, "postId": 1, "userId": 3 },
-    { "id": 4, "postId": 2, "userId": 2 }
+    {
+      "id": 1,
+      "postId": 1,
+      "userId": 1
+    },
+    {
+      "id": 3,
+      "postId": 1,
+      "userId": 3
+    },
+    {
+      "id": 4,
+      "postId": 2,
+      "userId": 2
+    },
+    {
+      "postId": 1,
+      "userId": 2,
+      "id": 5
+    }
   ]
 }

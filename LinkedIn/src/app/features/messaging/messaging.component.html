@@ -1,0 +1,109 @@
+<div class="container">
+  <div
+    class="accordion fixed-bottom p-2 ml-auto mr-5 w-25"
+    id="accordionExample"
+  >
+    <div class="card">
+      <div
+        class="card-header bg-dark text-white"
+        id="headingOne"
+        (click)="messageOpened = !messageOpened"
+      >
+        <div class="dot  ml-4 mt-4 "></div>
+        <img
+          src="../../../assets/imgs/basant_profile_pic.jfif"
+          class="rounded-circle mr-2 img-w "
+          alt=""
+        />
+        Messaging
+        <small class="float-right mt-2 ml-auto">
+          <i class="fa fa-edit mx-3"></i>
+          <div
+            class="dropdown float-right"
+            (click)="dropdownOpened = !dropdownOpened"
+          >
+            <i class="fas fa-ellipsis-h mx-1"></i>
+            <div
+              class="dropdown-menu "
+              aria-labelledby="dropdownMenuLink"
+              [ngClass]="{ show: dropdownOpened }"
+            >
+              <a class="dropdown-item" href="#">new group conversation</a>
+              <a class="dropdown-item" href="#">messaging setting</a>
+            </div>
+          </div>
+        </small>
+      </div>
+
+      <div
+        id="collapseOne"
+        class="collapse show"
+        aria-labelledby="headingOne"
+        data-parent="#accordionExample"
+        [ngClass]="{ show: messageOpened }"
+      >
+        <div class="card-body">
+          <!--messaging search-->
+          <form>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"
+                  ><i class="fas fa-search"></i
+                ></span>
+              </div>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Search messages"
+              />
+              <div class="input-group-append">
+                <button class="input-group-text">
+                  <i class="fas fa-filter"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+
+          <!--contacts-->
+          <div>
+            <div class="card-body border-bottom d-flex">
+              <span href="#" class="mr-3">
+                <img
+                  src="../../../assets/imgs/basant_profile_pic.jfif"
+                  class="rounded-circle mr-2 img-w"
+                  alt=""
+                />
+              </span>
+              <div>
+                <span>Basant Amr</span>
+                <br />
+                <small>
+                  Basant: Thank you!
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="card-body border-bottom d-flex">
+              <span href="#" class="mr-3">
+                <img
+                  src="../../../assets/imgs/mona.jpg"
+                  class="rounded-circle mr-2 img-w"
+                  alt=""
+                />
+              </span>
+              <div>
+                <span>Amal Atef</span>
+                <br />
+                <small>
+                  Basant: Thank you!
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

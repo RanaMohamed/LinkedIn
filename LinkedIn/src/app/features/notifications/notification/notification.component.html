@@ -1,0 +1,69 @@
+<div
+  class="card-body bg-light border d-flex"
+  [ngClass]="{ unReadClr: notification.unRead }"
+>
+  <div>
+    <a href="#" class="float-left">
+      <img
+        [src]="notification.user.imageUrl"
+        class="rounded-circle mr-2 circle-img"
+        alt=""
+      />
+    </a>
+  </div>
+  <div>
+    <span class="text-uppercase float-left" *ngIf="notification.title"
+      >{{ notification.title }}<br
+    /></span>
+    <a href="#">
+      {{ notification.description }}
+    </a>
+    <br />
+    <small class="text-secondary" *ngIf="notification.Reactions"
+      >{{ notification.Reactions }} Reactions</small
+    >
+
+    <small class="text-secondary" *ngIf="notification.noComments">
+      &bull; {{ notification.noComments }} Comments</small
+    >
+    <br />
+    <button
+      type="button"
+      class="btn btn-outline-primary ml-auto font-weight-bold"
+      *ngIf="notification.actionBtn"
+    >
+      {{ notification.actionBtn }}
+    </button>
+  </div>
+
+  <div class="ml-3">
+    <div
+      class="dropdown float-right"
+      (click)="dropdownOpened = !dropdownOpened"
+    >
+      <i class="fas fa-ellipsis-h"></i>
+
+      <div
+        class="dropdown-menu "
+        aria-labelledby="dropdownMenuLink"
+        [ngClass]="{ show: dropdownOpened }"
+      >
+        <a class="dropdown-item" (click)="deleteNotification()"
+          ><i class="fas fa-trash"></i>Delete<br />
+          Delete this notification</a
+        >
+        <a class="dropdown-item" href="#"
+          ><i class="fas fa-ban"></i>Unfollow <br />
+          Stop seeing ... update</a
+        >
+        <a class="dropdown-item" href="#"
+          ><i class="fas fa-times-circle"></i>Turn off <br />
+          Stop recieving notifications like this</a
+        >
+      </div>
+    </div>
+    <small class="float-right text-secondary">{{
+      moment(notification.date).fromNow()
+    }}</small>
+  </div>
+</div>

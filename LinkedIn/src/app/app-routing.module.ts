@@ -6,6 +6,7 @@ import { RegisterationComponent } from "./features/auth/registeration/registerat
 import { LoginComponent } from "./features/auth/login/login.component";
 import { JobsComponent } from "./features/jobs/jobs.component";
 import { AuthGuard } from "./features/auth/auth.guard";
+import { NotificationsComponent } from "./features/notifications/notifications.component";
 
 const routes: Routes = [
   {
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "profile", component: ProfileComponent, canActivate: [AuthGuard] },
   { path: "jobs", component: JobsComponent, canActivate: [AuthGuard] },
+  { path: "notifications", component: NotificationsComponent },
   { path: "", component: HomeComponent, canActivate: [AuthGuard] }
 ];
 

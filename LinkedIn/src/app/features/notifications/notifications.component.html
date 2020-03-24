@@ -1,0 +1,147 @@
+<div class="container">
+  <div class="row">
+    <div class="col-3">
+      <div class="card">
+        <div class="card-body text-center ">
+          <h5 class="card-title">Notifications</h5>
+          <p class="card-text">
+            You’re all caught up! <br />
+            back later for new notifications
+          </p>
+        </div>
+        <div class="card-body  text-center bg-light border">
+          <span href="#" class="card-text">
+            Improve your notifications
+          </span>
+          <a href="#" class="card-link font-weight-bold text-primary"
+            >View Setting</a
+          >
+        </div>
+      </div>
+    </div>
+    <div class="col-9">
+      <div class="row">
+        <div class="col-7">
+          <div class="card mb-3">
+            <h5 class="ml-3">Recent</h5>
+            <app-notification
+              *ngFor="let notification of recent"
+              [notification]="notification"
+            ></app-notification>
+          </div>
+          <div class="card mb-3">
+            <h5 class="ml-3">Earlier</h5>
+            <app-notification
+              *ngFor="let notification of notifications"
+              [notification]="notification"
+            ></app-notification>
+          </div>
+        </div>
+        <!-- <div class="card-body bg-light border">
+                <a href="#" class="mr-3">
+                  <img
+                    src="https://via.placeholder.com/60"
+                    class="rounded-circle mr-2"
+                    alt=""
+                  />
+                </a>
+                <span>title if there is one or remove it</span>
+                <a href="#">
+                  Satya Nadella was mentioned in the news: Gates leaves Microsoft
+                  boardSatya Nadella was mentioned in the news: Gates leaves
+                  Microsoft board
+                </a>
+                <span><i class="fas fa-ellipsis-h"></i></span>
+                <span>11d</span>
+                <br />
+                <span>377</span> &bull; <span>9 Comments</span>
+                <br />
+                <button type="button" class="btn btn-outline-info ml-auto">
+                  Say Hello
+                </button>
+              </div>
+              <div class="card-body bg-light border">
+                <a href="#" class="mr-3">
+                  <img
+                    src="https://via.placeholder.com/60"
+                    class="rounded-circle mr-2"
+                    alt=""
+                  />
+                </a>
+                <span>title if there is one or remove it</span>
+                <a href="#">
+                  Satya Nadella was mentioned in the news: Gates leaves Microsoft
+                  boardSatya Nadella was mentioned in the news: Gates leaves
+                  Microsoft board
+                </a>
+                <span><i class="fas fa-ellipsis-h"></i></span>
+                <span>11d</span>
+                <br />
+                <span>377</span> &bull; <span>9 Comments</span>
+                <br />
+                <button type="button" class="btn btn-outline-info ml-auto">
+                  Say Hello
+                </button>
+              </div>
+            </div>
+            <div class="card mb-3">
+              <h5 class="mr-3 ">Earlier</h5>
+              <div class="card-body bg-light border">
+                <a href="#" class="mr-3">
+                  <img
+                    src="https://via.placeholder.com/60"
+                    class="rounded-circle mr-2"
+                    alt=""
+                  />
+                </a>
+                <span>title if there is one or remove it</span>
+                <a href="#">
+                  Satya Nadella was mentioned in the news: Gates leaves Microsoft
+                  boardSatya Nadella was mentioned in the news: Gates leaves
+                  Microsoft board
+                </a>
+                <span><i class="fas fa-ellipsis-h"></i></span>
+                <span>11d</span>
+                <br />
+                <span>377</span> &bull; <span>9 Comments</span>
+                <br />
+                <button type="button" class="btn btn-outline-info ml-auto">
+                  Say Hello
+                </button>
+              </div>
+            </div>
+          </div> -->
+        <div class="col-5">
+          <div class="card">
+            <div class="card-body">
+              <p>Ad <i class="fas fa-ellipsis-h float-right"></i></p>
+
+              <div class="mb-2 align-items-center">
+                <img
+                  src="../../../../assets/imgs/basant_profile_pic.jfif"
+                  class="rounded-circle mr-2 circle-img"
+                  alt=""
+                />
+                <img
+                  src="../../../../assets/imgs/leen_pic.png"
+                  class="rounded-circle mr-2 circle-img"
+                  alt=""
+                />
+                <div>
+                  <p class="mb-0">
+                    Basant, explore relevant opportunities with Lean Business
+                    Services
+                  </p>
+                </div>
+                <button class="btn btn-outline-info ml-auto">
+                  Follow
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-messaging></app-messaging>
+  </div>
+</div>

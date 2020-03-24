@@ -99,7 +99,13 @@
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link py-0" href="#"
+          <small
+            class="badge badge-pill badge-danger position-absolute ml-1"
+            *ngIf="noOfNotifications > 0"
+          >
+            {{ noOfNotifications }}
+          </small>
+          <a class="nav-link py-0" [routerLink]="'/notifications'"
             ><i class="fa fa-bell d-block"></i><small>Notifications</small></a
           >
         </li>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "src/app/features/auth/auth.service";
 import { Router } from "@angular/router";
+import { NotificationsService } from "./../../features/notifications/notifications.service";
 
 @Component({
   selector: "app-header",
@@ -9,9 +10,18 @@ import { Router } from "@angular/router";
 })
 export class HeaderComponent implements OnInit {
   dropdownOpened = false;
-  constructor(private auth: AuthService, private router: Router) {}
+  noOfNotifications;
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private notiService: NotificationsService
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.notiService
+      .getNotificationLength()
+      .subscribe(n => (this.noOfNotifications = n));
+  }
 
   logout() {
     this.auth.logout();
