@@ -5,7 +5,8 @@
         <h4>About</h4>
       </div>
       <div class="col-2 d-flex justify-content-end">
-        <div class="edit-icon" (click)="openForm = !openForm">
+        <div class="edit-icon" (click)="openForm = !openForm"
+          *ngIf="+activatedRoute.snapshot.params.id === auth.getLoggedUserId() || !activatedRoute.snapshot.params.id">
           <i class="fas fa-pen text-primary"></i>
         </div>
       </div>
@@ -19,8 +20,4 @@
   <div>{{ about.media }}</div>
 </section>
 
-<app-about-form
-  *ngIf="openForm"
-  [about]="about"
-  (closeForm)="closeModal()"
-></app-about-form>
+<app-about-form *ngIf="openForm" [about]="about" (closeForm)="closeModal()"></app-about-form>

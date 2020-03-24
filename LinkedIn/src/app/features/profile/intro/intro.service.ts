@@ -67,11 +67,9 @@ export class IntroService {
   constructor(private http: HttpClient, private auth: AuthService) {
     this.introInfo = new Subject<Intro>();
   }
-  getById(): Observable<Intro> {
+  getById(userId: number = this.auth.getLoggedUserId()): Observable<Intro> {
     this.http
-      .get<Intro>(
-        `http://localhost:3000/users/${this.auth.getLoggedUserId()}?_embed=educations`
-      )
+      .get<Intro>(`http://localhost:3000/users/${userId}?_embed=educations`)
       .subscribe(res => {
         this.introInfo.next(res);
       });

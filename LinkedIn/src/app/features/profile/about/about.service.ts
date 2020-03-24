@@ -13,11 +13,9 @@ export class AboutService {
     this.aboutData = new Subject<About>();
   }
 
-  getById(): Observable<About> {
+  getById(userId: number = this.auth.getLoggedUserId()): Observable<About> {
     this.http
-      .get<About>(
-        `http://localhost:3000/abouts?userId=${this.auth.getLoggedUserId()}`
-      )
+      .get<About>(`http://localhost:3000/abouts?userId=${userId}`)
       .subscribe(res => {
         this.aboutData.next(res);
       });

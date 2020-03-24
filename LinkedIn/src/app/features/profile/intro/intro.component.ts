@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { IntroService } from "./intro.service";
 import { Intro } from "../../../_models/intro";
 import { months } from "../../../_utilities/utilities";
+import { ActivatedRoute } from "@angular/router";
+import { AuthService } from "../../auth/auth.service";
 
 @Component({
   selector: "app-intro",
@@ -48,10 +50,16 @@ export class IntroComponent implements OnInit {
   };
   formOpened = false;
   openContact = false;
-  constructor(private introService: IntroService) {}
+  constructor(
+    private introService: IntroService,
+    protected activatedRoute: ActivatedRoute,
+    protected auth: AuthService
+  ) {}
 
   ngOnInit() {
-    this.introService.getById().subscribe(r => (this.intro = r));
+    this.activatedRoute.params.subscribe(params => {
+      this.introService.getById(params.id).subscribe(r => (this.intro = r));
+    });
   }
 
   OpenContact() {

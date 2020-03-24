@@ -17,12 +17,10 @@ export class ExperienceService {
     this.experiences = new Subject<Experience[]>();
   }
 
-  getAll() {
+  getAll(userId: number = this.auth.getLoggedUserId()) {
     this.http
       .get<Experience[]>(
-        `${
-          this.experiencesUrl
-        }?_expand=company&_sort=end.year&_order=desc&userId=${this.auth.getLoggedUserId()}`
+        `${this.experiencesUrl}?_expand=company&_sort=end.year&_order=desc&userId=${userId}`
       )
       .subscribe(res => {
         this.list = res;

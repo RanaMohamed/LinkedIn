@@ -7,7 +7,8 @@
                 <h4>Experience</h4>
             </div>
             <div class="col-2 d-flex justify-content-end">
-                <div class="edit-icon" (click)="formOpened = !formOpened">
+                <div class="edit-icon" (click)="formOpened = !formOpened"
+                    *ngIf="+activatedRoute.snapshot.params.id === auth.getLoggedUserId() || !activatedRoute.snapshot.params.id">
                     <i class="fas fa-plus text-primary"></i>
                 </div>
             </div>
@@ -37,7 +38,8 @@
                     <p class="mt-2">{{ex.description}}</p>
                 </div>
                 <div class="col-2 d-flex justify-content-end">
-                    <div class="edit-icon" (click)="editExperience(ex)">
+                    <div class="edit-icon" (click)="editExperience(ex)"
+                        *ngIf="+activatedRoute.snapshot.params.id === auth.getLoggedUserId() || !activatedRoute.snapshot.params.id">
                         <i class="fas fa-pen text-primary"></i>
                     </div>
                 </div>

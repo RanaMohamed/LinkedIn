@@ -12,14 +12,8 @@
     <div class="col-8">
       <div class="d-flex justify-content-end">
         <div class="dropdown m-2">
-          <button
-            class="btn dropdown-toggle btn-color"
-            type="button"
-            id="dropdownMenuButton"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
+          <button class="btn dropdown-toggle btn-color" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
             Add profile section
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -33,25 +27,18 @@
           </div>
         </div>
         <div class="btn-group d-block m-2">
-          <button
-            type="button"
-            class="btn btn-outline-secondary dropdown-toggle"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
+          <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
             More...
           </button>
           <div class="dropdown-menu">
-            <a class="dropdown-item" href="#"
-              ><i class="far fa-share-square"></i> Share Profile via Message</a
-            >
+            <a class="dropdown-item" href="#"><i class="far fa-share-square"></i> Share Profile via Message</a>
             <a class="dropdown-item" href="#">
-              <i class="fas fa-download"></i> Save to PDF</a
-            >
+              <i class="fas fa-download"></i> Save to PDF</a>
           </div>
         </div>
-        <div class="m-2 p-2 edit-icon" (click)="formOpened = !formOpened">
+        <div class="m-2 p-2 edit-icon" (click)="formOpened = !formOpened"
+          *ngIf="+activatedRoute.snapshot.params.id === auth.getLoggedUserId() || !activatedRoute.snapshot.params.id">
           <i class="fas fa-pen text-primary"></i>
         </div>
       </div>
@@ -92,7 +79,8 @@
     </div>
   </div>
 
-  <div class="p-3 m-3 open-jop">
+  <div class="p-3 m-3 open-jop"
+    *ngIf="+activatedRoute.snapshot.params.id === auth.getLoggedUserId() || !activatedRoute.snapshot.params.id">
     <div class="row">
       <div class="col-10">
         <div>open to jop opportunities</div>
@@ -107,9 +95,5 @@
   </div>
 </section>
 
-<app-contact
-  *ngIf="openContact"
-  [contactInfo]="intro.contactInfo"
-  (closeForm)="OpenContact()"
-  (contactEdit)="editContact($event)"
-></app-contact>
+<app-contact *ngIf="openContact" [contactInfo]="intro.contactInfo" (closeForm)="OpenContact()"
+  (contactEdit)="editContact($event)"></app-contact>

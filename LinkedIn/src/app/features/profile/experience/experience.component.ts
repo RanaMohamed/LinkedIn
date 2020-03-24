@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { ExperienceService } from "./experience.service";
 import { Experience } from "src/app/_models/experience";
 import { months, getDateDifference } from "src/app/_utilities/utilities";
+import { ActivatedRoute } from "@angular/router";
+import { AuthService } from "../../auth/auth.service";
 
 @Component({
   selector: "app-experience",
@@ -13,12 +15,18 @@ export class ExperienceComponent implements OnInit {
   formOpened = false;
   selectedExperience: Experience;
   months = months;
-  constructor(private experienceService: ExperienceService) {}
+  constructor(
+    private experienceService: ExperienceService,
+    protected activatedRoute: ActivatedRoute,
+    protected auth: AuthService
+  ) {}
 
   ngOnInit() {
-    this.experienceService
-      .getAll()
-      .subscribe(experiences => (this.experiences = experiences));
+    this.activatedRoute.params.subscribe(params => {
+      this.experienceService
+        .getAll(params.id)
+        .subscribe(experiences => (this.experiences = experiences));
+    });
   }
 
   editExperience(experience: Experience) {
