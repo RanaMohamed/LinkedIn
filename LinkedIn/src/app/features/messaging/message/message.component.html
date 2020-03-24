@@ -1,0 +1,100 @@
+<div class="container">
+  <div class="accordion fixed-bottom w-25 mrgn ml-auto" id="accordionExample">
+    <div class="card">
+      <div
+        class="card-header bg-dark text-white d-flex"
+        id="headingOne"
+        (click)="messageOpened = !messageOpened"
+      >
+        Reem Emad
+        <small class="mt-2 d-flex float-right ml-auto">
+          <i class="fa fa-expand-alt mx-2"></i>
+          <div class="dropdown">
+            <i
+              class="fas fa-ellipsis-h mx-2"
+              (click)="dropdownOpened = !dropdownOpened"
+            ></i>
+            <div
+              class="dropdown-menu "
+              aria-labelledby="dropdownMenuLink"
+              [ngClass]="{ show: dropdownOpened }"
+            >
+              <a class="dropdown-item" href="#">Archieve</a>
+              <a class="dropdown-item" href="#">Delete</a>
+              <a class="dropdown-item" href="#">Mark as unread</a>
+              <a class="dropdown-item" href="#">Mute</a>
+            </div>
+          </div>
+          <i class="fa fa-times ml-2 p-1"></i>
+        </small>
+      </div>
+
+      <div
+        id="collapseOne"
+        class="collapse"
+        aria-labelledby="headingOne"
+        data-parent="#accordionExample"
+        [ngClass]="{ show: messageOpened }"
+      >
+        <div class="card-body p-0">
+          <div>
+            <div class="card-body  d-flex">
+              <span href="#" class="mr-3">
+                <img
+                  src="../../../assets/imgs/basant_profile_pic.jfif"
+                  class="rounded-circle mr-2 img-w"
+                  alt=""
+                />
+              </span>
+              <div>
+                <span>Basant Amr . 10:34</span>
+                <br />
+                <small>
+                  Congrats on finishing up at Information Technology Institute
+                  (ITI)!
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="card-body d-flex">
+              <span href="#" class="mr-3">
+                <img
+                  src="../../../assets/imgs/reem_profile_pic.jfif"
+                  class="rounded-circle mr-2 img-w"
+                  alt=""
+                />
+              </span>
+              <div>
+                <span>Reem Emad . 10:35</span>
+                <br />
+                <small>
+                  Thank you!
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-footer p-0" [hidden]="!messageOpened">
+        <input
+          class="p-0 m-0 writemsg"
+          type="text"
+          placeholder=" Write a message"
+        />
+        <div class="border bg-light p-2">
+          <i class="fa fa-image mx-2"></i>
+          <i class="fa fa-paperclip mx-2"></i>
+          <i class="fab fa-gofore mx-2"></i>
+          <i class="fa fa-smile-beam mx-2"></i>
+          <div class="float-right d-flex">
+            <button class="btn-primary mx-2">Send</button>
+            <i class="fa fa-ellipsis-h ml-2 mx-2 my-auto"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

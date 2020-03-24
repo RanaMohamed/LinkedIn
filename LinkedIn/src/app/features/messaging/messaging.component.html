@@ -1,8 +1,5 @@
 <div class="container">
-  <div
-    class="accordion fixed-bottom p-2 ml-auto mr-5 w-25"
-    id="accordionExample"
-  >
+  <div class="accordion fixed-bottom ml-auto mr-5 w-25" id="accordionExample">
     <div class="card">
       <div
         class="card-header bg-dark text-white"
@@ -18,11 +15,11 @@
         Messaging
         <small class="float-right mt-2 ml-auto">
           <i class="fa fa-edit mx-3"></i>
-          <div
-            class="dropdown float-right"
-            (click)="dropdownOpened = !dropdownOpened"
-          >
-            <i class="fas fa-ellipsis-h mx-1"></i>
+          <div class="dropdown float-right">
+            <i
+              class="fas fa-ellipsis-h mx-1"
+              (click)="dropdownOpened = !dropdownOpened"
+            ></i>
             <div
               class="dropdown-menu "
               aria-labelledby="dropdownMenuLink"
@@ -37,7 +34,7 @@
 
       <div
         id="collapseOne"
-        class="collapse show"
+        class="collapse"
         aria-labelledby="headingOne"
         data-parent="#accordionExample"
         [ngClass]="{ show: messageOpened }"
@@ -66,19 +63,22 @@
 
           <!--contacts-->
           <div>
-            <div class="card-body border-bottom d-flex">
+            <div
+              class="card-body border-bottom d-flex clickable"
+              (click)="showContactMessage = !showContactMessage"
+            >
               <span href="#" class="mr-3">
                 <img
-                  src="../../../assets/imgs/basant_profile_pic.jfif"
+                  src="../../../assets/imgs/reem_profile_pic.jfif"
                   class="rounded-circle mr-2 img-w"
                   alt=""
                 />
               </span>
               <div>
-                <span>Basant Amr</span>
+                <span>Reem Emad</span>
                 <br />
                 <small>
-                  Basant: Thank you!
+                  Reem: Thank you!
                 </small>
               </div>
             </div>
@@ -94,7 +94,7 @@
                 />
               </span>
               <div>
-                <span>Amal Atef</span>
+                <span>Mona Mohamed</span>
                 <br />
                 <small>
                   Basant: Thank you!
@@ -105,5 +105,6 @@
         </div>
       </div>
     </div>
+    <app-message [hidden]="!showContactMessage"></app-message>
   </div>
 </div>

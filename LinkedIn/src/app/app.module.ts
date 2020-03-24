@@ -32,9 +32,10 @@ import { SliderComponent } from "./shared/slider/slider.component";
 import { ModalComponent } from "./shared/modal/modal.component";
 import { PostVideoFormComponent } from "./features/home/post/post-video-form/post-video-form.component";
 import { PostCommentComponent } from "./features/home/post/post-comment/post-comment.component";
-import { NotificationsComponent } from './features/notifications/notifications.component';
-import { MessagingComponent } from './features/messaging/messaging.component';
-import { NotificationComponent } from './features/notifications/notification/notification.component';
+import { NotificationsComponent } from "./features/notifications/notifications.component";
+import { MessagingComponent } from "./features/messaging/messaging.component";
+import { NotificationComponent } from "./features/notifications/notification/notification.component";
+import { MessageComponent } from './features/messaging/message/message.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { NotificationComponent } from './features/notifications/notification/not
     PostCommentComponent,
     NotificationsComponent,
     MessagingComponent,
-    NotificationComponent
+    NotificationComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,

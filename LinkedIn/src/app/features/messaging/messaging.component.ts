@@ -8,6 +8,7 @@ import { Component, OnInit } from "@angular/core";
 export class MessagingComponent implements OnInit {
   dropdownOpened = false;
   messageOpened = false;
+  showContactMessage = false;
 
   constructor() {}
 
